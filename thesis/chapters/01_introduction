@@ -1,0 +1,9 @@
+\section{Einleitung}
+
+Diese Arbeit wurde im Rahmen des Seminars DevOps und Cloud Computing bei Prof. Dr. Torsten Zimmer an der Hochschule München erstellt. Die Arbeit befasst sich mit der Konfiguration einer CI/CD-Pipeline mit Kubernetes. \\
+
+Pro Woche startet Google nach eigenen Angaben über zwei Milliarden Container. Von Gmail bis YouTube laufen beinahe alle Dienste in Containern. Containertechnologien befinden sich in den letzten Jahren zweifelsfrei auf einem Siegeszug. Die Idee Software in standardisierte Pakete zu verpacken revolutionierte den Einsatz und die Distribution von Anwendungen. Um die große Anzahl an Containern zu verwalten wurden Anwendungen zur Container-Orchestrierung entwickelt. \\
+
+Doch Container-Virtualisierung war nur eine von vielen Revolutionen. Die Cloud revolutionierte die Nutzung von Computerressourcen. Mit den verteilten Systemen in der Cloud ließ sich der Betrieb immer schwerer von Architektur und der Implementierung der Systeme trennen. Es kam zu einer weiteren Revolution, dem DevOps-Ansatz, welcher das Zusammenspiel von IT-Betrieb und Softwareentwicklung maßgeblich veränderte. \\
+
+In dieser Arbeit werden diese Revolutionen miteinander verknüpft. Es werden die Merkmale von Container-Virtualisierung, Container-Orchestrierung und DevOps erläutert und vor allem deren Synergieeffekte in der gemeinsamen Verwendung aufgezeigt. 

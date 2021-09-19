@@ -1,0 +1,68 @@
+% **************************************************
+% Document class
+% **************************************************
+
+\documentclass[a4paper,12pt]{scrartcl}
+
+
+% **************************************************
+% Settings
+% **************************************************
+
+\usepackage{settings}
+
+
+% **************************************************
+% Metadata
+% **************************************************
+
+\hypersetup{
+	pdftitle = \getTitle,
+	pdfauthor = \getAuthor,
+	pdfsubject = \getDoctype
+	pdfkeywords = {Microservices, Kubernetes}
+}
+\title{\getTitle}
+\subtitle{\getDoctype}
+\author{\getAuthor}
+\date{}
+
+
+% **************************************************
+% Header and footer
+% **************************************************
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\getDoctype}
+\chead{\includegraphics[width=2cm]{logos/hm_logo}}
+\rhead{\getUniversity}
+\lfoot{\getAuthor}
+\rfoot{Seite \thepage\ von \pageref{LastPage}}
+
+
+% **************************************************
+% Content
+% **************************************************
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\listoffigures
+\lstlistoflistings
+
+\newpage
+\input{chapters/01_introduction}
+
+\newpage
+\input{chapters/99_conclusion}
+
+\newpage
+\printbibliography
+
+\end{document}

@@ -1,0 +1,60 @@
+% **************************************************
+% Packages
+% **************************************************
+
+% Use UTF-8 encoding
+\usepackage[utf8]{inputenc}
+
+% Use german language package
+\usepackage[ngerman]{babel}
+
+% Reference the number of pages
+\usepackage{lastpage}
+
+% Style header and footer
+\usepackage{fancyhdr}
+
+% Embed pictures
+\usepackage{graphicx}
+
+% Embed source code
+\usepackage{listings}
+
+% Use different colors
+\usepackage{xcolor}
+
+% Embed urls
+\usepackage[urlcolor=blue, pdfborder={0 0 0}]{hyperref}
+
+% Use multiple columns
+\usepackage{multicol}
+
+
+% **************************************************
+% Bibliography
+% **************************************************
+
+% Use biblatex with biber for bibliography
+\usepackage[backend=biber, style=bath, sorting=none]{biblatex}
+
+% Add source for bibliographic database
+\addbibresource{bibliography.bib}
+
+% Provide advanced quotations
+\usepackage{csquotes}
+
+
+% **************************************************
+% Commands
+% **************************************************
+
+\newcommand*{\getUniversity}{Hochschule München}
+\newcommand*{\getFaculty}{Fakultät für Informatik und Mathematik}
+\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes}
+\newcommand*{\getTitleEng}{Design and Deployment of Microservices with Kubernetes}
+\newcommand*{\getAuthor}{Simon Hirner}
+\newcommand*{\getDoctype}{Bachelorarbeit}
+\newcommand*{\getSupervisor}{Prof. Dr. Torsten Zimmer}
+\newcommand*{\getAdvisor}{XX}
+\newcommand*{\getSubmissionDate}{19. September 2021}
+\newcommand*{\getSubmissionLocation}{München}
