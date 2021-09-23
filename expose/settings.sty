@@ -35,13 +35,16 @@
 % Add list of abbreviations
 \usepackage{acronym}
 
+% Improve figure positioning
+\usepackage{float}
+
 
 % **************************************************
 % Bibliography
 % **************************************************
 
 % Use biblatex with biber for bibliography
-\usepackage[backend=biber, style=bath, sorting=none]{biblatex}
+\usepackage[backend=biber, style=authoryear, sorting=none]{biblatex}
 
 % Add source for bibliographic database
 \addbibresource{bibliography.bib}
@@ -51,18 +54,46 @@
 
 
 % **************************************************
-% Variables
+% Source code formatting
 % **************************************************
 
-\newcommand*{\getUniversity}{Hochschule für angewandte Wissenschaften München}
-\newcommand*{\getFaculty}{Fakultät für Informatik und Mathematik}
-\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes}
-\newcommand*{\getTitleEng}{Design and Deployment of Microservices with Kubernetes}
-\newcommand*{\getAuthor}{Simon Hirner}
-\newcommand*{\getMatriculationNumber}{02607918}
-\newcommand*{\getCourse}{Wirtschaftsinformatik}
-\newcommand*{\getDoctype}{Bachelorarbeit}
-\newcommand*{\getSupervisor}{Prof. Dr. Torsten Zimmer}
-\newcommand*{\getAdvisor}{}
-\newcommand*{\getSubmissionDate}{19. September 2021}
-\newcommand*{\getSubmissionLocation}{München}
+\renewcommand\lstlistingname{Quellcode}
+
+\renewcommand\lstlistlistingname{Quellcodeverzeichnis}
+
+\lstset{ %
+    backgroundcolor=\color{white},
+    basicstyle=\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{green},
+    escapeinside={\%*}{*)},
+    keywordstyle=\color{blue},
+    stringstyle=\color{purple},
+    showstringspaces=false,
+    showspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=lines
+}
+
+
+% **************************************************
+% Header and footer
+% **************************************************
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\nouppercase{\leftmark}}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\rfoot{}
+
+
+% **************************************************
+% Miscellaneous
+% **************************************************
+
+% Prevent identation of new paragraphs
+\setlength{\parindent}{0pt} 
