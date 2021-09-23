@@ -5,7 +5,8 @@
 \documentclass[
 	a4paper,
 	12pt,
-	bibtotocnumbered,
+	bibtotoc,
+	listof=totoc,
 	titlepage
 ]{scrartcl}
 
@@ -18,36 +19,31 @@
 
 
 % **************************************************
-% Metadata
+% Variables
+% **************************************************
+
+\newcommand*{\getUniversity}{Hochschule für angewandte Wissenschaften München}
+\newcommand*{\getFaculty}{Fakultät für Informatik und Mathematik}
+\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes}
+\newcommand*{\getAuthor}{Simon Hirner}
+\newcommand*{\getEmailAddress}{simon.hirner@hm.edu}
+\newcommand*{\getMatriculationNumber}{02607918}
+\newcommand*{\getCourse}{Wirtschaftsinformatik}
+\newcommand*{\getDoctype}{Exposé zur Bachelorarbeit}
+\newcommand*{\getSupervisor}{Prof. Dr. Torsten Zimmer}
+\newcommand*{\getSubmissionDate}{\today}
+
+
+% **************************************************
+% PDF Metadata
 % **************************************************
 
 \hypersetup{
 	pdftitle = \getTitle,
 	pdfauthor = \getAuthor,
 	pdfsubject = \getDoctype
-	pdfkeywords = {Microservices, Kubernetes}
+	pdfkeywords = {Microservices, Kubernetes, DevOps}
 }
-
-
-% **************************************************
-% Header and footer
-% **************************************************
-
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\nouppercase{\leftmark}}
-\chead{}
-\rhead{\thepage}
-\lfoot{}
-\rfoot{}
-
-
-% **************************************************
-% Headline for source code list
-% **************************************************
-
-\renewcommand\lstlistingname{Quellcode}
-\renewcommand\lstlistlistingname{Quellcode}
 
 
 % **************************************************
@@ -56,28 +52,74 @@
 
 \begin{document}
 
-\input{pages/title}
+\titlehead{
+	\begin{flushright}
+		\includegraphics[width=50mm]{logos/university_logo}
+	\end{flushright}
+	\begin{center}
+		{\Large \getUniversity}\\
+		{\large \getFaculty}
+		\vspace*{10mm}
+	\end{center}
+}
 
-\input{pages/abstract}
+\subject{\getDoctype}
+
+\title{\vspace{-10mm} \getTitle}
+
+\subtitle{}
+
+\author{}
+
+\date{}
+
+\publishers{
+	\parbox{\textwidth}{
+		\vspace*{30mm}
+		\large
+		\begin{tabularx}{0.8\textwidth}{lX}
+			\textbf{Vorgelegt von:} & \getAuthor \\[0.6em]
+			\textbf{E-Mail:} & \getEmailAddress \\[0.6em]
+			\textbf{Matrikelnummer:} & \getMatriculationNumber \\[0.6em]
+			\textbf{Studiengang:} & \getCourse \\[0.6em]
+			\textbf{Betreuer:} & \getSupervisor \\[0.6em]
+			\textbf{Datum:} & \today \\[0.6em]
+		\end{tabularx}
+	}
+}\normalsize
+
+\maketitle
 
 \tableofcontents
 
-\newpage
-\listoffigures
+\clearpage
+\section{Thema und Motivation}
 
-\newpage
-\lstlistoflistings
+Thema: Deployment, Orchestrierung und Skalierung von Microservices mithilfe von Kubernetes am Beispiel eines ERP-Systems
 
-\newpage
-\input{pages/acronyms}
+Microservices werden weltweit erfolgreich in großen Unternehmen eingesetzt.
 
-\newpage
-\input{chapters/01_introduction}
+Microservices haben erheblich Auswirkungen auf alle Phasen des Softwareentwicklungszyklus, doch auf keinen so viel wie auf das Deployment. Kaum ein anderes Thema wurde so sehr durch die technologischen Neuerungen beeinflusst wie das Deployment. 
 
-\newpage
-\input{chapters/99_conclusion}
+Auch wenn der Begriff Microservices relativ neu ist, ist die Idee nicht ganz neu. Microservices sind einem ständigen Wandel unterworfen.
 
-\newpage
+(\cite[S. 99]{hightowerKubernetesKompakte2018}).
+
+\section{Zielsetzung}
+
+Entwicklung, Deployment, Testen, Wartung von Systemen basierend auf Microservices.
+
+Orchestrierung und Skalierung in Kubernetes
+
+Geschlossenes Gesamtbild von Microservices liefern
+
+\section{Theoretische Grundlage}
+\section{Konzept}
+\section{Vorläufige Gliederung}
+\section{Zeitplan}
+\section{Eigene Motivation und Vorarbeit}
+
+\clearpage
 \printbibliography
 
 \end{document}

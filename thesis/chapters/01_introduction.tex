@@ -1,9 +1,37 @@
 \section{Einleitung}
 
-Diese Arbeit wurde im Rahmen des Seminars DevOps und Cloud Computing bei Prof. Dr. Torsten Zimmer an der Hochschule München erstellt. Die Arbeit befasst sich mit der Konfiguration einer CI/CD-Pipeline mit Kubernetes. \\
+Im Folgenden wird beispielhaft gezeigt, wie Zitate, Bilder, Tabellen oder Quellcode in die Arbeit eingefügt werden können.
 
-Pro Woche startet Google nach eigenen Angaben über zwei Milliarden Container. Von Gmail bis YouTube laufen beinahe alle Dienste in Containern. Containertechnologien befinden sich in den letzten Jahren zweifelsfrei auf einem Siegeszug. Die Idee Software in standardisierte Pakete zu verpacken revolutionierte den Einsatz und die Distribution von Anwendungen. Um die große Anzahl an Containern zu verwalten wurden Anwendungen zur Container-Orchestrierung entwickelt. \\
+\subsection{Zitate}
+Menschen, die mit ihrem IQ prahlen, sind Versager (\cite[S. 99]{hightowerKubernetesKompakte2018}).
 
-Doch Container-Virtualisierung war nur eine von vielen Revolutionen. Die Cloud revolutionierte die Nutzung von Computerressourcen. Mit den verteilten Systemen in der Cloud ließ sich der Betrieb immer schwerer von Architektur und der Implementierung der Systeme trennen. Es kam zu einer weiteren Revolution, dem DevOps-Ansatz, welcher das Zusammenspiel von IT-Betrieb und Softwareentwicklung maßgeblich veränderte. \\
+\subsection{Bilder}
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/figure_example.png}
+    \caption{Mooresches Gesetz}
+\end{figure}
 
-In dieser Arbeit werden diese Revolutionen miteinander verknüpft. Es werden die Merkmale von Container-Virtualisierung, Container-Orchestrierung und DevOps erläutert und vor allem deren Synergieeffekte in der gemeinsamen Verwendung aufgezeigt. [\cite[S. 1]{hightowerKubernetesKompakte2018}]
+\subsection{Tabellen}
+\begin{table}[H]
+    \centering
+    \begin{tabular}[H]{l|l|l}
+        Bezeichnung & Kerne & TDP \\
+        \hline
+        Intel Core i5 & 6 & 111 W \\
+        \hline
+        AMD Ryzen 7 & 8 & 178 W \\
+    \end{tabular}
+    \caption{Prozessoren}
+\end{table}
+
+
+\subsection{Quellcode}
+\begin{lstlisting}[language=java, caption=Hello World in Java, captionpos=b]
+    class HelloWorld {
+        public static void main(String[] args) {
+            // Display the string.y
+            System.out.println("Hello World!");
+        }
+    }
+\end{lstlisting}

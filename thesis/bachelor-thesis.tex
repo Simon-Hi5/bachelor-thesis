@@ -5,7 +5,8 @@
 \documentclass[
 	a4paper,
 	12pt,
-	bibtotocnumbered,
+	bibtotoc,
+	listof=totoc,
 	titlepage
 ]{scrartcl}
 
@@ -18,36 +19,30 @@
 
 
 % **************************************************
-% Metadata
+% Variables
+% **************************************************
+
+\newcommand*{\getUniversity}{Hochschule für angewandte Wissenschaften München}
+\newcommand*{\getFaculty}{Fakultät für Informatik und Mathematik}
+\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes}
+\newcommand*{\getAuthor}{Simon Hirner}
+\newcommand*{\getMatriculationNumber}{02607918}
+\newcommand*{\getCourse}{Wirtschaftsinformatik}
+\newcommand*{\getDoctype}{Bachelorarbeit}
+\newcommand*{\getSupervisor}{Prof. Dr. Torsten Zimmer}
+\newcommand*{\getSubmissionDate}{\today}
+
+
+% **************************************************
+% PDF Metadata
 % **************************************************
 
 \hypersetup{
 	pdftitle = \getTitle,
 	pdfauthor = \getAuthor,
 	pdfsubject = \getDoctype
-	pdfkeywords = {Microservices, Kubernetes}
+	pdfkeywords = {Microservices, Kubernetes, DevOps}
 }
-
-
-% **************************************************
-% Header and footer
-% **************************************************
-
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\nouppercase{\leftmark}}
-\chead{}
-\rhead{\thepage}
-\lfoot{}
-\rfoot{}
-
-
-% **************************************************
-% Headline for source code list
-% **************************************************
-
-\renewcommand\lstlistingname{Quellcode}
-\renewcommand\lstlistlistingname{Quellcode}
 
 
 % **************************************************
@@ -62,22 +57,28 @@
 
 \tableofcontents
 
-\newpage
+\clearpage
 \listoffigures
 
-\newpage
+\clearpage
+\listoftables
+
+\clearpage
 \lstlistoflistings
 
-\newpage
+\clearpage
 \input{pages/acronyms}
 
-\newpage
+\clearpage
 \input{chapters/01_introduction}
 
-\newpage
+\clearpage
 \input{chapters/99_conclusion}
 
-\newpage
+\clearpage
 \printbibliography
+
+\clearpage
+\input{pages/declaration}
 
 \end{document}
