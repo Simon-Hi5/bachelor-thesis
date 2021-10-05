@@ -38,13 +38,19 @@
 % Improve figure positioning
 \usepackage{float}
 
+% Use Helvetica font
+\usepackage[scaled]{helvet}
+
+% Use Times New Roman font
+\usepackage{mathptmx}
+
 
 % **************************************************
 % Bibliography
 % **************************************************
 
 % Use biblatex with biber for bibliography
-\usepackage[backend=biber, style=authoryear, sorting=none]{biblatex}
+\usepackage[backend=biber, style=apa, sorting=none]{biblatex}
 
 % Add source for bibliographic database
 \addbibresource{bibliography.bib}
@@ -96,4 +102,8 @@
 % **************************************************
 
 % Prevent identation of new paragraphs
-\setlength{\parindent}{0pt} 
+\setlength{\parindent}{0pt}
+
+% Reduce hyphenation
+\hyphenpenalty=5000
+\tolerance=1000
