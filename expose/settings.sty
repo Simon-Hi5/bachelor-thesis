@@ -8,6 +8,9 @@
 % Use german language package
 \usepackage[ngerman]{babel}
 
+% Use T1 font encoding
+\usepackage[T1]{fontenc}
+
 % Reference the number of pages
 \usepackage{lastpage}
 
@@ -38,19 +41,34 @@
 % Improve figure positioning
 \usepackage{float}
 
+% Use Helvetica font
+\usepackage[scaled]{helvet}
+
+% Use Times New Roman font
+\usepackage{mathptmx}
+
+% Use Enumeration
+\usepackage{enumitem}
+
+% Use Gantt chart
+\usepackage{pgfgantt}
+
 
 % **************************************************
 % Bibliography
 % **************************************************
 
 % Use biblatex with biber for bibliography
-\usepackage[backend=biber, style=authoryear, sorting=none]{biblatex}
+\usepackage[backend=biber, style=apa, sorting=none]{biblatex}
 
 % Add source for bibliographic database
 \addbibresource{bibliography.bib}
 
 % Provide advanced quotations
 \usepackage{csquotes}
+
+% Show uncited references in bibiography
+\nocite{*}
 
 
 % **************************************************
@@ -84,7 +102,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\nouppercase{\leftmark}}
+\lhead{\nouppercase{Exposé zur Bachelorarbeit}}
 \chead{}
 \rhead{\thepage}
 \lfoot{}
@@ -96,4 +114,14 @@
 % **************************************************
 
 % Prevent identation of new paragraphs
-\setlength{\parindent}{0pt} 
+\setlength{\parindent}{0pt}
+
+% Format provisional outline
+\newlist{outline}{enumerate}{10}
+
+% Format provisional outline
+\setlist[outline]{label*=\arabic*.}
+
+% Reduce hyphenation
+\hyphenpenalty=5000
+\tolerance=1000
