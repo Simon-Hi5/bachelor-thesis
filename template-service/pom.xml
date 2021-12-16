@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.hm</groupId>
-	<artifactId>template</artifactId>
+	<artifactId>template-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>template</name>
+	<name>template-service</name>
 	<description>Template for microservice.</description>
 	<properties>
 		<java.version>11</java.version>
