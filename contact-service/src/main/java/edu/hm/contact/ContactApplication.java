@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.Month;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Contact API", version = "1.0", description = "Contact Information"))
 public class ContactApplication implements CommandLineRunner {
 
-    Logger logger = LoggerFactory.getLogger(ContactApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactApplication.class);
 
     private final ContactRepository contactRepository;
     private final AddressRepository addressRepository;
@@ -34,6 +34,20 @@ public class ContactApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        initializeDatabase();
+    }
+
+    @Bean
+    public ValidatingMongoEventListener validatingMongoEventListener() {
+        return new ValidatingMongoEventListener(validator());
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    private void initializeDatabase() {
         try {
             contactRepository.deleteAll();
             addressRepository.deleteAll();
@@ -48,19 +62,9 @@ public class ContactApplication implements CommandLineRunner {
             addressRepository.save(address1);
             contactRepository.save(contact1);
             contactRepository.save(contact2);
-        } catch (Exception exception) {
+        } catch (ConstraintViolationException exception) {
             logger.error(exception.getMessage());
         }
-    }
-
-    @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() {
-        return new ValidatingMongoEventListener(validator());
-    }
-
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
     }
 
 }
