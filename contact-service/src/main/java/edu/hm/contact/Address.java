@@ -26,10 +26,6 @@ public class Address {
 
     private Country country;
 
-    private Address() {
-
-    }
-
     public Address(String address, String additionalAddress, String postcode, String town, Country country) {
         this.address = address;
         this.additionalAddress = additionalAddress;
