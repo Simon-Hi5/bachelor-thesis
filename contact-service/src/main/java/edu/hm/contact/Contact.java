@@ -1,8 +1,6 @@
 package edu.hm.contact;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 enum Gender {
     MALE, FEMALE, DIVERSE
@@ -23,31 +20,29 @@ public class Contact {
     @Id
     private String id;
 
-    @NotBlank(message = "First name should not be blank.")
+    @NotBlank(message = "First name should not be blank")
     private String firstName;
 
-    @NotBlank(message = "Last name should not be blank.")
+    @NotBlank(message = "Last name should not be blank")
     private String lastName;
 
     private Gender gender;
 
-    @Past(message = "Date of birth should be in the past.")
+    @Past(message = "Date of birth should be in the past")
     private LocalDate dateOfBirth;
 
     @Email(message = "Email should be valid.")
     private String email;
 
-    @Pattern(regexp = "^\\+\\d{6,14}$", message = "Phone number should be valid.")
+    @Pattern(regexp = "^\\+\\d{6,14}$", message = "Phone number should be valid")
     private String phoneNumber;
 
     @DBRef
     private Address address;
 
-    @CreatedDate
-    private LocalDateTime created;
+    private Contact() {
 
-    @LastModifiedDate
-    private LocalDateTime modified;
+    }
 
     public Contact(String firstName, String lastName) {
         this.firstName = firstName;
@@ -124,14 +119,6 @@ public class Contact {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
     }
 
     @Override
