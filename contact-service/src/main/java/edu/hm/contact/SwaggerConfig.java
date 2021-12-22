@@ -25,6 +25,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Contact REST API")
                 .description("Contact API description")
+                .version("V1.0")
                 .build();
     }
 }
