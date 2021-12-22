@@ -19,12 +19,16 @@ public class Address {
 
     private String additionalAddress;
 
-    @Pattern(regexp = "^\\d{4,5}$", message = "Postcode should be valid.")
+    @Pattern(regexp = "^\\d{4,5}$", message = "Postcode should be valid")
     private String postcode;
 
     private String town;
 
     private Country country;
+
+    private Address() {
+
+    }
 
     public Address(String address, String additionalAddress, String postcode, String town, Country country) {
         this.address = address;
