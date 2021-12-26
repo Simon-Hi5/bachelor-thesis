@@ -1,4 +1,4 @@
-package edu.hm.contact;
+package edu.hm.contact.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
