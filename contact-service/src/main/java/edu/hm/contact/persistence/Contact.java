@@ -1,5 +1,6 @@
-package edu.hm.contact;
+package edu.hm.contact.persistence;
 
+import edu.hm.contact.common.Gender;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,10 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-
-enum Gender {
-    MALE, FEMALE, DIVERSE
-}
 
 @Document(collection = "contacts")
 public class Contact {
@@ -63,6 +60,10 @@ public class Contact {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
