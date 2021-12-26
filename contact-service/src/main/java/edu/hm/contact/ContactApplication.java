@@ -1,7 +1,8 @@
 package edu.hm.contact;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
+import edu.hm.contact.common.Gender;
+import edu.hm.contact.persistence.*;
+import edu.hm.contact.common.Country;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
