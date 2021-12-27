@@ -18,6 +18,11 @@ import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.Month;
 
+/**
+ * Contact microservice application.
+ *
+ * @author Simon Hirner
+ */
 @SpringBootApplication
 public class ContactApplication implements CommandLineRunner {
 

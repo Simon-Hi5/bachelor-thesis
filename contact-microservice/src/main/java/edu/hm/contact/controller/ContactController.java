@@ -7,7 +7,6 @@ import edu.hm.contact.common.SwaggerConfig;
 import edu.hm.contact.persistence.Contact;
 import edu.hm.contact.service.ContactService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+/**
+ * Controller for contact operations.
+ *
+ * @author Simon Hirner
+ */
 @RestController
 @RequestMapping("/contacts")
 @Api(tags = {SwaggerConfig.CONTACT_TAG})
