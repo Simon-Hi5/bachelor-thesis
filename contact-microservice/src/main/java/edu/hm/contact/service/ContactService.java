@@ -5,6 +5,11 @@ import edu.hm.contact.persistence.Contact;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface for contact service.
+ *
+ * @author Simon Hirner
+ */
 public interface ContactService {
 
     List<Contact> getAllContacts();

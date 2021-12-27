@@ -13,6 +13,11 @@ import java.util.List;
 import static com.mongodb.internal.connection.tlschannel.util.Util.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests for contact repository.
+ *
+ * @author Simon Hirner
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ContactRepositoryTest {

@@ -7,6 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Smoke test.
+ *
+ * @author Simon Hirner
+ */
 @SpringBootTest
 class ContactApplicationTests {
 

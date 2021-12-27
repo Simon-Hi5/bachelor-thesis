@@ -2,6 +2,11 @@ package edu.hm.contact.persistence;
 
 import javax.validation.constraints.Pattern;
 
+/**
+ * Address of a contact.
+ *
+ * @author Simon Hirner
+ */
 public class Address {
 
     private String address;
@@ -15,7 +20,17 @@ public class Address {
 
     private Country country;
 
-    public Address(String address, String additionalAddress, String postcode, String town, Country country) {
+    /**
+     * Constructor.
+     *
+     * @param address address
+     * @param additionalAddress additional address
+     * @param postcode postcode
+     * @param town town
+     * @param country country
+     */
+    public Address(String address, String additionalAddress, String postcode,
+                   String town, Country country) {
         this.address = address;
         this.additionalAddress = additionalAddress;
         this.postcode = postcode;
@@ -65,13 +80,10 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "address='" + address + '\'' +
-                ", additionalAddress='" + additionalAddress + '\'' +
-                ", postcode='" + postcode + '\'' +
-                ", town='" + town + '\'' +
-                ", country=" + country +
-                '}';
+        return "Address{"
+                + "address='" + address + '\''
+                + ", town='" + town + '\''
+                + '}';
     }
 
 }

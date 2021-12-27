@@ -10,6 +10,11 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
+/**
+ * Data model for contacts.
+ *
+ * @author Simon Hirner
+ */
 @Document(collection = "contacts")
 public class Contact {
 
@@ -37,15 +42,35 @@ public class Contact {
 
     private Address address;
 
+    /**
+     * Default constructor.
+     */
     private Contact() {
-
+        // Is needed
     }
 
+    /**
+     * Constructor.
+     *
+     * @param firstName first name
+     * @param lastName last name
+     */
     public Contact(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    /**
+     * Constructor.
+     *
+     * @param firstName first name
+     * @param lastName last name
+     * @param gender gender
+     * @param dateOfBirth date of birth
+     * @param email email address
+     * @param phoneNumber phone number
+     * @param address address
+     */
     public Contact(String firstName, String lastName,
                    Gender gender, LocalDate dateOfBirth,
                    String email, String phoneNumber, Address address) {
@@ -120,11 +145,11 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return "Contact{"
+                + "id='" + id + '\''
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + '}';
     }
 
 }

@@ -11,6 +11,11 @@ import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ * Configuration for Swagger API documentation.
+ *
+ * @author Simon Hirner
+ */
 @Configuration
 public class SwaggerConfig {
 
