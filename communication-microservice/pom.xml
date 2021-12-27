@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.hm</groupId>
-	<artifactId>contact-microservice</artifactId>
+	<artifactId>communication-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>contact-microservice</name>
-	<description>Contact Microservice.</description>
+	<name>communication-microservice</name>
+	<description>Communication Microservice.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
