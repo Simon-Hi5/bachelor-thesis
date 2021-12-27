@@ -1,5 +1,5 @@
-# Contact Microservice
-Spring Boot microservice for contact management of a CRM system.
+# Opportunity Microservice
+Spring Boot microservice for opportunity management of a CRM system.
 
 ## Features
 * MongoDB integration
