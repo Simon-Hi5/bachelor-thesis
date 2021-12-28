@@ -1,4 +1,4 @@
-package edu.hm.communication.common;
+package edu.hm.interaction.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
 
-    public static final String CONTACT_TAG = "Communications";
+    public static final String CONTACT_TAG = "Interactions";
 
     @Bean
     public Docket api() {
@@ -28,14 +28,14 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(CONTACT_TAG, "Operations about Communications."))
+                .tags(new Tag(CONTACT_TAG, "Operations about Interactions."))
                 .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Communication REST API")
-                .description("REST API for Communication Microservice.")
+                .title("Interaction REST API")
+                .description("REST API for Interaction Microservice.")
                 .version("V1.0")
                 .build();
     }

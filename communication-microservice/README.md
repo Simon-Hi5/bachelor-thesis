@@ -1,5 +1,5 @@
-# Communication Microservice
-Spring Boot microservice for communication management of a CRM system.
+# Interaction Microservice
+Spring Boot microservice for interaction management of a CRM system.
 
 ## Features
 * MongoDB integration
