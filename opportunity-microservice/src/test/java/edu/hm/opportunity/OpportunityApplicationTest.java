@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Simon Hirner
  */
 @SpringBootTest
-class OpportunityApplicationTests {
+class OpportunityApplicationTest {
 
 	@Autowired
 	private OpportunityController opportunityController;

@@ -1,6 +1,6 @@
-package edu.hm.communication;
+package edu.hm.interaction;
 
-import edu.hm.communication.controller.CommunicationController;
+import edu.hm.interaction.controller.InteractionController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Simon Hirner
  */
 @SpringBootTest
-class CommunicationApplicationTests {
+class InteractionApplicationTest {
 
 	@Autowired
-	private CommunicationController communicationController;
+	private InteractionController interactionController;
 
 	@Test
 	void contextLoads() {
-		assertThat(communicationController).isNotNull();
+		assertThat(interactionController).isNotNull();
 	}
 
 }

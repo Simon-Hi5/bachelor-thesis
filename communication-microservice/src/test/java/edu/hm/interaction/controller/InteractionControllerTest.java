@@ -1,6 +1,6 @@
-package edu.hm.communication.controller;
+package edu.hm.interaction.controller;
 
-import edu.hm.communication.service.CommunicationService;
+import edu.hm.interaction.service.InteractionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,27 +11,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Tests for communication controller.
+ * Tests for interaction controller.
  *
  * @author Simon Hirner
  */
-@WebMvcTest(CommunicationController.class)
-public class CommunicationControllerTest {
+@WebMvcTest(InteractionController.class)
+public class InteractionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CommunicationService communicationService;
+    private InteractionService interactionService;
 
     @Test
-    public void communicationsShouldReturnOK() throws Exception {
-        mockMvc.perform(get("/communications")).andExpect(status().isOk());
+    public void interactionsShouldReturnOK() throws Exception {
+        mockMvc.perform(get("/interactions")).andExpect(status().isOk());
     }
 
     @Test
-    public void communicationsShouldReturnf() throws Exception {
-        mockMvc.perform(get("/communications/1")).andExpect(status().isNotFound());
+    public void interactionsShouldReturnf() throws Exception {
+        mockMvc.perform(get("/interactions/1")).andExpect(status().isNotFound());
     }
 
 }
