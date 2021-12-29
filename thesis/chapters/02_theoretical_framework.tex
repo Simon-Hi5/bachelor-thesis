@@ -1,10 +1,54 @@
-\section{Einleitung}
+\section{Theoretischer Rahmen}
 
+DevOps, Cloud und Container Microservices und Kubernetes
 
-\subsection{Motivation}
+Kubernetes ist der Branchenstandard und die Grundlage für moderne Webanwendungen (\cite[Vorwort]{arundelCloud2019}).
 
+\subsection{DevOps}
 
-\subsection{Zielsetzung}
+\subsection{Microservices}
 
+Im Mittelpunkt der Arbeit stehen Microservices. Microservices sind ein Ansatz zur Modularisierung von Software.
 
-\subsection{Abgrenzung}
+Microservices vs Monolithen
+
+Dabei werden Microservices häufig im geschäftlichen Umfeld eingesetzt (\cite[S. 15]{newmanMicroservices2015}). 
+
+\subsubsection{Vorteile}
+
+Das Aufteilen von Software bringt wichtige Vorteile mit sich.
+
+\paragraph{Modularisierung}
+Bei klassischen Software-Monolithen, welche aus Komponenten zusammengestellt wird, entstehen schnell unerwünschte Abhängigkeiten. Die viele Abhängigkeiten erschweren die Wartung oder Weiterentwicklung. Da die einzelnen Microservices eigene Programme sind, herrscht eine starke Modularisierung. Die Programme sind eigenständig und kommunizieren nur über explizite Schnittstellen. Ungewollte Abhängigkeiten entstehen hier deutlich schwerer. (\cite[S. 3]{wolffMicroservices2018})
+
+In der Praxis wird die Architektur von Deployment-Monolithen meistens zunehmend schlechter. (\cite[S. 3]{wolffMicroservices2018})
+
+\paragraph{Ersetzbarkeit}
+Da Microservices nur über eine explizite Schnittstelle genutzt werden, können sie einfach durch einen Service, der die selbe Schnittstelle anbietet ersetzt werden. Bei der Ersetzung ist der neue Service nicht an den Technologie-Stack des alten Service gebunden. Auch die Risiken werden geringer, da bei schwerwiegenden Fehlentscheidungen in der Entwicklung, ein Austausch mit weniger Aufwand verbunden ist. (\cite[S. 4]{wolffMicroservices2018})
+
+Sie können auch deutlich schneller eingesetzt werden. (Time to Market)
+
+\paragraph{Skalierbarkeit}
+Durch die Unabhängigkeit der Microservices können sie auch unabhängig voneinander skaliert werden. So kann eine einzelne Funktionalität, welche stärker genutzt wird, skaliert werden, ohne das gesamte System zu skalieren. (\cite[S. 5]{wolffMicroservices2018})
+
+\paragraph{Technologiefreiheit}
+
+Des Weiteren führt die Unabhängigkeit auch zu einer großen Technologiefreiheit. Die verwendeten Technologien müssen schließlich nur in der Lage sein die explizite Schnittstelle anzubieten. (\cite[S. 5]{wolffMicroservices2018})
+
+\paragraph{Continuous Delivery}
+
+Ein wesentlicher Grund für die Einführung ist Continuous Delivery. Die kleinen Microservices können leichter deployt werden und das Deployment bietet weniger Gefahren und ist einfacher abzusichern, als bei einem Monolithen. (\cite[S. 5]{wolffMicroservices2018})
+
+\subsubsection{Herausforderungen}
+
+\paragraph{Versteckte Beziehungen}
+
+\paragraph{Refactoring}
+
+\paragraph{Fachliche Architektur}
+
+\paragraph{Komplexität}
+
+\paragraph{Verteilte Systeme}
+
+\subsection{Kubernetes}
