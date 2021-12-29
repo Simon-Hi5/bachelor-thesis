@@ -55,21 +55,29 @@
 
 \input{pages/abstract}
 
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
 
 \clearpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\thispagestyle{plain}
 \listoffigures
 
 \clearpage
+\thispagestyle{plain}
 \listoftables
 
 \clearpage
+\thispagestyle{plain}
 \lstlistoflistings
 
 \clearpage
-\input{pages/acronyms}
+\thispagestyle{plain}
+\input{pages/acronyms}	
 
 \clearpage
+\pagenumbering{arabic} 
 \input{chapters/01_introduction}
 
 \clearpage
@@ -82,9 +90,17 @@
 \input{chapters/99_conclusion}
 
 \clearpage
+\pagenumbering{Roman}
+\setcounter{page}{5}
+\thispagestyle{plain}
 \printbibliography
 
 \clearpage
+\thispagestyle{plain}
 \input{pages/declaration}
+
+\clearpage
+\thispagestyle{plain}
+\input{pages/appendix}
 
 \end{document}
