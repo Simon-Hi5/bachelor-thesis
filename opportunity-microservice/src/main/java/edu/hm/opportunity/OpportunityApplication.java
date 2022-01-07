@@ -1,9 +1,7 @@
 package edu.hm.opportunity;
 
-import edu.hm.opportunity.persistence.Country;
-import edu.hm.opportunity.persistence.Gender;
-import edu.hm.opportunity.persistence.Address;
 import edu.hm.opportunity.persistence.Opportunity;
+import edu.hm.opportunity.persistence.Status;
 import edu.hm.opportunity.service.OpportunityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,12 +57,11 @@ public class OpportunityApplication implements CommandLineRunner {
 
             opportunityService.deleteAllOpportunities();
 
-            Address address1 = new Address("Straße 1", "",
-                    "80963", "München", Country.GERMANY);
-            Opportunity opportunity1 = new Opportunity("Thorsten", "Schlott");
-            Opportunity opportunity2 = new Opportunity("Max", "Mustermann", Gender.MALE,
-                    LocalDate.of(1999, Month.JULY, 23), "test@test.de",
-                    "+49012940323", address1);
+            Opportunity opportunity1 = new Opportunity(LocalDate.of(2023, Month.JANUARY, 6),
+                    Status.PLANNED, 2);
+            Opportunity opportunity2 = new Opportunity(LocalDate.of(2022, Month.DECEMBER, 23),
+                    120000.0, 130000.0, 8000.0, Status.IN_PROGRESS, "Notiz", 3,
+                    "101010");
 
             opportunityService.saveOpportunity(opportunity1);
             opportunityService.saveOpportunity(opportunity2);
