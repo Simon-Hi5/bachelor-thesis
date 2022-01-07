@@ -50,13 +50,14 @@ public class OpportunityServiceImpl implements OpportunityService {
         logger.debug("Replace opportunity {}", id);
         return getOpportunity(id)
                 .map(opportunity -> {
-                    opportunity.setFirstName(newOpportunity.getFirstName());
-                    opportunity.setLastName(newOpportunity.getLastName());
-                    opportunity.setGender(newOpportunity.getGender());
-                    opportunity.setEmail(newOpportunity.getEmail());
-                    opportunity.setDateOfBirth(newOpportunity.getDateOfBirth());
-                    opportunity.setPhoneNumber(newOpportunity.getPhoneNumber());
-                    opportunity.setAddress(newOpportunity.getAddress());
+                    opportunity.setBudget(newOpportunity.getBudget());
+                    opportunity.setDiscount(newOpportunity.getDiscount());
+                    opportunity.setEstimatedCloseDate(newOpportunity.getEstimatedCloseDate());
+                    opportunity.setNote(newOpportunity.getNote());
+                    opportunity.setPriority(newOpportunity.getPriority());
+                    opportunity.setStatus(newOpportunity.getStatus());
+                    opportunity.setValue(newOpportunity.getValue());
+                    opportunity.setRelatedContactID(newOpportunity.getRelatedContactID());
                     return saveOpportunity(opportunity);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(id));
