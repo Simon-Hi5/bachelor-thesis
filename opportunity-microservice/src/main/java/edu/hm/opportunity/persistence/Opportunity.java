@@ -7,7 +7,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Data model for opportunities.
@@ -20,7 +19,6 @@ public class Opportunity {
     @Id
     private String id;
 
-    @NotBlank(message = "Estimated close date should not be blank")
     private LocalDate estimatedCloseDate;
 
     private double value;
