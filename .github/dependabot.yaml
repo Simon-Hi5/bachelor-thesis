@@ -1,17 +1,17 @@
 version: 2
 updates:
   - package-ecosystem: maven
-    directory: "./contact-microservice"
+    directory: "/contact-microservice"
     schedule:
       interval: daily
 
   - package-ecosystem: maven
-    directory: "./opportunity-microservice"
+    directory: "/opportunity-microservice"
     schedule:
       interval: daily
 
   - package-ecosystem: maven
-    directory: "./interaction-microservice"
+    directory: "/interaction-microservice"
     schedule:
       interval: daily
 
