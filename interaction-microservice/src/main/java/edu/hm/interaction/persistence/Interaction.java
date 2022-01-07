@@ -1,14 +1,9 @@
 package edu.hm.interaction.persistence;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -27,9 +22,11 @@ public class Interaction {
     private String note;
 
     @NotBlank(message = "Contact ID should not be blank")
-    private String contactId;
+    private String relatedContactId;
 
     private LocalDateTime dateAndTime;
+
+    private String relatedOpportunityId;
 
     /**
      * Default constructor.
@@ -42,13 +39,13 @@ public class Interaction {
      * Constructor.
      *
      * @param formOfInteraction form of interaction
-     * @param contactId contact ID
+     * @param relatedContactId related contact ID
      * @param dateAndTime date and time of interaction
      */
-    public Interaction(FormOfInteraction formOfInteraction, String contactId,
+    public Interaction(FormOfInteraction formOfInteraction, String relatedContactId,
                        LocalDateTime dateAndTime) {
         this.formOfInteraction = formOfInteraction;
-        this.contactId = contactId;
+        this.relatedContactId = relatedContactId;
         this.dateAndTime = dateAndTime;
     }
 
@@ -57,14 +54,14 @@ public class Interaction {
      *
      * @param formOfInteraction form of interaction
      * @param note note
-     * @param contactId contact ID
+     * @param relatedContactId related contact ID
      * @param dateAndTime date and time of interaction
      */
     public Interaction(FormOfInteraction formOfInteraction, String note,
-                       String contactId, LocalDateTime dateAndTime) {
+                       String relatedContactId, LocalDateTime dateAndTime) {
         this.formOfInteraction = formOfInteraction;
         this.note = note;
-        this.contactId = contactId;
+        this.relatedContactId = relatedContactId;
         this.dateAndTime = dateAndTime;
     }
 
@@ -88,12 +85,12 @@ public class Interaction {
         this.note = note;
     }
 
-    public String getContactId() {
-        return contactId;
+    public String getRelatedContactId() {
+        return relatedContactId;
     }
 
-    public void setContactId(String contactId) {
-        this.contactId = contactId;
+    public void setRelatedContactId(String relatedContactId) {
+        this.relatedContactId = relatedContactId;
     }
 
     public LocalDateTime getDateAndTime() {
@@ -102,6 +99,14 @@ public class Interaction {
 
     public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
+    }
+
+    public String getRelatedOpportunityId() {
+        return relatedOpportunityId;
+    }
+
+    public void setRelatedOpportunityId(String relatedOpportunityId) {
+        this.relatedOpportunityId = relatedOpportunityId;
     }
 
     @Override

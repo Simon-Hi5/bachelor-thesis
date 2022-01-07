@@ -51,9 +51,10 @@ public class InteractionServiceImpl implements InteractionService {
         return getInteraction(id)
                 .map(interaction -> {
                     interaction.setNote(newInteraction.getNote());
-                    interaction.setContactId(newInteraction.getContactId());
+                    interaction.setRelatedContactId(newInteraction.getRelatedContactId());
                     interaction.setDateAndTime(newInteraction.getDateAndTime());
                     interaction.setFormOfInteraction(newInteraction.getFormOfInteraction());
+                    interaction.setRelatedOpportunityId(newInteraction.getRelatedOpportunityId());
                     return saveInteraction(interaction);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(id));
