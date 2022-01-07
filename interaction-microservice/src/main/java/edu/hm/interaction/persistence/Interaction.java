@@ -17,7 +17,6 @@ public class Interaction {
     @Id
     private String id;
 
-    @NotBlank(message = "Form of interaction should not be blank")
     private FormOfInteraction formOfInteraction;
 
     private String note;

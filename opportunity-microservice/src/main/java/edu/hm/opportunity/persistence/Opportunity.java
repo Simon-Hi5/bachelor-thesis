@@ -29,7 +29,6 @@ public class Opportunity {
 
     private double discount;
 
-    @NotBlank(message = "Status should not be blank")
     private Status status;
 
     private String note;
