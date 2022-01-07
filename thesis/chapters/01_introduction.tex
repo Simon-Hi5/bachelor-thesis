@@ -1,37 +1,49 @@
 \section{Einleitung}
 
-Im Folgenden wird beispielhaft gezeigt, wie Zitate, Bilder, Tabellen oder Quellcode in die Arbeit eingefügt werden können.
-
-\subsection{Zitate}
-Menschen, die mit ihrem IQ prahlen, sind Versager (\cite[S. 99]{hightowerKubernetesKompakte2018}).
-
-\subsection{Bilder}
-\begin{figure}[H] 
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/figure_example.png}
-    \caption{Mooresches Gesetz}
-\end{figure}
-
-\subsection{Tabellen}
-\begin{table}[H]
-    \centering
-    \begin{tabular}[H]{l|l|l}
-        Bezeichnung & Kerne & TDP \\
-        \hline
-        Intel Core i5 & 6 & 111 W \\
-        \hline
-        AMD Ryzen 7 & 8 & 178 W \\
-    \end{tabular}
-    \caption{Prozessoren}
-\end{table}
+\dictum[Tony Hoare]{\center ``There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult."}
+\vspace{1em} 
+Zunächst wird in diesem Kapitel näher auf die Motivation sowie der Zielsetzung der vorliegenden Bachelorarbeit eingegangen.
+\\
+\\
+{Kurzbeschreibung} \\
+{Gliederung \& Struktur der Arbeit}
 
 
-\subsection{Quellcode}
-\begin{lstlisting}[language=java, caption=Hello World in Java, captionpos=b]
-    class HelloWorld {
-        public static void main(String[] args) {
-            // Display the string.y
-            System.out.println("Hello World!");
-        }
-    }
-\end{lstlisting}
+\subsection{Motivation}
+Durch Container, Microservices und Kubernetes hat sich in den letzten Jahren ein erheblicher
+Wandel in der IT-Branche vollzogen. Containervirtualisierung erleichtert das Bauen großer
+verteilter Systeme durch das Verbinden von vielen kleinen Services. Im Gegensatz zu
+monolithischen Anwendungen erleichtern Microservices den Einsatz von verschiedenen
+Technologien, die Skalierung und den modularen Aufbau (Newman et al., 2015, S. 24 ff.).
+Um die große Anzahl an Services zu steuern, kommen Orchestrierungssysteme zum Einsatz.
+In diesem Bereich hat sich in den letzten Jahren Kubernetes zum Standard entwickelt. Das
+alles sind Trends die DevOps unterstützen und für ein zunehmendes Verschmelzen von
+Softwareentwicklern und Systemadministratoren sorgen. Heutzutage sind DevOps-Prinzipien
+tief in modernen Anwendungen verwurzelt und haben erhebliche Auswirkungen auf alle
+Phasen des Entwicklungszyklus. Vor allem der Entwurf und die Bereitstellung wurden enorm
+beeinflusst und haben sich grundsätzlich verändert. Den containerisierten, verteilten Systemen
+gehört die Zukunft (Arundel und Domingus, 2019, S. 1). In dieser Bachelorarbeit wird deshalb
+der Fokus auf dem Entwurf und der Bereitstellung von modernen Microservice-basierten
+Anwendungen mit dem Branchenstandard Kubernetes liegen.
+
+
+\subsection{Zielsetzung}
+Ziel dieser Bachelorarbeit ist es eine Übersicht über 
+
+Die 
+
+
+Die Bachelorarbeit widmet sich dem Entwurf und der Bereitstellung von Microservices mit
+Kubernetes. Die Arbeit wird zuerst die nötigen Methoden und Technologien beschreiben, um
+diese im Anschluss anhand einer konkreten Fallstudie einzusetzen. Das Ziel der Fallstudie
+ist es, ein auf Microservices basierendes Customer-Relationship-Management-System (CRM-
+System) zu entwerfen und dieses mithilfe von Kubernetes bereitzustellen. Dabei soll ein
+Verfahren, das dem aktuellen Stand der Technik entspricht, vom Entwurf bis zur Bereitstellung
+von modernen Microservice-basierten Anwendungen implementiert werden.
+
+\subsection{Abgrenzung}
+Die folgenden Aspekte werden nicht betrachtet:
+\begin{itemize}
+\item Sicherheit (Authentifizierung)
+\item Cloud Computing
+\end{itemize}

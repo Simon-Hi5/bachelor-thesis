@@ -24,13 +24,13 @@
 
 \newcommand*{\getUniversity}{Hochschule für angewandte Wissenschaften München}
 \newcommand*{\getFaculty}{Fakultät für Informatik und Mathematik}
-\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes}
+\newcommand*{\getTitle}{Entwurf und Bereitstellung von Microservices mit Kubernetes am Beispiel eines CRM-Systems}
 \newcommand*{\getAuthor}{Simon Hirner}
 \newcommand*{\getMatriculationNumber}{02607918}
 \newcommand*{\getCourse}{Wirtschaftsinformatik}
 \newcommand*{\getDoctype}{Bachelorarbeit}
 \newcommand*{\getSupervisor}{Prof. Dr. Torsten Zimmer}
-\newcommand*{\getSubmissionDate}{\today}
+\newcommand*{\getSubmissionDate}{04.02.2022}
 
 
 % **************************************************
@@ -55,30 +55,52 @@
 
 \input{pages/abstract}
 
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
 
 \clearpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\thispagestyle{plain}
 \listoffigures
 
 \clearpage
+\thispagestyle{plain}
 \listoftables
 
 \clearpage
+\thispagestyle{plain}
 \lstlistoflistings
 
 \clearpage
-\input{pages/acronyms}
+\thispagestyle{plain}
+\input{pages/acronyms}	
 
 \clearpage
+\pagenumbering{arabic} 
 \input{chapters/01_introduction}
+
+\clearpage
+\input{chapters/02_theoretical_framework}
+
+\clearpage
+\input{chapters/03_case_study}
 
 \clearpage
 \input{chapters/99_conclusion}
 
 \clearpage
+\pagenumbering{Roman}
+\setcounter{page}{5}
+\thispagestyle{plain}
 \printbibliography
 
 \clearpage
+\thispagestyle{plain}
 \input{pages/declaration}
+
+\clearpage
+\thispagestyle{plain}
+\input{pages/appendix}
 
 \end{document}

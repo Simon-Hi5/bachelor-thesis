@@ -92,10 +92,10 @@
 \fancyhf{}
 \lhead{\nouppercase{\leftmark}}
 \chead{}
-\rhead{\thepage}
+\rhead{}
 \lfoot{}
+\cfoot{\thepage}
 \rfoot{}
-
 
 % **************************************************
 % Miscellaneous
@@ -107,3 +107,10 @@
 % Reduce hyphenation
 \hyphenpenalty=5000
 \tolerance=1000
+
+% Styling of quote at start of chapter
+\setkomafont{dictumtext}{\itshape}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{\linewidth}
+\renewcommand*\dictumauthorformat[1]{-- #1}
+\renewcommand*\dictumrule{}
