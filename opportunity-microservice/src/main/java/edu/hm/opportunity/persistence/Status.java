@@ -5,6 +5,6 @@ package edu.hm.opportunity.persistence;
  *
  * @author Simon Hirner
  */
-public enum Gender {
-    MALE, FEMALE, DIVERSE
+public enum Status {
+    PLANNED, IN_PROGRESS, ON_HOLD, CANCELED, SOLD
 }

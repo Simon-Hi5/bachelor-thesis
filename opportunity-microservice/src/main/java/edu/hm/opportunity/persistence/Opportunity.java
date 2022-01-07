@@ -1,14 +1,13 @@
 package edu.hm.opportunity.persistence;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Data model for opportunities.
@@ -21,26 +20,26 @@ public class Opportunity {
     @Id
     private String id;
 
-    @NotBlank(message = "First name should not be blank")
-    private String firstName;
+    @NotBlank(message = "Estimated close date should not be blank")
+    private LocalDate estimatedCloseDate;
 
-    @NotBlank(message = "Last name should not be blank")
-    private String lastName;
+    private double value;
 
-    private Gender gender;
+    private double budget;
 
-    @Past(message = "Date of birth should be in the past")
-    private LocalDate dateOfBirth;
+    private double discount;
 
-    @Email(message = "Email should be valid.")
+    @NotBlank(message = "Status should not be blank")
+    private Status status;
 
-    @Indexed(unique = true)
-    private String email;
+    private String note;
+    
+    @NotBlank(message = "Priority should not be blank")
+    @Min(value = 1, message = "Priority should be at least 1")
+    @Max(value = 3, message = "Priority should be at most 3")
+    private int priority;
 
-    @Pattern(regexp = "^\\+\\d{6,14}$", message = "Phone number should be valid")
-    private String phoneNumber;
-
-    private Address address;
+    private String relatedContactID;
 
     /**
      * Default constructor.
@@ -50,105 +49,116 @@ public class Opportunity {
     }
 
     /**
-     * Constructor.
+     * Constructor
      *
-     * @param firstName first name
-     * @param lastName last name
+     * @param estimatedCloseDate estimated close date
+     * @param status status
+     * @param priority priority
      */
-    public Opportunity(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Opportunity(LocalDate estimatedCloseDate, Status status, int priority) {
+        this.estimatedCloseDate = estimatedCloseDate;
+        this.status = status;
+        this.priority = priority;
     }
 
     /**
      * Constructor.
      *
-     * @param firstName first name
-     * @param lastName last name
-     * @param gender gender
-     * @param dateOfBirth date of birth
-     * @param email email address
-     * @param phoneNumber phone number
-     * @param address address
+     * @param estimatedCloseDate estimated close date
+     * @param value value amount
+     * @param budget budget amount
+     * @param discount discount amount
+     * @param status status
+     * @param note note
+     * @param priority priority
+     * @param relatedContactID related contact ID
      */
-    public Opportunity(String firstName, String lastName,
-                   Gender gender, LocalDate dateOfBirth,
-                   String email, String phoneNumber, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+    public Opportunity(LocalDate estimatedCloseDate, double value, double budget, double discount,
+                       Status status, String note, int priority, String relatedContactID) {
+        this.estimatedCloseDate = estimatedCloseDate;
+        this.value = value;
+        this.budget = budget;
+        this.discount = discount;
+        this.status = status;
+        this.note = note;
+        this.priority = priority;
+        this.relatedContactID = relatedContactID;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public LocalDate getEstimatedCloseDate() {
+        return estimatedCloseDate;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEstimatedCloseDate(LocalDate estimatedCloseDate) {
+        this.estimatedCloseDate = estimatedCloseDate;
     }
 
-    public String getLastName() {
-        return lastName;
+    public double getValue() {
+        return value;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setValue(double value) {
+        this.value = value;
     }
 
-    public Gender getGender() {
-        return gender;
+    public double getBudget() {
+        return budget;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
-    public String getEmail() {
-        return email;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getNote() {
+        return note;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public Address getAddress() {
-        return address;
+    public int getPriority() {
+        return priority;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getRelatedContactID() {
+        return relatedContactID;
+    }
+
+    public void setRelatedContactID(String relatedContactID) {
+        this.relatedContactID = relatedContactID;
     }
 
     @Override
     public String toString() {
         return "Opportunity{"
                 + "id='" + id + '\''
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
+                + ", status='" + status + '\''
+                + ", priority='" + priority + '\''
                 + '}';
     }
 
