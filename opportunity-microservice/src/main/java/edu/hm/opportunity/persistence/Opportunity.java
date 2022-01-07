@@ -30,8 +30,7 @@ public class Opportunity {
     private Status status;
 
     private String note;
-    
-    @NotBlank(message = "Priority should not be blank")
+
     @Min(value = 1, message = "Priority should be at least 1")
     @Max(value = 3, message = "Priority should be at most 3")
     private int priority;
