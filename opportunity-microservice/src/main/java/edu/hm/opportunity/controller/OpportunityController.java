@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/opportunities")
+@CrossOrigin(origins = "http://localhost:3000")
 @Api(tags = {SwaggerConfig.Opportunity_TAG})
 public class OpportunityController {
 
