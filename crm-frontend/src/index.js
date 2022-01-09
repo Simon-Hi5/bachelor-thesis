@@ -11,19 +11,28 @@ import {
 import Interactions from './pages/Interactions';
 import Opportunities from './pages/Opportunities';
 import Contacts from './pages/Contacts';
+import Contact from './pages/Contact';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<App />}>
-          <Route path='contacts' element={<Contacts />} />
-          <Route path='interactions' element={<Interactions />} />
-          <Route path='opportunities' element={<Opportunities />} />
+        <Route exact path='/' element={<App />}>
+          <Route exact path='contacts' element={<Contacts />}>
+            <Route path=":id" element={<Contact />} />
+            <Route
+              index
+              element={
+                  <p>Select an invoice</p>
+              }
+            />
+          </Route>
+          <Route exact path='interactions' element={<Interactions />} />
+          <Route exact path='opportunities' element={<Opportunities />} />
           <Route
             path="*"
             element={
-                <p>There's nothing here!</p>
+              <p>There's nothing here!</p>
             }
           />
         </Route>

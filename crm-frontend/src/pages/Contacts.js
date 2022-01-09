@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router';
 import ContactList from '../components/contact/ContactList';
 
 const Contacts = () => {
@@ -6,6 +7,7 @@ const Contacts = () => {
         <div>
             <h2>Contacts</h2>
             <ContactList />
+            <Outlet />
         </div>
     );
 }
