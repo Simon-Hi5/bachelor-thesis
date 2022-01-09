@@ -1,9 +1,9 @@
 package edu.hm.contact;
 
-import edu.hm.contact.persistence.Country;
-import edu.hm.contact.persistence.Gender;
 import edu.hm.contact.persistence.Address;
 import edu.hm.contact.persistence.Contact;
+import edu.hm.contact.persistence.Country;
+import edu.hm.contact.persistence.Gender;
 import edu.hm.contact.service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
