@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { CONTACT_API } from '../../Constants';
+import { Link } from 'react-router-dom';
 
 class ContactList extends Component {
 
@@ -12,7 +14,7 @@ class ContactList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/contacts')
+        axios.get(CONTACT_API)
             .then(response => {
                 this.setState({
                     contacts: response.data
@@ -24,9 +26,9 @@ class ContactList extends Component {
         const { contacts } = this.state;
         return (
             <div>
-                <h2>List of Contacts</h2>
+                <h3>List of Contacts</h3>
                 {
-                    contacts.map(contact => <div key={contact.id}>{contact.lastName}</div>)
+                    contacts.map(contact => <Link to={`/contacts/${contact.id}`} key={contact.id}>{contact.lastName}</Link>)
                 }
             </div>
         )
