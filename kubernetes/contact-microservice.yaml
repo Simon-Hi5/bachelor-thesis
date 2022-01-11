@@ -1,0 +1,48 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: contact-service
+spec:
+  selector:
+    app: contact-service
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30081
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-service
+spec:
+  selector:
+      matchLabels:
+        app: contact-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: contact-service
+    spec:
+      containers:
+        - name: contact-service
+          image: contact-microservice:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8080
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: contact-db-config  
+                  key: database
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"
+                  
