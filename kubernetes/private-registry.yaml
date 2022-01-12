@@ -35,24 +35,7 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
-      nodePort: 30400
-      name: registry
-  selector:
-    app: registry
-    tier: registry
-  type: NodePort
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: registry-ui
-  labels:
-    app: registry
-spec:
-  ports:
-    - port: 8080
-      targetPort: 8080
+      nodePort: 30000
       name: registry
   selector:
     app: registry
@@ -91,27 +74,11 @@ spec:
           name: registry
         resources:
           limits:
-            memory: 512Mi
+            memory: 256Mi
             cpu: "1"
           requests:
             memory: 128Mi
             cpu: "0.25"
-      - name: registryui
-        image: hyper/docker-registry-web:latest
-        ports:
-        - containerPort: 8080
-        resources:
-          limits:
-            memory: 512Mi
-            cpu: "1"
-          requests:
-            memory: 128Mi
-            cpu: "0.25"
-        env:
-        - name: REGISTRY_URL
-          value: http://localhost:5000/v2
-        - name: REGISTRY_NAME
-          value: cluster-registry
       volumes:
       - name: docker
         hostPath:
