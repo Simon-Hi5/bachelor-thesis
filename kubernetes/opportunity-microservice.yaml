@@ -1,0 +1,47 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: opportunity-service
+spec:
+  selector:
+    app: opportunity-service
+  ports:
+  - protocol: TCP
+    port: 8082
+    nodePort: 30012
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opportunity-service
+spec:
+  selector:
+      matchLabels:
+        app: opportunity-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: opportunity-service
+    spec:
+      containers:
+        - name: opportunity-service
+          image: 10.110.56.71:5000/opportunity-microservice:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8082
+          env:
+            - name: MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: opportunity-db-config  
+                  key: host
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: "1"
+            requests:
+              memory: 128Mi
+              cpu: "0.25"

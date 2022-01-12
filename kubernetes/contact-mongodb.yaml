@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: contact-db-config
+data:
+ host: contact-db-service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: contact-db
+  name: contact-db-service
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 30020
+  selector:
+    app: contact-db
+  type: NodePort
+    
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-db
+  labels:
+    app: contact-db
+spec:
+  selector: 
+    matchLabels:
+      app: contact-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: contact-db
+      name: contact-db-service
+    spec:
+      containers:
+      - image: mongo:latest
+        name: contact-db
+        ports:
+        - containerPort: 27017
+          name: contact-db
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: "1"
+          requests:
+            memory: 128Mi
+            cpu: "0.25"
