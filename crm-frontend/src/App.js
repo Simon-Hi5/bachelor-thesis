@@ -1,14 +1,14 @@
-import logo from './logo.svg';
+import { Outlet } from 'react-router';
 import './App.css';
-import ContactList from './components/contact/ContactList';
-import ContactForm from './components/contact/ContactForm';
+import Pages from './pages/Pages';
 
 function App() {
   return (
-      <div className="App">
-        <ContactList/>
-        <ContactForm/>
-      </div>
+    <div className="App">
+      <h1>Micro-CRM</h1>
+      <Pages />
+      <Outlet />
+    </div>
   );
 }
 

@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: opportunity-db-config
+data:
+ host: opportunity-db-service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: opportunity-db
+  name: opportunity-db-service
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 30022
+  selector:
+    app: opportunity-db
+  type: NodePort
+    
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opportunity-db
+  labels:
+    app: opportunity-db
+spec:
+  selector: 
+    matchLabels:
+      app: opportunity-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: opportunity-db
+      name: opportunity-db-service
+    spec:
+      containers:
+      - image: mongo:latest
+        name: opportunity-db
+        ports:
+        - containerPort: 27017
+          name: opportunity-db
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: "1"
+          requests:
+            memory: 128Mi
+            cpu: "0.25"
