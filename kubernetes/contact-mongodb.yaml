@@ -16,9 +16,10 @@ spec:
   ports:
   - port: 27017
     targetPort: 27017
+    nodePort: 30020
   selector:
     app: contact-db
-  clusterIP: None
+  type: NodePort
     
 ---
 apiVersion: apps/v1
@@ -46,8 +47,8 @@ spec:
           name: contact-db
         resources:
           limits:
-            memory: 512Mi
+            memory: 256Mi
             cpu: "1"
           requests:
-            memory: 256Mi
-            cpu: "0.5"
+            memory: 128Mi
+            cpu: "0.25"

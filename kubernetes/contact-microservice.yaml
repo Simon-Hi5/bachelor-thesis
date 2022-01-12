@@ -8,7 +8,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8080
-    nodePort: 30081
+    nodePort: 30010
   type: NodePort
 
 ---
@@ -28,21 +28,21 @@ spec:
     spec:
       containers:
         - name: contact-service
-          image: contact-microservice:latest
-          imagePullPolicy: Never
+          image: 10.110.56.71:5000/contact-microservice:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 8080
           env:
-            - name: MONGODB_URI
+            - name: MONGODB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: contact-db-config  
-                  key: database
+                  key: host
           resources:
             limits:
-              memory: 512Mi
+              memory: 256Mi
               cpu: "1"
             requests:
-              memory: 256Mi
-              cpu: "0.5"
+              memory: 128Mi
+              cpu: "0.25"
                   
