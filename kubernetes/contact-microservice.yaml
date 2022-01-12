@@ -45,4 +45,3 @@ spec:
             requests:
               memory: 128Mi
               cpu: "0.25"
-                  
