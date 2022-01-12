@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: interaction-db-config
+data:
+ host: interaction-db-service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: interaction-db
+  name: interaction-db-service
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 30021
+  selector:
+    app: interaction-db
+  type: NodePort
+    
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: interaction-db
+  labels:
+    app: interaction-db
+spec:
+  selector: 
+    matchLabels:
+      app: interaction-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: interaction-db
+      name: interaction-db-service
+    spec:
+      containers:
+      - image: mongo:latest
+        name: interaction-db
+        ports:
+        - containerPort: 27017
+          name: interaction-db
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: "1"
+          requests:
+            memory: 128Mi
+            cpu: "0.25"
