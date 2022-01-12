@@ -40,6 +40,8 @@ public class ContactApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        String mongodbHost = System.getenv().getOrDefault("MONGODB_HOST", "localhost");
+        logger.info("Environment variable MONGODB_HOST=" + mongodbHost);
         initializeDatabase();
     }
 
