@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crm-frontend-service
+  labels:
+    app: crm-frontend
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+    nodePort: 30030
+  selector:
+    app: crm-frontend
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crm-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crm-frontend
+  template:
+    metadata:
+      labels:
+        app: crm-frontend
+      name: crm-frontend
+    spec:
+      containers:
+      - name: crm-frontend
+        image: crm-frontend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: crm-frontend
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: "1"
+          requests:
+            memory: 128Mi
+            cpu: "0.25"
