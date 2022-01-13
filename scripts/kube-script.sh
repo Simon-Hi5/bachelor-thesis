@@ -1,25 +1,28 @@
 #!/bin/sh
 
+# Make scripts executable
+chmod a+x ./**/*.sh
+
+# Change directory
+cd ./kube || exit
+
+# Connect with minikube docker client
+eval "$(minikube docker-env)"
+
 # Stop and delete old minikube sessions
-sh ./kube/stop-minikube.sh
+sh ./stop-minikube.sh
 
 # Start new container
-minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000  --insecure-registry "10.0.0.0/24"
-
-# Deploy private registry
-./kube/deploy-registry.sh
-
-# Add insecure registry
-./kube/add-insecure-registry.sh
+minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000
 
 # Deploy Contact Microservice
-./kube/deploy-contact-microservice.sh
+./deploy-contact-microservice.sh
 
 # Deploy Interaction Microservice
-./kube/deploy-interaction-microservice.sh
+#./deploy-interaction-microservice.sh
 
 # Deploy Opportunity Microservice
-./kube/deploy-opportunity-microservice.sh
+#./deploy-opportunity-microservice.sh
 
 # Deploy CRM Frontend
-./kube/deploy-crm-frontend.sh
+./deploy-crm-frontend.sh
