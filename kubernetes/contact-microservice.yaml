@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: contact-service
-          image: 10.110.56.71:5000/contact-microservice:latest
-          imagePullPolicy: Always
+          image: contact-microservice:latest
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 8080
           env:
