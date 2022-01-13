@@ -6,11 +6,8 @@ chmod a+x ./**/*.sh
 # Change directory
 cd ./kube || exit
 
-# Connect with minikube docker client
-eval "$(minikube docker-env)"
-
 # Stop and delete old minikube sessions
-sh ./stop-minikube.sh
+./stop-minikube.sh
 
 # Start new container
 minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000

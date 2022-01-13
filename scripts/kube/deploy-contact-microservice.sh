@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Connect with minikube docker client
+eval "$(minikube docker-env)"
+
 # Deploy MongoDB
 kubectl apply -f ../../kubernetes/contact-mongodb.yaml
 kubectl rollout status deployments/contact-db
