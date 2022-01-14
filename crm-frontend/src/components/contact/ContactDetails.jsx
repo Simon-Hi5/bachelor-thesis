@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { CONTACT_API } from '../../Constants';
+import ContactService from '../../services/ContactService';
 
 class ContactDetails extends Component {
 
@@ -23,12 +22,12 @@ class ContactDetails extends Component {
     }
 
     updateContact() {
-        axios.get(CONTACT_API + `/${this.props.id}`)
+        ContactService.getContact(this.props.id)
             .then(response => {
                 this.setState({
                     contact: response.data
                 })
-            });
+            })
     }
 
     render() {

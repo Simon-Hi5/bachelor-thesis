@@ -12,6 +12,7 @@ import Interactions from './pages/Interactions';
 import Opportunities from './pages/Opportunities';
 import Contacts from './pages/Contacts';
 import Contact from './pages/Contact';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,7 +24,7 @@ ReactDOM.render(
             <Route
               index
               element={
-                  <p>Select an invoice</p>
+                  <p>Select a contact</p>
               }
             />
           </Route>
