@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { CONTACT_API } from "../../Constants";
+import ContactService from "../../services/ContactService";
 
 class ContactForm extends Component {
 
@@ -32,11 +33,10 @@ class ContactForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        axios.post(CONTACT_API, this.state)
+        ContactService.saveContact(this.state)
             .then(response => {
 
-            }
-            )
+            });
     }
 
     render() {
