@@ -1,4 +1,4 @@
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ContactForm from "../components/contact/ContactForm";
 
 const NewContact = () => {

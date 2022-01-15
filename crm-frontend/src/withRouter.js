@@ -8,7 +8,7 @@ export const withRouter = (Component) => {
       <Component
         navigate={navigate}
         {...props}
-        />
+      />
     );
   };
 

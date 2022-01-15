@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Alert, Button, Card, Col, Form, Row } from 'react-bootstrap';
 import ContactService from '../../services/ContactService';
-import { Container, Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import { withRouter } from '../../withRouter';
 
 class ContactDetails extends Component {
@@ -63,7 +63,7 @@ class ContactDetails extends Component {
 
     handleDelete() {
         ContactService.deleteContact(this.props.id)
-            .then(response => {
+            .then(() => {
                 this.setState({
                     error: "",
                 })
@@ -80,7 +80,7 @@ class ContactDetails extends Component {
         event.preventDefault();
 
         ContactService.replaceContact(this.props.id, this.state.contact)
-            .then(response => {
+            .then(() => {
                 this.setState({
                     error: "",
                 })
