@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router';
 import './App.css';
-import Pages from './pages/Pages';
+import Navigation from './pages/Navigation';
 
 function App() {
   return (
     <div className="App">
-      <h1>Micro-CRM</h1>
-      <Pages />
+      <Navigation />
       <Outlet />
     </div>
   );

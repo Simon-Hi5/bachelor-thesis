@@ -61,7 +61,7 @@ public class ContactApplication implements CommandLineRunner {
 
             contactService.deleteAllContacts();
 
-            Address address1 = new Address("Straße 1", "",
+            Address address1 = new Address("Straße 1", "Apartment A",
                     "80963", "München", Country.GERMANY);
             Contact contact1 = new Contact("Thorsten", "Schlott");
             Contact contact2 = new Contact("Max", "Mustermann", Gender.MALE,

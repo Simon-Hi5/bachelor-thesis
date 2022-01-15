@@ -1,38 +1,35 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
+  BrowserRouter as Router, Route, Routes
 } from "react-router-dom";
-import Interactions from './pages/Interactions';
-import Opportunities from './pages/Opportunities';
-import Contacts from './pages/Contacts';
+import App from './App';
+import './index.css';
 import Contact from './pages/Contact';
+import Contacts from './pages/Contacts';
+import Interactions from './pages/Interactions';
+import NewContact from './pages/NewContact';
+import Opportunities from './pages/Opportunities';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route exact path='/' element={<App />}>
-          <Route exact path='contacts' element={<Contacts />}>
-            <Route path=":id" element={<Contact />} />
-            <Route
-              index
-              element={
-                  <p>Select an invoice</p>
-              }
-            />
-          </Route>
+          <Route exact path='contacts' element={<Contacts />} />
+          <Route path="contacts/new" element={<NewContact />} />
+          <Route path="contacts/:id" element={<Contact />} />
           <Route exact path='interactions' element={<Interactions />} />
           <Route exact path='opportunities' element={<Opportunities />} />
           <Route
             path="*"
             element={
-              <p>There's nothing here!</p>
+              <Container>
+              <h2 className="text-start mt-5 mb-5">There's nothing here!</h2>
+            </Container>
             }
           />
         </Route>
