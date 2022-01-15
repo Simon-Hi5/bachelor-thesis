@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Alert, Button, Card, Col, Form, Row } from "react-bootstrap";
 import ContactService from "../../services/ContactService";
-import { Form, Button, Card, Alert, Row, Col } from "react-bootstrap";
 import { withRouter } from "../../withRouter";
 
 class ContactForm extends Component {
@@ -51,7 +51,7 @@ class ContactForm extends Component {
         event.preventDefault();
 
         ContactService.saveContact(this.state.contact)
-            .then(response => {
+            .then(() => {
                 this.setState({
                     error: "",
                 })

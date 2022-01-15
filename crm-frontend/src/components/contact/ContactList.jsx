@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Button, Card, Nav, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import ContactService from '../../services/ContactService';
-import { Card, Container, Nav, Table, Button } from 'react-bootstrap';
 
 class ContactList extends Component {
 

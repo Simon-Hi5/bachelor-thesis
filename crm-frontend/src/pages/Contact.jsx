@@ -1,6 +1,6 @@
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router";
 import ContactDetails from "../components/contact/ContactDetails";
-import { Container, Button } from "react-bootstrap";
 
 const Contact = () => {
     let params = useParams();

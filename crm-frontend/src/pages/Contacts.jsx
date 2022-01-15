@@ -1,7 +1,6 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import ContactList from '../components/contact/ContactList';
-import { Button, Container } from 'react-bootstrap';
-import { NavLink } from "react-router-dom";
 
 const Contacts = () => {
     return (
