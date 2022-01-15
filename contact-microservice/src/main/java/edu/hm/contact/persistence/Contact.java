@@ -33,7 +33,6 @@ public class Contact {
     private LocalDate dateOfBirth;
 
     @Email(message = "Email should be valid.")
-
     @Indexed(unique = true)
     private String email;
 

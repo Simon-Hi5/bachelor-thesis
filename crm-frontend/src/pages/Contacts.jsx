@@ -1,14 +1,13 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Container } from 'react-bootstrap';
 import ContactList from '../components/contact/ContactList';
 
 const Contacts = () => {
     return (
-        <div>
-            <h2>Contacts</h2>
+        <Container>
+            <h2 className="text-start mt-4 mb-4">Contacts</h2>
             <ContactList />
-            <Outlet />
-        </div>
+        </Container>
     );
 }
 

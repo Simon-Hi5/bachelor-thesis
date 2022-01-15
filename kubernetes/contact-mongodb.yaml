@@ -20,35 +20,48 @@ spec:
   selector:
     app: contact-db
   type: NodePort
-    
+
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: contact-db
   labels:
     app: contact-db
 spec:
-  selector: 
+  serviceName: contact-db-service
+  replicas: 1
+  selector:
     matchLabels:
       app: contact-db
-  replicas: 1
   template:
     metadata:
       labels:
         app: contact-db
-      name: contact-db-service
+        name: contact-db-service
     spec:
       containers:
-      - image: mongo:latest
-        name: contact-db
-        ports:
-        - containerPort: 27017
-          name: contact-db
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: "1"
-          requests:
-            memory: 128Mi
-            cpu: "0.25"
+        - name: contact-db
+          image: mongo:latest
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: "1"
+            requests:
+              memory: 128Mi
+              cpu: "0.25"
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: contact-db-pvc
+              mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: contact-db-pvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Mi

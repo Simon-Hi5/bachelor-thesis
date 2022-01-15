@@ -1,0 +1,1 @@
+export const INTERACTION_API = 'http://localhost:8081/interactions';

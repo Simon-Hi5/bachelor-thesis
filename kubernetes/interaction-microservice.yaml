@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: interaction-service
-          image: 10.110.56.71:5000/interaction-microservice:latest
-          imagePullPolicy: Always
+          image: interaction-microservice:latest
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 8081
           env:
