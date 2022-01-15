@@ -12,28 +12,26 @@ import Interactions from './pages/Interactions';
 import Opportunities from './pages/Opportunities';
 import Contacts from './pages/Contacts';
 import Contact from './pages/Contact';
+import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NewContact from './pages/NewContact';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route exact path='/' element={<App />}>
-          <Route exact path='contacts' element={<Contacts />}>
-            <Route path=":id" element={<Contact />} />
-            <Route
-              index
-              element={
-                  <p>Select a contact</p>
-              }
-            />
-          </Route>
+          <Route exact path='contacts' element={<Contacts />} />
+          <Route path="contacts/new" element={<NewContact />} />
+          <Route path="contacts/:id" element={<Contact />} />
           <Route exact path='interactions' element={<Interactions />} />
           <Route exact path='opportunities' element={<Opportunities />} />
           <Route
             path="*"
             element={
-              <p>There's nothing here!</p>
+              <Container>
+              <h2 className="text-start mt-5 mb-5">There's nothing here!</h2>
+            </Container>
             }
           />
         </Route>
