@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const CONTACT_API = 'http://localhost:8080/contacts';
+const BACKEND = process.env.REACT_APP_BACKEND;
+
+const CONTACT_API = 'http://' + BACKEND + '/contacts';
 
 class ContactService {
 

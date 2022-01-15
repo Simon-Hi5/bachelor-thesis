@@ -1,14 +1,13 @@
 import React from 'react';
-import { Outlet } from 'react-router';
 import ContactList from '../components/contact/ContactList';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
+import { NavLink } from "react-router-dom";
 
 const Contacts = () => {
     return (
         <Container>
-            <h2>Contacts</h2>
+            <h2 className="text-start mt-4 mb-4">Contacts</h2>
             <ContactList />
-            <Outlet />
         </Container>
     );
 }
