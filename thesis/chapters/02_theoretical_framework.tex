@@ -25,7 +25,20 @@ Eine der wichtigsten Werkzeuge von DevOps ist Continuous Delivery.
 
 \subsection{Microservices}
 
-Im Mittelpunkt dieser Arbeit stehen Microservices. Microservices sind ein Architekturmuster der konträr zu einer klassischen monolithischen Architektur ist. Dabei heben sich Microservices durch ihre lose Kopplung und die damit einhergehende erhöhte Unabhängigkeit hervor. Obwohl Microservices ein neuer Begriff sind, ist das Konzept schon deutlich länger vorhanden.
+Im Mittelpunkt dieser Arbeit stehen Microservices. Microservices sind
+
+ Bei Microservices handelt es sich um ein Architekturmuster zur Modualisierung von Software (\cite[S. 15]{newmanMicroservices2015}). Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits älter (\cite[S. 15]{newmanMicroservices2015}). Große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Ein solches einzelnes Programme wird als Microservice bezeichnet. Der Begriff Microservice ist nicht fest definiert (\cite[S. 2]{wolffMicroservices2018}), deshalb werden im nachfolgenden Kapitel die wichtigsten Eigenschaften und Merkmale betrachtet.
+
+
+Microservices sind ein Architekturmuster. Architekturmuster beschreiben die Grundstruktur von Systemen in der Softwareentwicklung. Microserices werden als Architekturmuster in die Kategorie der verteilten Systeme eingeordnet. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern. Die Microservices sind dabei voneinander unabhängig und kommunizieren in einem Netzwerk über festgelegte Schnittstellen miteinander.
+ 
+Architekturmuster Erklärung
+Wenn das Architekturmuster für ein System bestimmend ist, nennt man es auch dessen Architekturstil
+
+Erklärung Monolith
+
+
+ Microservices sind ein Architekturmuster, welches konträr zu einer klassischen monolithischen Architektur ist. Dabei heben sich Microservices durch ihre lose Kopplung und die damit einhergehende erhöhte Unabhängigkeit hervor. Obwohl Microservices ein neuer Begriff sind, ist das Konzept schon deutlich länger vorhanden.
 
 Microservices vs Monolithen
 
@@ -36,6 +49,28 @@ Marktwachstumsprognose: https://www.instanttechnews.com/technology-news/2020/02/
 Microservices machen Gebrauch von den neu entwickelten Technologien und Verfahren des letzten Jahrzehnts. Vor allem mit DevOps-Methoden und Kubernetes können ...
 
 \subsubsection{Merkmale}
+
+Microservices sind eigenständige Programme welche über ein Neztwerk miteinander kommunizieren.
+
+\paragraph{Größe}
+
+Microservices sollen nur eine Aufgabe erledigen, diese jedoch bestmöglich. Dieser Ansatz ist nicht neu und entstammt der UNIX-Philosophie: "Mache nur eine Sache und mache sie gut" (Douglas McIlroy).
+Wie der Name "Microservices" bereits andeutet, handelt es sich dabei offensichtlich um kleine Services. Eine genaue Festlegung wie groß die Services sein sollten gibt es jedoch nicht. Die Anzahl der Codezeilen (Lines of Code) können einen Hinweis geben, jedoch sind derartige Kriterien stark von der Programmiersprache und dem verwendeten Technologie-Stack abhängig. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Des Weiteren sollte ein Microservice nur so Groß sein, dass er von einem einzigen Entwicklerteam betreut werden kann.
+
+Der Name "Microservices" deutet schon an, dass es sich offensichtlich um kleine Services handelt.
+Eine objektive Messung der Größe ist jedoch nicht möglich. Um die Größe eines Microservices zu bestimmen, könnte man beispielsweise die Anzahl der Codezeilen (LoC) verwenden. Doch die Lines of Code hängen starkt von der verwendeten Programmiersprache und dem Technologie-Stack ab. Eine Messung der Größe nach rein objektiven Kriterien macht demnach keinen Sinn (\cite[S. 31]{wolffMicroservices2018})(\cite[S. 22]{newmanMicroservices2015}). Stattdessen sollte sich die Größe an die fachlichen Gegebenheiten richten. Je kleiner die Services werden desto mehr kommen die in den nächsten Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Ein Microservice sollte von einem einzigen Enticklerteam gehandhabt werden (\cite[S. 23]{newmanMicroservices2015}). Falls das nicht mehr möglich ist, könnte es darauf hindeuten, dass der Microservice zu groß ist.
+
+\paragraph{Sepzialisierung}
+
+
+
+\paragraph{Eigenständigkeit}
+
+Microservices laufen als eigenständige Programme und müssen unabhängig voneinander deploybar sein. Jeder Microservice ist ein eigener Prozess, welcher isoliert von den anderen abläuft. Die Isolierung trägt dazu bei, dass verteilte System besser zu verstehen aber auch keine unbemerkten Abhängigkeiten zwischen den Services entstehen zu lassen. Neue Technologien wie Containervirtualisierung können dies erleichtern. Die Kommunikation der Services erfolgt über ein Netzwerk und mittels sprachunabhängiger Schnittstellen (API).
+
+Eine ausreichende Eigenständigkeit ist nur gegeben, sobald die Services unabhängig voneinander verändert und bereitgestellt werden können. Ein Entwicklerteam sollte sich bei der Implementierung von Änderungen oder neuen Funktionen nicht mit anderen Teams absprechen müssen. 
+
+\paragraph{Ersetzbarkeit}
 
 
 
@@ -59,6 +94,8 @@ Durch die Unabhängigkeit der Microservices können sie auch unabhängig voneina
 \paragraph{Technologiefreiheit}
 
 Des Weiteren führt die Unabhängigkeit auch zu einer großen Technologiefreiheit. Die verwendeten Technologien müssen schließlich nur in der Lage sein die explizite Schnittstelle anzubieten. (\cite[S. 5]{wolffMicroservices2018})
+
+
 
 \paragraph{Continuous Delivery}
 
