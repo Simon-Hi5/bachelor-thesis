@@ -16,10 +16,10 @@ minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000
 ./deploy-contact-microservice.sh
 
 # Deploy Interaction Microservice
-#./deploy-interaction-microservice.sh
+./deploy-interaction-microservice.sh
 
 # Deploy Opportunity Microservice
-#./deploy-opportunity-microservice.sh
+./deploy-opportunity-microservice.sh
 
 # Deploy CRM Frontend
 ./deploy-crm-frontend.sh
