@@ -1,5 +1,7 @@
 package edu.hm.contact.persistence;
 
+import edu.hm.contact.common.ValueOfEnum;
+
 import javax.validation.constraints.Pattern;
 
 /**
@@ -18,6 +20,7 @@ public class Address {
 
     private String town;
 
+    @ValueOfEnum(enumClass = Country.class, message = "Value of country is invalid")
     private Country country;
 
     /**

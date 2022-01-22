@@ -1,5 +1,6 @@
 package edu.hm.interaction.persistence;
 
+import edu.hm.interaction.common.ValueOfEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +18,7 @@ public class Interaction {
     @Id
     private String id;
 
+    @ValueOfEnum(enumClass = FormOfInteraction.class, message = "Value of form of interaction is invalid")
     private FormOfInteraction formOfInteraction;
 
     private String note;
@@ -25,8 +27,6 @@ public class Interaction {
     private String relatedContactId;
 
     private LocalDateTime dateAndTime;
-
-    private String relatedOpportunityId;
 
     /**
      * Default constructor.
@@ -99,14 +99,6 @@ public class Interaction {
 
     public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
-    }
-
-    public String getRelatedOpportunityId() {
-        return relatedOpportunityId;
-    }
-
-    public void setRelatedOpportunityId(String relatedOpportunityId) {
-        this.relatedOpportunityId = relatedOpportunityId;
     }
 
     @Override
