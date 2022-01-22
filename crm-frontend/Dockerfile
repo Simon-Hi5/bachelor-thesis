@@ -1,5 +1,5 @@
 
-FROM node:latest as builder
+FROM node:latest as build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --silent
@@ -11,5 +11,5 @@ CMD ["npm", "start"]
 #FROM nginx:alpine
 #WORKDIR /usr/share/nginx/html
 #RUN rm -rf ./*
-#COPY --from=builder /app/build .
+#COPY --from=build /app/build .
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
