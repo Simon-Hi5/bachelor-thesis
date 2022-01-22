@@ -38,6 +38,11 @@ spec:
                 configMapKeyRef:
                   name: interaction-db-config  
                   key: host
+            - name: CONTACT_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: contact-service-config  
+                  key: host
           resources:
             limits:
               memory: 256Mi
