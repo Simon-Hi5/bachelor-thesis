@@ -45,9 +45,10 @@ public class Opportunity {
      * @param estimatedCloseDate estimated close date
      * @param status status
      */
-    public Opportunity(LocalDate estimatedCloseDate, Status status) {
+    public Opportunity(LocalDate estimatedCloseDate, Status status, String relatedContactId) {
         this.estimatedCloseDate = estimatedCloseDate;
         this.status = status;
+        this.relatedContactId = relatedContactId;
     }
 
     /**

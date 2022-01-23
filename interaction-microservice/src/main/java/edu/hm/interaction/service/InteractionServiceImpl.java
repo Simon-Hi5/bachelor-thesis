@@ -36,7 +36,7 @@ public class InteractionServiceImpl implements InteractionService {
     @Override
     public List<Interaction> getAllInteractions() {
         logger.debug("Find all interactions");
-        return interactionRepository.findAllByOrderByDateAndTimeAscIdAsc();
+        return interactionRepository.findAllByOrderByDateAndTimeDescIdDesc();
     }
 
     @Override

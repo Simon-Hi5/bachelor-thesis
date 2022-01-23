@@ -10,5 +10,5 @@ import java.util.List;
  * @author Simon Hirner
  */
 public interface InteractionRepository extends MongoRepository<Interaction, String> {
-    List<Interaction> findAllByOrderByDateAndTimeAscIdAsc();
+    List<Interaction> findAllByOrderByDateAndTimeDescIdDesc();
 }
