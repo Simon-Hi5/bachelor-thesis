@@ -63,7 +63,7 @@ public class OpportunityApplication implements CommandLineRunner {
                     Status.PLANNED, 2);
             Opportunity opportunity2 = new Opportunity(LocalDate.of(2022, Month.DECEMBER, 23),
                     120000.0, 130000.0, 8000.0, Status.IN_PROGRESS, "Notiz", 3,
-                    "101010");
+                    "");
 
             opportunityService.saveOpportunity(opportunity1);
             opportunityService.saveOpportunity(opportunity2);

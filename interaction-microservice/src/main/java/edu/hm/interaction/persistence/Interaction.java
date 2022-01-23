@@ -18,7 +18,6 @@ public class Interaction {
     @Id
     private String id;
 
-    @ValueOfEnum(enumClass = FormOfInteraction.class, message = "Value of form of interaction is invalid")
     private FormOfInteraction formOfInteraction;
 
     private String note;

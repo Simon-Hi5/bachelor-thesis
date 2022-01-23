@@ -46,6 +46,11 @@ public class InteractionServiceImpl implements InteractionService {
 
     @Override
     public Interaction saveInteraction(Interaction newInteraction) {
+        if (newInteraction.getRelatedContactId() == null || newInteraction.getRelatedContactId().isEmpty()) {
+            logger.debug("Save new interaction");
+            return interactionRepository.save(newInteraction);
+        }
+
         logger.debug("Verify contact ID");
         String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
         String contactApi = "http://" + contactService + "/contacts/" + newInteraction.getRelatedContactId();
