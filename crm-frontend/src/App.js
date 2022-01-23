@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <Navigation />
       <Outlet />
+      <div className="mb-5"/>
     </div>
   );
 }
