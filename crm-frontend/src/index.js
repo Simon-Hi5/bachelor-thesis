@@ -7,12 +7,16 @@ import {
 } from "react-router-dom";
 import App from './App';
 import './index.css';
-import Contact from './pages/Contact';
-import Contacts from './pages/Contacts';
-import Interactions from './pages/Interactions';
-import NewContact from './pages/NewContact';
-import Opportunities from './pages/Opportunities';
+import Contact from './pages/contact/Contact';
+import Contacts from './pages/contact/Contacts';
+import Interactions from './pages/interaction/Interactions';
+import NewContact from './pages/contact/NewContact';
+import Opportunities from './pages/opportunity/Opportunities';
 import reportWebVitals from './reportWebVitals';
+import NewInteraction from './pages/interaction/NewInteraction';
+import Interaction from './pages/interaction/Interaction';
+import NewOpportunity from './pages/opportunity/NewOpportunity';
+import Opportunity from './pages/opportunity/Opportunity';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,7 +27,11 @@ ReactDOM.render(
           <Route path="contacts/new" element={<NewContact />} />
           <Route path="contacts/:id" element={<Contact />} />
           <Route exact path='interactions' element={<Interactions />} />
+          <Route path="interactions/new" element={<NewInteraction />} />
+          <Route path="interactions/:id" element={<Interaction />} />
           <Route exact path='opportunities' element={<Opportunities />} />
+          <Route path="opportunities/new" element={<NewOpportunity />} />
+          <Route path="opportunities/:id" element={<Opportunity />} />
           <Route
             path="*"
             element={

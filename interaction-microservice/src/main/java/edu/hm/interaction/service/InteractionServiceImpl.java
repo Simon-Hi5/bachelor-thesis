@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -52,18 +53,19 @@ public class InteractionServiceImpl implements InteractionService {
         }
 
         logger.debug("Verify contact ID");
-        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
+        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost:8080");
         String contactApi = "http://" + contactService + "/contacts/" + newInteraction.getRelatedContactId();
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
-            logger.debug("Save new interaction");
-            return interactionRepository.save(newInteraction);
-        } else if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
+            if (response.getStatusCode().equals(HttpStatus.OK)) {
+                logger.debug("Save new interaction");
+                return interactionRepository.save(newInteraction);
+            }
+        } catch (Exception exception) {
             throw new BadRequestException("Contact ID is invalid");
-        } else {
-            throw new BadRequestException("Contact ID could not be verified");
         }
+        throw new BadRequestException("Contact ID could not be verified");
     }
 
     @Override
