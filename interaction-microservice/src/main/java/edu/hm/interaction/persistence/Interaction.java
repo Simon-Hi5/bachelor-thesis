@@ -1,6 +1,5 @@
 package edu.hm.interaction.persistence;
 
-import edu.hm.interaction.common.ValueOfEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
