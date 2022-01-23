@@ -1,12 +1,17 @@
 package edu.hm.interaction.service;
 
 import edu.hm.interaction.InteractionApplication;
+import edu.hm.interaction.common.BadRequestException;
 import edu.hm.interaction.common.ResourceNotFoundException;
 import edu.hm.interaction.persistence.Interaction;
 import edu.hm.interaction.persistence.InteractionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +46,24 @@ public class InteractionServiceImpl implements InteractionService {
 
     @Override
     public Interaction saveInteraction(Interaction newInteraction) {
-        logger.debug("Save new interaction");
-        return interactionRepository.save(newInteraction);
+        if (newInteraction.getRelatedContactId() == null || newInteraction.getRelatedContactId().isEmpty()) {
+            logger.debug("Save new interaction");
+            return interactionRepository.save(newInteraction);
+        }
+
+        logger.debug("Verify contact ID");
+        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
+        String contactApi = "http://" + contactService + "/contacts/" + newInteraction.getRelatedContactId();
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            logger.debug("Save new interaction");
+            return interactionRepository.save(newInteraction);
+        } else if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+            throw new BadRequestException("Contact ID is invalid");
+        } else {
+            throw new BadRequestException("Contact ID could not be verified");
+        }
     }
 
     @Override
@@ -54,7 +75,6 @@ public class InteractionServiceImpl implements InteractionService {
                     interaction.setRelatedContactId(newInteraction.getRelatedContactId());
                     interaction.setDateAndTime(newInteraction.getDateAndTime());
                     interaction.setFormOfInteraction(newInteraction.getFormOfInteraction());
-                    interaction.setRelatedOpportunityId(newInteraction.getRelatedOpportunityId());
                     return saveInteraction(interaction);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(id));

@@ -4,10 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 /**
@@ -32,7 +29,7 @@ public class Contact {
     @Past(message = "Date of birth should be in the past")
     private LocalDate dateOfBirth;
 
-    @Email(message = "Email should be valid.")
+    @Email(message = "Email should be valid")
     @Indexed(unique = true)
     private String email;
 
@@ -152,3 +149,4 @@ public class Contact {
     }
 
 }
+

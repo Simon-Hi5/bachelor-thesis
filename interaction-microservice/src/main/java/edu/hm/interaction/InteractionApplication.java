@@ -59,8 +59,8 @@ public class InteractionApplication implements CommandLineRunner {
 
             interactionService.deleteAllInteractions();
 
-            Interaction interaction1 = new Interaction(FormOfInteraction.EMAIL, "123456",LocalDateTime.of(2020, Month.JUNE, 12, 8,30));
-            Interaction interaction2 = new Interaction(FormOfInteraction.PHONE, "Notiz","101010",LocalDateTime.of(2020, Month.JUNE, 12, 8,30));
+            Interaction interaction1 = new Interaction(FormOfInteraction.EMAIL, "",LocalDateTime.of(2020, Month.JUNE, 12, 8,30));
+            Interaction interaction2 = new Interaction(FormOfInteraction.PHONE, "Notiz","",LocalDateTime.of(2020, Month.JUNE, 12, 8,30));
 
             interactionService.saveInteraction(interaction1);
             interactionService.saveInteraction(interaction2);
