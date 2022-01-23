@@ -21,7 +21,6 @@ public class Interaction {
 
     private String note;
 
-    @NotBlank(message = "Contact ID should not be blank")
     private String relatedContactId;
 
     private LocalDateTime dateAndTime;
