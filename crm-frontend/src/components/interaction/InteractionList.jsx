@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Nav, Table } from 'react-bootstrap';
+import { Button, Card, Col, Form, FormControl, Nav, Row, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import InteractionService from '../../services/InteractionService';
 
@@ -10,23 +10,51 @@ class InteractionList extends Component {
 
         this.state = {
             interactions: [],
+            filteredInteractions: [],
         }
+    }
+
+    handleSearch = search => {
+        let filtered = this.state.interactions.filter(interaction => {
+            return interaction.formOfInteraction.match(new RegExp(search.target.value, "i")) ||
+                interaction.note.match(new RegExp(search.target.value, "i")) ||
+                interaction.id.match(new RegExp(search.target.value, "i"))
+        })
+        this.setState({
+            filteredInteractions: filtered,
+        });
     }
 
     componentDidMount() {
         InteractionService.getAllInteractions()
             .then(response => {
                 this.setState({
-                    interactions: response.data
+                    interactions: response.data,
+                    filteredInteractions: response.data,
                 })
             });
     }
 
     render() {
-        const { interactions } = this.state;
+        const { filteredInteractions: interactions } = this.state;
         return (
             <div>
-                <Button className="text-start mb-4" variant="primary" as={NavLink} to='/interactions/new'>New</Button>{' '}
+                <Row>
+                    <Col>
+                        <Button className="text-start mb-4" variant="primary" as={NavLink} to='/interactions/new'>New</Button>{' '}
+                    </Col>
+                    <Col xs={4}>
+                        <Form className="d-flex">
+                            <FormControl
+                                type="search"
+                                placeholder="Search"
+                                className="me-2"
+                                aria-label="Search"
+                                onChange={this.handleSearch}
+                            />
+                        </Form>
+                    </Col>
+                </Row>
                 <Card>
                     <Card.Body>
                         <Table responsive>
@@ -40,7 +68,7 @@ class InteractionList extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {interactions.map(interaction =>
+                                {interactions.filter(interaction => interaction.relatedContactId.includes(this.props.id ? this.props.id : "")).map(interaction =>
                                     <tr key={interaction.id}>
                                         <td>
                                             <Nav.Link style={{ display: 'contents' }} as={NavLink} to={`/interactions/${interaction.id}`} key={interaction.id}>
@@ -52,8 +80,8 @@ class InteractionList extends Component {
                                         <td>{(interaction.note ? interaction.note : "-")}</td>
                                         <td>
                                             {(interaction.relatedContactId ? (
-                                             <Nav.Link style={{ display: 'contents' }} as={NavLink} to={`/contacts/${interaction.relatedContactId}`} key={interaction.relatedContactId}>
-                                                {interaction.relatedContactId.substr(interaction.relatedContactId.length - 8)}
+                                                <Nav.Link style={{ display: 'contents' }} as={NavLink} to={`/contacts/${interaction.relatedContactId}`} key={interaction.relatedContactId}>
+                                                    {interaction.relatedContactId.substr(interaction.relatedContactId.length - 8)}
                                                 </Nav.Link>
                                             ) : "-")}
                                         </td>

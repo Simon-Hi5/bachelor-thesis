@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Nav, Table } from 'react-bootstrap';
+import { Button, Card, Col, Form, FormControl, Nav, Row, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import ContactService from '../../services/ContactService';
 
@@ -10,23 +10,51 @@ class ContactList extends Component {
 
         this.state = {
             contacts: [],
+            filteredContacts: [],
         }
+    }
+
+    handleSearch = search => {
+        let filtered = this.state.contacts.filter(contact => {
+            return contact.firstName.match(new RegExp(search.target.value, "i")) ||
+                contact.lastName.match(new RegExp(search.target.value, "i")) ||
+                contact.id.match(new RegExp(search.target.value, "i"))
+        })
+        this.setState({
+            filteredContacts: filtered,
+        });
     }
 
     componentDidMount() {
         ContactService.getAllContacts()
             .then(response => {
                 this.setState({
-                    contacts: response.data
+                    contacts: response.data,
+                    filteredContacts: response.data,
                 })
             });
     }
 
     render() {
-        const { contacts } = this.state;
+        const { filteredContacts: contacts } = this.state;
         return (
             <div>
-                <Button className="text-start mb-4" variant="primary" as={NavLink} to='/contacts/new'>New</Button>{' '}
+                <Row>
+                    <Col>
+                        <Button className="text-start mb-4" variant="primary" as={NavLink} to='/contacts/new'>New</Button>{' '}
+                    </Col>
+                    <Col xs={4}>
+                        <Form className="d-flex">
+                            <FormControl
+                                type="search"
+                                placeholder="Search"
+                                className="me-2"
+                                aria-label="Search"
+                                onChange={this.handleSearch}
+                            />
+                        </Form>
+                    </Col>
+                </Row>
                 <Card>
                     <Card.Body>
                         <Table responsive>
