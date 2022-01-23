@@ -30,7 +30,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public List<Contact> getAllContacts() {
         logger.debug("Find all contacts");
-        return contactRepository.findAll();
+        return contactRepository.findAllByOrderByLastNameAscIdAsc();
     }
 
     @Override

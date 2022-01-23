@@ -34,7 +34,7 @@ public class OpportunityServiceImpl implements OpportunityService {
     @Override
     public List<Opportunity> getAllOpportunities() {
         logger.debug("Find all opportunities");
-        return opportunityRepository.findAll();
+        return opportunityRepository.findAllByOrderByEstimatedCloseDateAscIdAsc();
     }
 
     @Override
