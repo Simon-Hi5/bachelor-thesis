@@ -1,7 +1,5 @@
 package edu.hm.contact.persistence;
 
-import edu.hm.contact.common.ValueOfEnum;
-
 import javax.validation.constraints.Pattern;
 
 /**
