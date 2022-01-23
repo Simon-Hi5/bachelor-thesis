@@ -30,11 +30,7 @@ public class Opportunity {
 
     private String note;
 
-    @Min(value = 1, message = "Priority should be at least 1")
-    @Max(value = 3, message = "Priority should be at most 3")
-    private int priority;
-
-    private String relatedContactID;
+    private String relatedContactId;
 
     /**
      * Default constructor.
@@ -48,12 +44,10 @@ public class Opportunity {
      *
      * @param estimatedCloseDate estimated close date
      * @param status status
-     * @param priority priority
      */
-    public Opportunity(LocalDate estimatedCloseDate, Status status, int priority) {
+    public Opportunity(LocalDate estimatedCloseDate, Status status) {
         this.estimatedCloseDate = estimatedCloseDate;
         this.status = status;
-        this.priority = priority;
     }
 
     /**
@@ -66,18 +60,17 @@ public class Opportunity {
      * @param status status
      * @param note note
      * @param priority priority
-     * @param relatedContactID related contact ID
+     * @param relatedContactId related contact ID
      */
     public Opportunity(LocalDate estimatedCloseDate, double value, double budget, double discount,
-                       Status status, String note, int priority, String relatedContactID) {
+                       Status status, String note, String relatedContactId) {
         this.estimatedCloseDate = estimatedCloseDate;
         this.value = value;
         this.budget = budget;
         this.discount = discount;
         this.status = status;
         this.note = note;
-        this.priority = priority;
-        this.relatedContactID = relatedContactID;
+        this.relatedContactId = relatedContactId;
     }
 
     public String getId() {
@@ -132,20 +125,12 @@ public class Opportunity {
         this.note = note;
     }
 
-    public int getPriority() {
-        return priority;
+    public String getRelatedContactId() {
+        return relatedContactId;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public String getRelatedContactID() {
-        return relatedContactID;
-    }
-
-    public void setRelatedContactID(String relatedContactID) {
-        this.relatedContactID = relatedContactID;
+    public void setRelatedContactId(String relatedContactId) {
+        this.relatedContactId = relatedContactId;
     }
 
     @Override
@@ -153,7 +138,6 @@ public class Opportunity {
         return "Opportunity{"
                 + "id='" + id + '\''
                 + ", status='" + status + '\''
-                + ", priority='" + priority + '\''
                 + '}';
     }
 

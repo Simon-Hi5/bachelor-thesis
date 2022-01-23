@@ -35,7 +35,7 @@ public class OpportunityRepositoryTest {
     @Test
     public void createOpportunity() {
         Opportunity opportunity = new Opportunity(LocalDate.of(2022, Month.JANUARY, 1),
-                Status.PLANNED, 1);
+                Status.PLANNED);
         assertEquals(opportunity, opportunityRepository.save(opportunity));
     }
 

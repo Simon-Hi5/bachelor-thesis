@@ -88,7 +88,7 @@ class ContactForm extends Component {
                                 <Form.Group className="mb-3" >
                                     <Form.Label>Gender</Form.Label>
                                     <Form.Select aria-label="Default select example" name='gender' value={contact.gender} onChange={this.handleContactChange} >
-                                        <option>Select gender</option>
+                                        <option value="">Select gender</option>
                                         <option value="MALE">MALE</option>
                                         <option value="FEMALE">FEMALE</option>
                                         <option value="DIVERSE">DIVERSE</option>
@@ -127,7 +127,7 @@ class ContactForm extends Component {
                                 <Form.Group className="mb-3" >
                                     <Form.Label>Country</Form.Label>
                                     <Form.Select aria-label="Default select example" name='country' value={contact.address.country} onChange={this.handleAddressChange} >
-                                        <option>Select country</option>
+                                        <option value="">Select country</option>
                                         <option value="GERMANY">GERMANY</option>
                                         <option value="AUSTRIA">AUSTRIA</option>
                                         <option value="SWITZERLAND">SWITZERLAND</option>

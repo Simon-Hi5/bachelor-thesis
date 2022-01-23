@@ -126,7 +126,7 @@ class ContactDetails extends Component {
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Gender</Form.Label>
                                         <Form.Select aria-label="Default select example" name='gender' value={contact.gender ? contact.gender : "-"} onChange={this.handleContactChange} >
-                                            <option>Select gender</option>
+                                            <option value="">Select gender</option>
                                             <option value="MALE">MALE</option>
                                             <option value="FEMALE">FEMALE</option>
                                             <option value="DIVERSE">DIVERSE</option>
@@ -165,7 +165,7 @@ class ContactDetails extends Component {
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Country</Form.Label>
                                         <Form.Select aria-label="Default select example" name='country' value={contact.address && contact.address.country ? contact.address.country : "-"} onChange={this.handleAddressChange} >
-                                            <option>Select country</option>
+                                            <option value="">Select country</option>
                                             <option value="GERMANY">GERMANY</option>
                                             <option value="AUSTRIA">AUSTRIA</option>
                                             <option value="SWITZERLAND">SWITZERLAND</option>
@@ -173,7 +173,7 @@ class ContactDetails extends Component {
                                     </Form.Group>
                                 </Col>
                             </Row>
-                            <Button variant='primary' type='submit'>Save</Button>
+                            <Button variant='primary' type='submit'>Update</Button>
                         </Form>
                     </Card.Body>
                 </Card>

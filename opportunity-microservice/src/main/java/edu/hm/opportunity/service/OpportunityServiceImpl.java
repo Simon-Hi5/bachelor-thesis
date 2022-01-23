@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -46,24 +45,25 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public Opportunity saveOpportunity(Opportunity newOpportunity) {
-        if (newOpportunity.getRelatedContactID() == null || newOpportunity.getRelatedContactID().isEmpty()) {
+        if (newOpportunity.getRelatedContactId() == null || newOpportunity.getRelatedContactId().isEmpty()) {
             logger.debug("Save new interaction");
             return opportunityRepository.save(newOpportunity);
         }
 
         logger.debug("Verify contact ID");
-        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
-        String contactApi = "http://" + contactService + "/contacts/" + newOpportunity.getRelatedContactID();
+        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost:8080");
+        String contactApi = "http://" + contactService + "/contacts/" + newOpportunity.getRelatedContactId();
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
-        if (response.getStatusCode().equals(HttpStatus.OK)) {
-            logger.debug("Save new interaction");
-            return opportunityRepository.save(newOpportunity);
-        } else if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
+            if (response.getStatusCode().equals(HttpStatus.OK)) {
+                logger.debug("Save new opportunity");
+                return opportunityRepository.save(newOpportunity);
+            }
+        } catch (Exception exception) {
             throw new BadRequestException("Contact ID is invalid");
-        } else {
-            throw new BadRequestException("Contact ID could not be verified");
         }
+        throw new BadRequestException("Contact ID could not be verified");
     }
 
     @Override
@@ -75,10 +75,9 @@ public class OpportunityServiceImpl implements OpportunityService {
                     opportunity.setDiscount(newOpportunity.getDiscount());
                     opportunity.setEstimatedCloseDate(newOpportunity.getEstimatedCloseDate());
                     opportunity.setNote(newOpportunity.getNote());
-                    opportunity.setPriority(newOpportunity.getPriority());
                     opportunity.setStatus(newOpportunity.getStatus());
                     opportunity.setValue(newOpportunity.getValue());
-                    opportunity.setRelatedContactID(newOpportunity.getRelatedContactID());
+                    opportunity.setRelatedContactId(newOpportunity.getRelatedContactId());
                     return saveOpportunity(opportunity);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(id));
