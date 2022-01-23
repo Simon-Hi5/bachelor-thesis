@@ -20,7 +20,6 @@ public class Address {
 
     private String town;
 
-    @ValueOfEnum(enumClass = Country.class, message = "Value of country is invalid")
     private Country country;
 
     /**

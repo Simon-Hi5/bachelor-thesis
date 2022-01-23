@@ -1,6 +1,5 @@
 package edu.hm.opportunity.persistence;
 
-import edu.hm.opportunity.common.ValueOfEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,7 +26,6 @@ public class Opportunity {
 
     private double discount;
 
-    @ValueOfEnum(enumClass = Status.class, message = "Value of status is invalid")
     private Status status;
 
     private String note;

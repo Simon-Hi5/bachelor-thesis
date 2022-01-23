@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -45,6 +46,11 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public Opportunity saveOpportunity(Opportunity newOpportunity) {
+        if (newOpportunity.getRelatedContactID() == null || newOpportunity.getRelatedContactID().isEmpty()) {
+            logger.debug("Save new interaction");
+            return opportunityRepository.save(newOpportunity);
+        }
+
         logger.debug("Verify contact ID");
         String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
         String contactApi = "http://" + contactService + "/contacts/" + newOpportunity.getRelatedContactID();

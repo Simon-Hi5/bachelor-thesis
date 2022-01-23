@@ -25,7 +25,6 @@ public class Contact {
     @NotBlank(message = "Last name should not be blank")
     private String lastName;
 
-    @ValueOfEnum(enumClass = Gender.class, message = "Value of gender is invalid")
     private Gender gender;
 
     @Past(message = "Date of birth should be in the past")
