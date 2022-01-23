@@ -21,12 +21,9 @@ public class Interaction {
 
     private String note;
 
-    @NotBlank(message = "Contact ID should not be blank")
     private String relatedContactId;
 
     private LocalDateTime dateAndTime;
-
-    private String relatedOpportunityId;
 
     /**
      * Default constructor.
@@ -99,14 +96,6 @@ public class Interaction {
 
     public void setDateAndTime(LocalDateTime dateAndTime) {
         this.dateAndTime = dateAndTime;
-    }
-
-    public String getRelatedOpportunityId() {
-        return relatedOpportunityId;
-    }
-
-    public void setRelatedOpportunityId(String relatedOpportunityId) {
-        this.relatedOpportunityId = relatedOpportunityId;
     }
 
     @Override

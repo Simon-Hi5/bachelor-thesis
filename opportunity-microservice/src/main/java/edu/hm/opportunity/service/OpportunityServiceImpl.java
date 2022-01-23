@@ -1,14 +1,19 @@
 package edu.hm.opportunity.service;
 
 import edu.hm.opportunity.OpportunityApplication;
+import edu.hm.opportunity.common.BadRequestException;
 import edu.hm.opportunity.common.ResourceNotFoundException;
 import edu.hm.opportunity.persistence.Opportunity;
 import edu.hm.opportunity.persistence.OpportunityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,8 +46,24 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public Opportunity saveOpportunity(Opportunity newOpportunity) {
-        logger.debug("Save new opportunity");
-        return opportunityRepository.save(newOpportunity);
+        if (newOpportunity.getRelatedContactID() == null || newOpportunity.getRelatedContactID().isEmpty()) {
+            logger.debug("Save new interaction");
+            return opportunityRepository.save(newOpportunity);
+        }
+
+        logger.debug("Verify contact ID");
+        String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost");
+        String contactApi = "http://" + contactService + "/contacts/" + newOpportunity.getRelatedContactID();
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            logger.debug("Save new interaction");
+            return opportunityRepository.save(newOpportunity);
+        } else if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+            throw new BadRequestException("Contact ID is invalid");
+        } else {
+            throw new BadRequestException("Contact ID could not be verified");
+        }
     }
 
     @Override
