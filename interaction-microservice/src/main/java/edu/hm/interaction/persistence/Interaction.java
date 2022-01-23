@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 
 /**
@@ -23,6 +24,7 @@ public class Interaction {
 
     private String relatedContactId;
 
+    @Past(message = "Date and time should be in the past")
     private LocalDateTime dateAndTime;
 
     /**

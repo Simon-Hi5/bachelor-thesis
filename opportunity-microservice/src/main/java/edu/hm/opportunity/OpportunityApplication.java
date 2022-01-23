@@ -60,7 +60,7 @@ public class OpportunityApplication implements CommandLineRunner {
             opportunityService.deleteAllOpportunities();
 
             Opportunity opportunity1 = new Opportunity(LocalDate.of(2023, Month.JANUARY, 6),
-                    Status.PLANNED);
+                    Status.PLANNED, "");
             Opportunity opportunity2 = new Opportunity(LocalDate.of(2022, Month.DECEMBER, 23),
                     120000.0, 130000.0, 8000.0, Status.IN_PROGRESS, "Notiz",
                     "");
