@@ -1,22 +1,16 @@
-% Einleitung
+\section{Theoretische Grundlagen}
 
-Das Ziel dieser Bachelorarbeit ist es mit neuen Methoden und Werkzeugen eine moderne Webanwendung zu gestalten. Dabei soll DevOps-Bezogen der gesamte Softwareprozess von der Entwicklung bis zum Betrieb analysiert und umgesetzt werden.
-
-\section{Theoretischer Rahmen}
-
-DevOps, Cloud und Container Microservices und Kubernetes
-
-Kubernetes ist der Branchenstandard und die Grundlage für moderne Webanwendungen (\cite[Vorwort]{arundelCloud2019}).
-
-Die Verwendungsweise wird maßgeblich beeinflusst durch neue Technologien. (\cite[S. 16]{newmanMicroservices2015})
-
-DevOps, Kubernetes und Microservices sind zwar komplett unterschiedliche Dinge haben jedoch zweifelsfrei Verbindungen und können in Zusammenarbeit ihre Stärken bestmöglich ausnutzen.
+Um die Fallstudie durchzuführen, wird zunächst der theoretische Rahmen der Arbeit erläutert. In diesem Kapitel wird zunächst der DevOps-Ansatz und Microservices beschrieben. Anschließend wird Containervirtualisierung sowie Kubernetes erklärt.
 
 \subsection{DevOps}
 
-Bevor auf die Architektur und verwendete Technologien eingegangen wird, ist es wichtig den Kontext dieser neuen Entwicklungen zu verstehen.
+Bevor auf die Architektur und die verwendete Technologien eingegangen wird, ist es wichtig den weiteren Kontext zu betrachten. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Dabei ist DevOps nicht klar definiert und ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. DevOps stellt den Kundennutzen in den Mittelpunkt. Das Ziel ist es ein Unternehmen anpassungsfähiger zu machen und trotzdem   geordnete Prozesse zu wahren. Die Anpassungsfähigkeit wird hier häufig mit der Time to Market gemessen. Diese Kennzahl sagt aus wie lange es dauert eine Änderung auf die Produktionsumgebung zu bringen.
 
-Das Kofferwort DevOps ist eine Sammlung von Lösungsansätzen wie IT-Leistungen schnell und risikoarm bereitgestellt werden können. Wie das Kofferwort "DevOps" bereits andeutet, bewirkt es eine stärkere Verschmelzung zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Dabei ist DevOps nich klar definiert. DevOps stellt den Kundennutzen in den Mittelpunkt und erinnert dabei an agile Softwareentwicklungsmethoden. DevOps und aglie Entwicklung schließen sich auch nicht gegenseitig aus unterscheiden sich jedoch durch die einbezogenen Gruppen und Abteilungen. Den während DevOps bezieht sich wie bereits erklärt nicht nur auf den Entwicklungsprozess und die Softwareentwickler sondern auf den gesamten Softwareprozess.
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/DevOpsDiagramm.png}
+    \caption{Kategorisierung von Unternehmen}
+\end{figure}
 
 Um DevOps in Unternehmen umzusetzen reicht es nicht die entsprechenden Werkzeuge einzuführen, sondern es muss zu einem Kulturwandel kommen.
 
@@ -27,17 +21,25 @@ Eine der wichtigsten Werkzeuge von DevOps ist Continuous Delivery.
 
 \subsection{Microservices}
 
-Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modualisierung von Software (\cite[S. 15]{newmanMicroservices2015}). Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits älter (\cite[S. 15]{newmanMicroservices2015}). Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Ein solches einzelnes Programme wird als Microservice bezeichnet. \\
+Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software (\cite[S. 15]{newmanMicroservices2015}). Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits älter (\cite[S. 15]{newmanMicroservices2015}). Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Ein solches einzelnes Programme wird als Microservice bezeichnet. \\
 \\
 Microservices sind ein Architekturmuster. Architekturmuster beschreiben die Grundstruktur von Systemen in der Softwareentwicklung. Microserices werden als Architekturmuster in die Kategorie der verteilten Systeme eingeordnet. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern. Die Microservices sind dabei voneinander unabhängig und kommunizieren in einem Netzwerk über festgelegte Schnittstellen miteinander. \\
 \\
 Microservices sind also das Gegenteil von klassischen monolithischen Softwarearchitekturen. Monolithische Software ist eine einzelne, zusammenhängende und untrennbare Einheit. Dies macht die Erweiterbarkeit und Warbarkeit deutlich schwieriger, da Teile des Systems nur mit erheblichem Aufwand angepasst werden können. Es kann zu nicht vorhersehbaren Abhängigkeiten kommen. Die Wiederverwendbarkeit von Teilen der Software gestaltet sich aufwendiger. Lastverteilung und Skalierung ist problematisch. Durch Modualisierung lassen sich viele dieser Nachteile abschwächen, können jedoch nicht komplett ausgemerzt werden. Um diese Nachteile zu umgehen sind Microservices entstanden. Doch neben vielen Vorteilen kommen Microservices auch mit Herausforderungen. Im nachfolgenden Abschnitt werden die genauen Vor- und Nachteile genauer erläutert. \\
-\\
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/Monolith.png}
+    \caption{Aufbau einer monolithischen Architektur}
+\end{figure}
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/Microservices.png}
+    \caption{Aufbau einer Microservice-Architektur}
+\end{figure}
+
 Der Begriff Microservice ist nicht fest definiert (\cite[S. 2]{wolffMicroservices2018}), deshalb werden im nachfolgenden Kapitel die wichtigsten Eigenschaften und Merkmale betrachtet.
 \\
 Dabei werden Microservices häufig im geschäftlichen Umfeld eingesetzt (\cite[S. 15]{newmanMicroservices2015}). \\
-\\
-Marktwachstumsprognose? \\
 \\
 Microservices sollen nur eine Aufgabe erledigen, diese jedoch bestmöglich. Dieser Ansatz ist nicht neu und entstammt der UNIX-Philosophie: "Mache nur eine Sache und mache sie gut" (Douglas McIlroy).
 Wie der Name "Microservices" bereits andeutet, handelt es sich dabei offensichtlich um kleine Services. Eine genaue Festlegung wie groß die Services sein sollten gibt es jedoch nicht. Die Anzahl der Codezeilen (Lines of Code) können einen Hinweis geben, jedoch sind derartige Kriterien stark von der Programmiersprache und dem verwendeten Technologie-Stack abhängig. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Des Weiteren sollte ein Microservice nur so Groß sein, dass er von einem einzigen Entwicklerteam betreut werden kann. Die Größe eines Microservices ist für die Definition also nicht zwangsläufig entscheidend (\cite[S. 2]{wolffMicroservices2018}). \\
@@ -169,13 +171,50 @@ Viele Vorteile
 Wichtige Dinge um die sich gekümmert werden müssen: Skalierung, Deployment, Service Discovery werden durch Kubernetes übernommen und erleichtert.
 
 
+\subsection{Containervirtualisierung}
+
+Früher wurden Anwendungen auf physischen Rechnern ausgeführt. Wenn mehrere Anwendungen auf einem Rechner liefen, konnte eine Anwendung Ressourcen wie die Rechenleistung der anderen Anwendung wegnehmen. Durch Virtualisierung von Hardware konnte das Problem gelöst werden, indem mehrere virtuelle Maschinen auf einem physischen Rechner betrieben werden. Virtuelle Maschinen besitzen dieselben Funktionen wie ein physischer Rechner und führen ein eigenes Betriebssystem aus. Dadurch ist diese Art der Virtualisierung nicht leichtgewichtig. Bei der Containervirtualisierung werden nur die Ressourcen des Betriebssystems des Betriebssystems zur Verfügung gestellt, welche auch wirklich benötigt werden. Containervirtualisierung ist deshalb leichtgewichtig.
+
+Ein weiteres Problem ist, wie Microservices aber auch andere verteilte Systeme über große Netzwerke mit vielen verschiedenartigen Rechnern bereitgestellt werden können. Es wurde also eine zuverlässige Methode gesucht wie Software auf diversen Rechnern immer gleich läuft. Auch dieses Problem schafft Containervirtualisierung aus dem Weg, indem es Software mit allen Abhängigkeiten, Bibliotheken, Compilern und Konfigurationen in eine standardisierte und einheitliche Komponente verpackt: Der Container. 
+Ein Image einer virtuellen Maschine besitzt auch alle diese Eigenschaften, enthält aber noch viel mehr als wie die Anwendung wirklich für die Ausführung benötigt.
+
+Vorteile zu VMs:
+- Container laufen auf der realen CPU, somit kein zusätzlicher Aufwand für Virtualisierung
+- Container enthält nur die Dateien, die wirklich benötigt werden, daher viel kleiner
+- Dateisystem-Layern, könen von mehreren Container genutzt und wiederverwendet werden, effiziente Platznutzung
+
+Eigenschaften von Images:
+- Wiederverwendbar
+- Kann überall laufen wo die entsprechende Container-Engine läuft und ausreichend Ressourcen vorhanden sind
+- Läuft überall gleich (Container-Format muss unterstützt werden)
+- Keine Abhängigkeit von unterschiedlichen Distributionen, Bibliotheken und Software-Versionen auf dem Rechner (lediglich abhängig von Betriebssystem-Kernel)
+
+Ein weiteres Problem was letztendlich zur Containervirtualisierung führte, ist die Frage wie verteilte Systeme (microservices) über große Netzwerke mit verschiedenartigen Rechnern bereitgestellt werden können. 
+
+Container revolutionieren also die Bereitstellung von Anwendungen, haben jedoch auch eine große Auswirkung auf die Anwendungsarchitektur und entfalten so beispielsweise das volle Potential von Microservices.
+In der steigenden Beliebtheit von Microservice-basierten Anwendungen bestehend aus Container sehen manche eine ähnliche Revolution wie die in den 1990er-Jahren objektorientierte Programmierung. (\cite[S. 1]{burnsDesign2016})
+
+{Vorteile}
+
+Container eignen sich aufgrund dieser Eigenschaften perfekt, Microservice-basierte Anwendungen zusammenzustellen und auszuführen. 
+
+Container sind normalerweise unveränderlich. Soll ein Container geändert werden, so wird der alte Container gegen einen neuen ausgetauscht.
+
+Ein Container besitzt sein eigenes Dateisystem, Anteil an CPU, Speicher und Prozessraum. 
+
+Containervirtualisierung 
+
 \subsection{Kubernetes}
+
+Der Name Kubernetes ist Griechisch und bedeutet Steuermann. Kubernetes wird häufig auch mit dem Kürzel "K8s" abgekürzt. Kubernetes ist jedoch kein Betriebssystem. Es benötigt ein installiertes Betriebssystem auf den Nodes.
 
 Kubernetes ist eine Open-Source-Plattform zur Orchestrierung und Verwaltung von Container-Awendungen. Wie Kubernetes bei der Bereitstellung und dem Betrieb von Microservices hilft wird in diesem Abschnitt erklärt. Zuerst muss jedoch Containervirtualisierung verstanden werden.
 
-\subsubsection{Containervirtualisierung}
+Kubernetes bietet viele Funktionen, die helfen eine entkoppelte Microservice-Architektur zu bauen.
 
-\subsubsection{Architektur}
+\subsubsection{Aufbau}
+
+
 
 \subsubsection{Objekte}
 
@@ -190,3 +229,5 @@ Kubernetes ist eine Open-Source-Plattform zur Orchestrierung und Verwaltung von 
 \subsubsection{Kubectl}
 
 \subsubsection{Minikube}
+
+Minikube ist ein Werkzeug, um ein lokales Kubernetes Cluster zu betreiben. Minikube erstellt ein Cluster bestehend aus nur einem Node in einer virtuellen Maschine. Der Node fungiert dabei sowohl als Master sowie auch als Worker. Minikube unterstützt mittlerweile auch den Betrieb mit mehreren Nodes. Des Weiteren kann das Cluster auch in einem Docker Container anstatt in einer virtuellen Maschine betrieben werden. Da Minikube über eine virtuelle Maschine oder in einem Docker Container läuft, kann minikube auch über Linux hinaus auf Windows oder MacOS betrieben werden.

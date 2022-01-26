@@ -1,56 +1,40 @@
 \section{Einleitung}
 
-\dictum[Tony Hoare]{\center ``Es gibt zwei Wege einen Softwareentwurf zu erstellen, entweder so einfach, dass er offensichtlich keine Schwächen hat, oder so kompliziert, dass er keine offensichtlichen Schwächen hat. Die erste Methode ist weitaus schwieriger."}
+\dictum[{\cite[S. 348]{pasteurOeuvres1933}}]{\center ``Veränderungen begünstigen nur den, der darauf vorbereitet ist." \upshape{} }
 \vspace{1em} 
-Zunächst wird in diesem Kapitel näher auf die Motivation sowie der Zielsetzung der vorliegenden Bachelorarbeit eingegangen.
-\\
-\\
-{Kurzbeschreibung} \\
-{Gliederung \& Struktur der Arbeit}
 
+Die IT-Branche befindet sich in einem erheblichen Wandel. Neue Methoden und Werkzeuge revolutionieren die Software-Welt. Angefangen hat es mit der Verbreitung von Cloud Computing. Bei den damit einhergehenden großen verteilten Systemen wurde es immer schwieriger den Betrieb des Systems von der Architektur des Systems zu trennen. Daraus resultierte DevOps. Ein Ansatz, welcher das stärkere Zusammenarbeiten von Softwareentwicklung und IT-Betrieb fördert und fordert. Mit dem Architekturmuster der Microservices lassen sich die Ziele von DevOps bereits im Entwurf von Anwendungen einbringen. Containervirtualisierung erleichtert die Bereitstellung der einzelnen Microservices und neue Werkzeuge wie Kubernetes helfen dabei die große Anzahl an Containern zu managen. Zusammen bilden all diese Veränderungen den Grundstein für moderne Anwendungen bestehend aus containerisierten Microservices, welche mit Kubernetes verwaltet werden. \\
+\\
+Die beiden Softwareentwickler Kubernetes Brendan Burns und David Oppenheimer, welche Kubernetes mitentwickelten, halten diese Veränderungen sogar ähnlich revolutionär wie die Popularisierung der objektorientierten Programmierung [\cite[S. 1]{burnsDesign2016}]. Der Cloud-Experte John Arundel denkt, dass aufgrund dieser Revolutionen die Zukunft in containersierten, verteilten Systemen liegt, die auf der Kubernetes-Plattform laufen [\cite[S. 1]{arundelCloud2019}]. \\
+\\
+In dieser Arbeit werden die Revolutionen miteinander verbunden, um die Merkmale und den Nutzen von containersisierten Microservices vom Entwurf bis zur Bereitstellung kennenzulernen. Zu Beginn der Arbeit wird in diesem Kapitel die Motivation, die Zielsetzung sowie der Aufbau der Arbeit beschrieben.
 
 \subsection{Motivation}
 
-Die Softwaretechnik befindet sich in einem spannenden Wandel. Containervirtualisierung erlaubt den leichten Einsatz von gleichen Softwarepaketen. DevOps führt zu einem Kulturwandel in Unternehmen und zur Verschmelzung von Softwareentwicklung und Betrieb. Kubernetes hilft bei der Orchestrierung von großen Maßen an Containern. Microservices werden zunehmend häufiger als Architektur eingesetzt. All diese Veränderungen sind die Antwort auf diverse Probleme, doch hängen auch miteinander zusammen und ergänzen sich. Zusammen bilden sie den Grundstein für moderne Anwendungen.
-
-Diese Arbeit zeigt einen aktuellen Stand zu Microservices, Container und Kubernetes und wie sie sich in das DevOps-Umfeld einfügen. Die Arbeit soll zeigen wie eine moderne Anwendung mit Microservice-Architektur entworfen und mit Kubernetes bereitgestellt wird. Dabei liegt der Fokus insbesondere auf der Synergie dieser Technologien.
-
-Die Grundidee Anwendungen in einzelne Komponenten einzuteilen ist nichts Neues. Microservices verfolgen diesen Ansatz noch extremer. Durch neue Werkzeuge und Technologien 
-
-Durch Container, Microservices und Kubernetes hat sich in den letzten Jahren ein erheblicher
-Wandel in der IT-Branche vollzogen. Containervirtualisierung erleichtert das Bauen großer
-verteilter Systeme durch das Verbinden von vielen kleinen Services. Im Gegensatz zu
-monolithischen Anwendungen erleichtern Microservices den Einsatz von verschiedenen
-Technologien, die Skalierung und den modularen Aufbau (Newman et al., 2015, S. 24 ff.).
-Um die große Anzahl an Services zu steuern, kommen Orchestrierungssysteme zum Einsatz.
-In diesem Bereich hat sich in den letzten Jahren Kubernetes zum Standard entwickelt. Das
-alles sind Trends die DevOps unterstützen und für ein zunehmendes Verschmelzen von
-Softwareentwicklern und Systemadministratoren sorgen. Heutzutage sind DevOps-Prinzipien
-tief in modernen Anwendungen verwurzelt und haben erhebliche Auswirkungen auf alle
-Phasen des Entwicklungszyklus. Vor allem der Entwurf und die Bereitstellung wurden enorm
-beeinflusst und haben sich grundsätzlich verändert. Den containerisierten, verteilten Systemen
-gehört die Zukunft (Arundel und Domingus, 2019, S. 1). In dieser Bachelorarbeit wird deshalb
-der Fokus auf dem Entwurf und der Bereitstellung von modernen Microservice-basierten
-Anwendungen mit dem Branchenstandard Kubernetes liegen.
-
+DevOps wird von immer mehr Unternehmen adaptiert, um die Geschwindigkeit und Qualität zu erhöhen. Ein umfangreiche Umfrage geben 83\% aller gefragten IT-Entscheidungsträger an, dass ihre Organisation bereits DevOps-Praktiken einsetzt [\cite[S. 10]{puppetState2021}]. \\
+\\
+Der Übergang zu Microservice-Architekturen ist in vollem Gange. Vor allem im unternehmerischen Umfeld werden immer mehr monolithische Anwendungen in Microservices aufgespalten. Die Verbreitung wird auch noch in den nächsten Jahren zunehmen und es ist nicht mit einer Trendwende zu rechnen. Das Marktvolumen für Microservices in der Cloud wurde 2020 auf 831 Millionen \ac{USD} geschätzt. Bis zum Jahre 2026 soll der Markt mit einer durchschnittlichen jährlichen Wachstumsrate von 21.7\%  auf 2701 Millionen \ac{USD} anwachsen [\cite[S. 7]{mordorintelligenceGlobal2020}]. \\
+\\
+Die Verwendungsweise wird maßgeblich beeinflusst durch neue Technologien [\cite[S. 16]{newmanMicroservices2015}]. 
+Containervirtualisierung erleichtert die Bereitstellung der einzelnen Microservices. Container werden auch über Microservices hinweg verwendet und sind aus der heutigen IT-Landschaft nicht mehr wegzudenken. Google startet über zwei Milliarden Container pro Woche [\cite[S. 43]{liebelSkalierbare2021}]. \\
+\\
+Kubernetes ist der Branchenstandard und die Grundlage für moderne Webanwendungen [\cite[Vorwort]{arundelCloud2019}]. Bei einer Umfrage zeigt sich, dass 91\% der Befragten Kubernetes zur Containerorchestrierung einsetzen [\cite[S. 8]{cloudnativecomputingfoundationCloud2020}]. Alle großen Cloud-Anbieter wie Google Cloud, Amazon Web Services und Microsoft Azure setzen Kubernetes ein. \\
+\\
+Es kann also zweifelsfrei behauptet werden, dass Microservices und Kubernetes im Trend sind und in Zukunft auch weiter ansteigen werden. Die Kombination dieser Methoden und Werkzeugen ergänzt sich perfekt und ist die Zukunft für große Systeme. Jedoch sind die Technologien diffizil und bringen neben zahlreichen Vorteilen auch viele Herausforderungen mit sich. Deshalb ist es von großer Bedeutung die Technologien in ihrer Gesamtheit zu verstehen und anwenden zu können. In dieser Arbeit wird sich deshalb der Entwurf und die Bereitstellung von Microservices mit Kubernetes widmen.
 
 \subsection{Zielsetzung}
-Ziel dieser Bachelorarbeit ist es eine Übersicht über 
+Das Ziel dieser Bachelorarbeit ist es eine mit dem aktuellen Stand der Technik entsprechende moderne Webanwendung nach der Microservice-Architektur zu entwerfen und mithilfe von Kubernetes bereitzustellen. Dazu soll zuerst ein aktueller Stand der Technik beschrieben werden um anschließend eine Fallstudie durchzuführen. Die Fallstudie wird am Beispiel eines \acp{CRM-System} durchgeführt. In der Fallstudie soll ein Verfahren vom Entwurf bis zur Bereitstellung in einem DevOps-Umfeld implementiert werden. Um Aussagen zum Anwendungsgebiet und der Realisierung von containerisierten Microservices mit Kubernetes zu treffen, sollen geklärt werden, 
 
-Die 
-
-
-Die Bachelorarbeit widmet sich dem Entwurf und der Bereitstellung von Microservices mit
-Kubernetes. Die Arbeit wird zuerst die nötigen Methoden und Technologien beschreiben, um
-diese im Anschluss anhand einer konkreten Fallstudie einzusetzen. Das Ziel der Fallstudie
-ist es, ein auf Microservices basierendes Customer-Relationship-Management-System (CRM-
-System) zu entwerfen und dieses mithilfe von Kubernetes bereitzustellen. Dabei soll ein
-Verfahren, das dem aktuellen Stand der Technik entspricht, vom Entwurf bis zur Bereitstellung
-von modernen Microservice-basierten Anwendungen implementiert werden.
-
-\subsection{Abgrenzung}
-Die folgenden Aspekte werden nicht betrachtet:
 \begin{itemize}
-\item Sicherheit (Authentifizierung)
-\item Cloud Computing
+\item welche Anwendungsmöglichkeiten sowie Vorteile Microservices bieten,
+\item wobei Containervirtualisierung sowie Kubernetes den Einsatz von Microservices unterstützt,
+\item wie eine Microservice-Architektur entworfen werden kann,
+\item wie Microservices mit Kubernetes bereitgestellt werden können und
+\item welche Nachteile und Herausforderungen sich daraus ergeben.
 \end{itemize}
+
+\subsection{Aufbau der Arbeit}
+
+Als Erstes wird in Kapitel 2 der aktuelle Stand der Technik beschrieben. Es wird DevOps, das Architekturmuster der Microservices, Containervirtualisierung sowie Kubernetes genauer erklärt. Auf Basis dieser theoretischen Grundlagen wird die Fallstudie durchgeführt. In Kapitel 3 wird zuerst die Problemstellung beschrieben. Danach wird in Kapitel 4 der Entwurf und in Kapitel 5 die Implementierung der Microservices erläutert. Anschließend wird in Kapitel 6 die Bereitstellung mit Kubernetes erklärt. Zum Schluss wird in Kapitel 7 ein Fazit gezogen und die Ergebnisse diskutiert.
+
+
