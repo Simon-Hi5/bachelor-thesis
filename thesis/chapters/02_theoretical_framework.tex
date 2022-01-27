@@ -1,76 +1,49 @@
 \section{Theoretische Grundlagen}
 
-Um die Fallstudie durchzuführen, wird zunächst der theoretische Rahmen der Arbeit erläutert. In diesem Kapitel wird zunächst der DevOps-Ansatz und Microservices beschrieben. Anschließend wird Containervirtualisierung sowie Kubernetes erklärt.
+In diesem Kapitel werden die grundlegenden Begriffe und Konzepte erläutert, welche wichtig für das Verständnis der Arbeit sind. Es wird zunächst der DevOps-Ansatz und das Architekturmuster der Microservices beschrieben. Anschließend wird Containervirtualisierung sowie Kubernetes erklärt.
 
 \subsection{DevOps}
 
-Bevor auf die Architektur und die verwendete Technologien eingegangen wird, ist es wichtig den weiteren Kontext zu betrachten. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Dabei ist DevOps nicht klar definiert und ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. DevOps stellt den Kundennutzen in den Mittelpunkt. Das Ziel ist es ein Unternehmen anpassungsfähiger zu machen und trotzdem   geordnete Prozesse zu wahren. Die Anpassungsfähigkeit wird hier häufig mit der Time to Market gemessen. Diese Kennzahl sagt aus wie lange es dauert eine Änderung auf die Produktionsumgebung zu bringen.
+Alle der in diesem Kapitel beschriebenen Architekturmuster, Methoden und Werkzeuge lassen sich dem DevOps-Ansatz zuordnen. Für das Verständnis der Arbeit ist es also essentiell zu Verstehen was DevOps bedeutet und warum es so populär ist. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Für DevOps gibt es keine einheitliche Definition. Es ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. Der Kundennutzen wird dabei immer in den Mittelpunkt gestellt [\cite[S. 1]{halstenbergDevOps2020}]. Das Ziel ist es die Softwarequalität zu verbessern und die Geschwindigkeit der Entwicklung und Bereitstellung zu erhöhen [\cite[S. 6]{arundelCloud2019}]. Um die Ziele umzusetzen bedient sich DevOps etablierten Methoden und Werkzeuge um daraus einen ganzheitlichen Ansatz zu formulieren. \\
+\\
+DevOps wird immer wichtiger, da durch das Aufkommen von Cloud Computing die Entwicklung und der Betrieb von Anwendungen nicht mehr trennbar ist. DevOps in ein Unternehmen einzuführen ist ein langwieriger Prozess, da insbesondere die Unternehmenskultur transformiert werden muss. Vor allem in großen Unternehmen zeigt sich das viele Prozesse schwerfällig geworden sind und nicht mehr dem eigentlichen Kundennutzen dienen. DevOps soll dieses Problem lösen und Unternehmen wieder anpassungsfähiger machen, ohne geordnete Strukturen zu verlieren.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/DevOpsDiagramm.png}
-    \caption{Kategorisierung von Unternehmen}
+    \includegraphics[width=0.6\textwidth]{figures/DevOpsDiagramm.png}
+    \caption{Kategorisierung von Unternehmen [\cite[S. 11]{halstenbergDevOps2020}]}
 \end{figure}
 
-Um DevOps in Unternehmen umzusetzen reicht es nicht die entsprechenden Werkzeuge einzuführen, sondern es muss zu einem Kulturwandel kommen.
-
-DevOps ist eine Sammlung an Methoden und Denkweisen, welche sich immer weiter verbreiten. Das Vorgehen in der Fallstudie dieser Arbeit kommen auch DevOps-Werkzeuge zum Einsatz. Da die gewählten Technologien und Architekturmuster sich nicht nur auf den Entwurf sondern auch
-
-
-Eine der wichtigsten Werkzeuge von DevOps ist Continuous Delivery.
+Eine reduzierte Time-to-Market kann durch engere Abstimmung und Automatisierung erreicht werden. Die Time-to-Market gibt an, wie lange es dauert eine Änderung zum Kunden, also auf die Produktionsumgebung, zu bringen. So können Änderungen schnell ausgeliefert werden und Feedback vom Endanwender erreicht schneller die Entwickler. Zur Umsetzung können Methoden wie Continuous-Integration und Continuous-Delivery eingesetzt werden, aber auch Architekturmuster wie Microservices und Werkzeuge wie Docker und Kubernetes können dabei unterstützen.
 
 \subsection{Microservices}
 
-Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software (\cite[S. 15]{newmanMicroservices2015}). Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits älter (\cite[S. 15]{newmanMicroservices2015}). Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Ein solches einzelnes Programme wird als Microservice bezeichnet. \\
+Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software (\cite[S. 15]{newmanMicroservices2015}). Eine einheitliche Definition für Microservices gib es nicht [\cite[S. 2]{wolffMicroservices2018}]. Bei der Beschreibung von Microservices werden grundlegende Prinzipien einer standardisierten Definition vorgezogen. \\
 \\
-Microservices sind ein Architekturmuster. Architekturmuster beschreiben die Grundstruktur von Systemen in der Softwareentwicklung. Microserices werden als Architekturmuster in die Kategorie der verteilten Systeme eingeordnet. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern. Die Microservices sind dabei voneinander unabhängig und kommunizieren in einem Netzwerk über festgelegte Schnittstellen miteinander. \\
-\\
-Microservices sind also das Gegenteil von klassischen monolithischen Softwarearchitekturen. Monolithische Software ist eine einzelne, zusammenhängende und untrennbare Einheit. Dies macht die Erweiterbarkeit und Warbarkeit deutlich schwieriger, da Teile des Systems nur mit erheblichem Aufwand angepasst werden können. Es kann zu nicht vorhersehbaren Abhängigkeiten kommen. Die Wiederverwendbarkeit von Teilen der Software gestaltet sich aufwendiger. Lastverteilung und Skalierung ist problematisch. Durch Modualisierung lassen sich viele dieser Nachteile abschwächen, können jedoch nicht komplett ausgemerzt werden. Um diese Nachteile zu umgehen sind Microservices entstanden. Doch neben vielen Vorteilen kommen Microservices auch mit Herausforderungen. Im nachfolgenden Abschnitt werden die genauen Vor- und Nachteile genauer erläutert. \\
+Microservices sind das Gegenteil von klassischen monolithischen Softwarearchitekturen. Ein Monolith ist eine einzelne, zusammenhängende und untrennbare Einheit. Die Erweiterbarkeit und Wartbarkeit von Monolithen ist häufig komplex, da die Codebasis umfangreich ist und mit der Zeit immer stärker wächst. Die Arbeit von mehreren Entwicklerteams ist ineffizient, dar ein höher Abstimmungsbedarf nötig ist. Des Weiteren lässt ist die Skalierbarkeit des schwergewichtigen Monolithen sehr beschränkt. Durch Modularisierung einer Anwendung lassen sich diese Probleme abschwächen, können jedoch nicht komplett behoben werden.
+
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.2\textwidth]{figures/Monolith.png}
-    \caption{Aufbau einer monolithischen Architektur}
+    \caption{Beispielhafter Aufbau einer monolithischen Architektur}
 \end{figure}
+
+Genau hier setzten Microservices an. Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits deutlich älter [\cite[S. 15]{newmanMicroservices2015}]. Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Das Architekturmuster der Microservices zählt zu den verteilten Systemen. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern und kommunizieren über das Netzwerk.
+
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.71\textwidth]{figures/Microservices.png}
-    \caption{Aufbau einer Microservice-Architektur}
+    \caption{Beispielhafter Aufbau einer Microservice-Architektur}
 \end{figure}
 
-Der Begriff Microservice ist nicht fest definiert (\cite[S. 2]{wolffMicroservices2018}), deshalb werden im nachfolgenden Kapitel die wichtigsten Eigenschaften und Merkmale betrachtet.
+Ein einzelner Microservice soll eine Aufgabe bestmöglich erledigen. Dieser Ansatz ist angelehnt an die \acs{UNIX}-Philosophie: "Mache nur eine Sache und mache sie gut" [\cite[]{salusQuarter1994}]. Jeder Microservice bildet so eine klar definierte Funktion des Gesamtsystems ab. Die Microservices müssen eigenständig sein, sodass sie unabhängig voneinander verändert und bereitgestellt werde können. Die Kommunikation zwischen den Microservices erfolgt ausschließlich über das Netzwerk mittels sprachunabhängiger Schnittstellen, sogenannte \acp{API} [\cite[S. 64]{trempArchitekturen2021}]. \\
 \\
-Dabei werden Microservices häufig im geschäftlichen Umfeld eingesetzt (\cite[S. 15]{newmanMicroservices2015}). \\
+Die Größe eines Microservices ist nicht zwangsläufig entscheidend [\cite[S. 2]{wolffMicroservices2018}]. Der Name "Microservices" deutet bereits an, dass es sich um kleine Services handelt, jedoch ist eine genaue Festlegung der Größe nicht sinnig [\cite[S. 22]{newmanMicroservices2015}]. Eine Messung der Größe durch die Anzahl der Codezeilen wäre zwar denkbar, jedoch hängen derartige Kriterien stark von der verwendeten Programmiersprache ab. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Eine Obergrenze für die Größe eines Microservices stellt die Teamgröße dar. An einem Microservice darf immer nur ein Entwicklerteam arbeiten [\cite[S. 23]{newmanMicroservices2015}]. Kann der Microservice nicht mehr von einem Team alleine entwickelt und gewartet werden, so ist er zu groß. Ein Microservice sollte auch nur so groß sein, dass er von einem Entwickler allumfassend verstanden werden kann. Ein Microservice sollte jedoch auch nicht zu klein gewählt werden, da ansonsten der Aufwand für die Bereitstellung der vielen Microservices sehr groß wird und die Kommunikation über das Netzwerk ansteigt. \\
 \\
-Microservices sollen nur eine Aufgabe erledigen, diese jedoch bestmöglich. Dieser Ansatz ist nicht neu und entstammt der UNIX-Philosophie: "Mache nur eine Sache und mache sie gut" (Douglas McIlroy).
-Wie der Name "Microservices" bereits andeutet, handelt es sich dabei offensichtlich um kleine Services. Eine genaue Festlegung wie groß die Services sein sollten gibt es jedoch nicht. Die Anzahl der Codezeilen (Lines of Code) können einen Hinweis geben, jedoch sind derartige Kriterien stark von der Programmiersprache und dem verwendeten Technologie-Stack abhängig. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Des Weiteren sollte ein Microservice nur so Groß sein, dass er von einem einzigen Entwicklerteam betreut werden kann. Die Größe eines Microservices ist für die Definition also nicht zwangsläufig entscheidend (\cite[S. 2]{wolffMicroservices2018}). \\
+Um von Microservices zu profitieren müssen Strukturen in Unternehmen überarbeitet werden. Das Gesetz von Conway besagt, dass durch die Kommunikationsstrukturen einer Organisation auch die Struktur der Systeme, welche die Organisation entwirft, vorgegeben wird [\cite{conwayHow1968}]. Bei monolithischen Anwendungen werden die Entwicklerteams häufig nach ihrem Fachbereich aufgeteilt. Es bilden sich so beispielsweise Teams spezialisiert auf das Frontend, das Backend und die Datenbank. Die entwickelte Anwendung wird, nach dem Gesetz von Conway, auch aus diesen drei Bereichen bestehen. Wenn nun ein neues Feature umgesetzt werden soll, müssen sich alle drei Teams miteinander absprechen. Um eine Microservice-Architektur umzusetzen muss also auch die Struktur des Unternehmens verändert werden. Die Entwicklerteams müssen crossfunktional mit Spezialisten aus verschiedenen Fachbereichen aufgebaut werden. Der Vorteil ist das Änderungen so häufig nur ein Entwicklerteam betreffen und der Koordinationsaufwand sinkt. \\
 \\
-Der Name "Microservices" deutet schon an, dass es sich offensichtlich um kleine Services handelt.
-Eine objektive Messung der Größe ist jedoch nicht möglich. Um die Größe eines Microservices zu bestimmen, könnte man beispielsweise die Anzahl der Codezeilen (LoC) verwenden. Doch die Lines of Code hängen starkt von der verwendeten Programmiersprache und dem Technologie-Stack ab. Eine Messung der Größe nach rein objektiven Kriterien macht demnach keinen Sinn (\cite[S. 31]{wolffMicroservices2018})(\cite[S. 22]{newmanMicroservices2015}). Stattdessen sollte sich die Größe an die fachlichen Gegebenheiten richten. Je kleiner die Services werden desto mehr kommen die in den nächsten Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Ein Microservice sollte von einem einzigen Enticklerteam gehandhabt werden (\cite[S. 23]{newmanMicroservices2015}). Falls das nicht mehr möglich ist, könnte es darauf hindeuten, dass der Microservice zu groß ist. \\
+Microservices werden häufig mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen [\cite[S. 2]{wolffMicroservices2018}]. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können. \\
 \\
-Die Teamgröße beschrenkt die Größe eines Microservices, um die Unabhängigkeit der Entwicklerteams zu gewährleisten. Ein einzelner Entwickler sollte in der Lage sein den kompletten Microservice zu verstehen. Die Infrastruktur begrenzt auch die Größe. Ist die Bereitstellung eines Services sehr aufwendig, sollte die Anzahl der Microservices eher geringer sein. Auch die Kommunikation zwischen den Services und somit die Netzwerkauslastung nimmt mit der Anzahl zu. Das ist ebenfalls ein Grund für nicht zu kleine Services.
-\\
-Microservices laufen als eigenständige Programme und müssen unabhängig voneinander deploybar sein. Jeder Microservice ist ein eigener Prozess, welcher isoliert von den anderen abläuft. Die Isolierung trägt dazu bei, dass verteilte System besser zu verstehen aber auch keine unbemerkten Abhängigkeiten zwischen den Services entstehen zu lassen. Neue Technologien wie Containervirtualisierung können dies erleichtern. Die Kommunikation der Services erfolgt über ein Netzwerk und mittels sprachunabhängiger Schnittstellen (API). \\
-\\
-Ein Microservice bildet eine eigenständige und klar definierte Funktion einer Applikation ab. Der Zugriff auf den Service erfolgt ausschließlich über eine klar definierte Schnittstelle (\cite[S. 64]{trempArchitekturen2021}). Wo genau die Aufteilung in Microservices vorgenohmen werden kann wird in einem späteren Kapitel genauer diskutiert. Es ist jedoch durchaus eine komplexe und schwierige Aufgabe.
-\\
-Eine ausreichende Eigenständigkeit ist nur gegeben, sobald die Services unabhängig voneinander verändert und bereitgestellt werden können. Ein Entwicklerteam sollte sich bei der Implementierung von Änderungen oder neuen Funktionen nicht mit anderen Teams absprechen müssen. \\
-\\
-Das Gesetz von Conaway von Melvin Edward Conway besagt, dass "Organisationen die Systeme entwerfen sind gewzungen Entwürfe zu erstellen die die Kommunikationsstrukturen dieser Organsiationen abbilden." Vereinfacht gesagt, wenn zwei Entwicklerteams in einem Unternehmen ein neues Softwaresystem entwickeln, dann wird mit großer Wahrscheinlichkeit das neue Softwaresystem unabhängig von den fachlichen Anforderungen auch aus zwei großen Komponenten bestehen. Die Schnittstellen zwischen diesen zwei Komponenten werden eine ähnliche Qualität wie die zwischenmenschlichen Kommunikation zwischen den beiden Entwicklerteams haben. Studien der Havard Business School belegen, dass diese These in der Realität meistens zutreffend ist.  \\
-\\
-Das CAP-Theorem kann auf alle verteilte Systeme und somit auch auf Microservices angewendet werden. Es besagt, dass es niemals möglich ist, gleichtzeitig die drei Eigenschaften Konsistenz (Consistency), Availability (Verfügbarkeit) und Ausfalltoleranz (Partition Tolerance) zu gewährleisten.
-
-\subsubsection{Serviceorientierte Architekturen}
-
-An dieser Stelle muss ein kurzer Exkurs zu serviceorientierten Architekturen (SOA) gemacht werden, da der Begriff häufig im Zusammenhang genannt wird. 
-
-Serviceorientierte Architektur ist ein Designansatz (\cite[S. 29]{newmanMicroservices2015}). Wie der Name schon andeutet ist das Prinzip sehr ähnlich zu Microservices. Auch bei SOA gibt es Services, welche über das Netzwerk miteinander kommunizieren.
-  
-Es gibt durchaus Definitionen welche Microservice und SOA als identisch ansehen. 
-
-Services bei SOA werden jedoch nicht neu entwickelt. Die Funktionalität ist in den betrieblichen Anwendungen bereits vorhanden. Durch einen SOA-Ansatz sollen diese Funktionalitäten durch Services von außerhalb der Anwendung zugreifbar gemacht werden. Das Ziel ist es eine flexiblere Gesamtstruktur der IT in einem Unternehmen zu haben und Services wiederverwenden zu können. Es bedeutet jedoch nicht zwanglsäufig das große monolithische Anwendungen in kleine Services aufgeteilt werden. Eine große Anwendung kann auch aus mehreren Service-Komponenten besitzen, die dessen Dienste für andere Anwendungen verfügbar machen, ohne den eigentlichen Monolithen aufzuteilen. Über die Service sollen Geschäftsprozesse abgebildet werden (\cite[S. 2]{wolffMicroservices2018}).
-
-Der größte Unterschied liegt jedoch auf der Ebene an der beide Ansätze ansetzen. Bei Microservices handelt es sich wie bereits erklärt um Architekturmuster, also einen konkreten Ansatz wie eine Anwendung entworfen werden kann. SOA setzt bei der gesamten IT eines Unternehmens an. SOA beschreibt wie viele Systeme in einem Unternehmen miteinander interargieren. Microservices beschreiben die Architektur von einem einzigen System. 
-
 
 \subsubsection{Vorteile}
 
@@ -118,17 +91,31 @@ Durch Ihre Unabhängigkeit können nur einzelne Services nach Änderungen neu be
 
 \subsubsection{Herausforderungen}
 
-Doch natürlich haben Microservices wie jedes Architekturmuster auch einige Nachteile.
+Doch natürlich haben Microservices wie jedes Architekturmuster auch einige Nachteile. Die Aufteilung eines Systems in viele Microservices erhöht die Komplexität. 
 
 \paragraph{Versteckte Beziehungen}
 
+Die Beziehungen von Microservices können schnell unüberschaubar werden. Ob und welche Funktionen ein Microservice von anderen Microservices in Anspruch nimmt sind nicht direkt ersichtlich. Ein genaues Monitoring ist hierbei nötig. Auch auf Code-Ebene kann es zu ungewollten Abhängigkeiten kommen, wenn mehrere Microservices die selbe Bibliothek verwenden. Unter Umständen müssen bei Änderungen an dieser Bibliothek die Services gemeinsam ausgeliefert werden und die Unabhängigkeit geht verloren (\cite[S. 75]{wolffMicroservices2018}).
+
 \paragraph{Refactoring}
 
-\paragraph{Fachliche Architektur}
+Während bei Softwaremodulen leicht Teile des Codes von einem Modul in ein anderes verschoben werden können ist es bei Microservices deutlich schwieriger. Wenn eine Funktionalität in einen anderen Microservice verschoben werden muss, dann ist ein höherer Aufwand erforderlich. Deshalb ist es wichtig die Makro-Architektur von Microservices mit bedacht zu wählen. Änderungen auf dieser Ebene sind im Nachhinein deutlich aufwendiger.
 
-\paragraph{Komplexität}
+\paragraph{Architektur}
+
+Die Architektur ist wichtiger als bei anderen Systemen.
+
+\paragraph{Betrieb}
+
+
 
 \paragraph{Verteilte Systeme}
+
+Microservices sind verteilte Systeme und bringen auch die damit verbundenen Nachteile mit sich. Da die Kommunikation mit den Microservices über das Netzwerk läuft, ist die Antwortzeit der Microservices von der Latenz abhängig. Da wird vor allem dann problematisch wenn ein Microservice viele Dienste von anderen Microservices in Anspruch nimmt. Deshalb sollten Microservices untereinander möglichst wenig kommunizieren müssen. Besitzen zwei Microservices viele Abhängigkeiten, kann dies ein Hinweis auf eine falsche Einteilung der Microservices sein. Des Weiteren muss das Netzwerk die höhere Last durch die Aufrufe standhalten. Außerdem ist Kommunikation über das Netzwerk immer unzuverlässig.
+
+\paragraph{Technologie-Komplexität}
+
+Die technologische Freiheit der Microservices kann schnell zu einer Herausforderung werden. Wenn jeder Microservice einen komplett unterschiedlichen Technologie-Stack verwendet, steigt die Komplexität des Gesamtsystems. Auch wird der Wechsel von Mitarbeitern zu anderen Teams schwieriger. Es bietet sich also an den Technologie-Stack einzuschränken und übergreifende Richtlinien für alle Microservices zu bestimmen.
 
 \subsubsection{Architektur}
 
@@ -165,36 +152,41 @@ Zuletzt müssen natürlich auch Microservices direkt miteinander kommunizieren, 
 
 \subsubsection{Bereitstellung und Betrieb}
 
+
+
 \subsubsection{Fazit}
 
 Viele Vorteile
 Wichtige Dinge um die sich gekümmert werden müssen: Skalierung, Deployment, Service Discovery werden durch Kubernetes übernommen und erleichtert.
 
 
-\subsection{Containervirtualisierung}
+\subsection{Docker}
 
-Früher wurden Anwendungen auf physischen Rechnern ausgeführt. Wenn mehrere Anwendungen auf einem Rechner liefen, konnte eine Anwendung Ressourcen wie die Rechenleistung der anderen Anwendung wegnehmen. Durch Virtualisierung von Hardware konnte das Problem gelöst werden, indem mehrere virtuelle Maschinen auf einem physischen Rechner betrieben werden. Virtuelle Maschinen besitzen dieselben Funktionen wie ein physischer Rechner und führen ein eigenes Betriebssystem aus. Dadurch ist diese Art der Virtualisierung nicht leichtgewichtig. Bei der Containervirtualisierung werden nur die Ressourcen des Betriebssystems des Betriebssystems zur Verfügung gestellt, welche auch wirklich benötigt werden. Containervirtualisierung ist deshalb leichtgewichtig.
+Anwendungen mit Microservice-Architektur verwenden heutzutage häufig Containervirtualisierung zur Bereitstellung. Durch die leichtgewichtige Containervirtualisierung können mehrere isolierte Instanzen eines Betriebssystem auf dem selben Kernel ausgeführt werden. Dadurch sind die Container ressourcenschonender als die Virtualisierung mittels Hypervisor, bei dem jede virtuelle Maschine sein eigenes Betriebssystem ausführt.
 
-Ein weiteres Problem ist, wie Microservices aber auch andere verteilte Systeme über große Netzwerke mit vielen verschiedenartigen Rechnern bereitgestellt werden können. Es wurde also eine zuverlässige Methode gesucht wie Software auf diversen Rechnern immer gleich läuft. Auch dieses Problem schafft Containervirtualisierung aus dem Weg, indem es Software mit allen Abhängigkeiten, Bibliotheken, Compilern und Konfigurationen in eine standardisierte und einheitliche Komponente verpackt: Der Container. 
-Ein Image einer virtuellen Maschine besitzt auch alle diese Eigenschaften, enthält aber noch viel mehr als wie die Anwendung wirklich für die Ausführung benötigt.
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/containervirtualisierung.png}
+    \caption{Vergleich Virtualisierung mittels Hypervisor und Container}
+\end{figure}
 
-Vorteile zu VMs:
-- Container laufen auf der realen CPU, somit kein zusätzlicher Aufwand für Virtualisierung
-- Container enthält nur die Dateien, die wirklich benötigt werden, daher viel kleiner
-- Dateisystem-Layern, könen von mehreren Container genutzt und wiederverwendet werden, effiziente Platznutzung
+Für die Ausführung einer Anwendung werden Abhängigkeiten wie Bibliotheken, Compiler und Interpreter benötigt. Des Weiteren muss die Anwendung richtig konfiguriert werden. Vor allem bei einer Microservice-Architektur kann das ein Problem werden, da die Microservices über große Netzwerke verteilt auf verschiedenartigen Rechnern bereitgestellt werden sollen. Containervirtualisierung löst dieses Problem, mit einem standardisierten Image-Datei, das die Anwendung mitsamt aller Abhängigkeiten und Konfigurationen beinhaltet [\cite[S. 9]{arundelCloud2019}]. Diese Image-Datei läuft unabhängig von der Plattform auf jedem Rechner, sofern die zugehörige Containervirtualisierungssoftware installiert ist. \\
+\\
+Eine freie Software zur Containervirtualisierung ist Docker. Docker ergänzt die Containervirtualisierung mit benutzerfreundlichen Werkzeugen  und ist der Branchenstandard für Containervirtualisierung. Im Folgenden werden die wichtigsten Begriffe und Funktionen von Docker näher beschrieben. \\
+\\
 
-Eigenschaften von Images:
-- Wiederverwendbar
-- Kann überall laufen wo die entsprechende Container-Engine läuft und ausreichend Ressourcen vorhanden sind
-- Läuft überall gleich (Container-Format muss unterstützt werden)
-- Keine Abhängigkeit von unterschiedlichen Distributionen, Bibliotheken und Software-Versionen auf dem Rechner (lediglich abhängig von Betriebssystem-Kernel)
+\subsection{Docker Image}
 
-Ein weiteres Problem was letztendlich zur Containervirtualisierung führte, ist die Frage wie verteilte Systeme (microservices) über große Netzwerke mit verschiedenartigen Rechnern bereitgestellt werden können. 
+Ein Docker Image ist das Speicherabbild eines Containers. Das Image beinhaltet alle Informationen, die zum Starten eines Containers notwendig sind.  Bei Docker besteht das Image aus mehreren Schichten. Jede Schicht repräsentiert eine Abhängigkeit oder Konfiguration, welche für die Anwendung benötigt wird. Docker optimiert automatisch den verwendeten Speicherplatz durch Wiederverwendung, wenn zwei Images eine gleiche Schicht verwenden. Die Docker Images sind portabel. Über zentrale Registrys können die Images verwaltet, gespeichert und verteilt werden. Docker Hub ist die größte öffentliche Registry mit einer Vielzahl an Images, die von anderen Benutzern bereitgestellt werden. Beim Ausführen eines Images wird auf Basis des Images ein Container gestartet. Ein Container ist die aktive Instanz eines Images. Er besitzt eine begrenzte Lebensdauer und wird, nachdem der in ihm laufende Prozess abgeschlossen ist, beendet. Das Image ist wiederverwendbar und es können beliebig viele Container aus einem Image erzeugt werden.
 
-Container revolutionieren also die Bereitstellung von Anwendungen, haben jedoch auch eine große Auswirkung auf die Anwendungsarchitektur und entfalten so beispielsweise das volle Potential von Microservices.
-In der steigenden Beliebtheit von Microservice-basierten Anwendungen bestehend aus Container sehen manche eine ähnliche Revolution wie die in den 1990er-Jahren objektorientierte Programmierung. (\cite[S. 1]{burnsDesign2016})
+\subsection{Dockerfile}
+
+Ein Dockerfile ist eine Textdatei mit mehreren Befehlen, die ein Docker Image beschreiben. Aus einem Dockerfile kann das entsprechende Image gebaut werden. Dazu werden die einzelnen Befehle abgearbeitet und für jeden Befehl eine neue Schicht in dem zugehörigen Image angelegt. Begonnen wird meistens mit einem Basis-Image, welches bereits vorhanden ist. Danach folgen spezifische Änderungen, damit die gewünschte Anwendung ausgeführt werden kann.
+
 
 {Vorteile}
+
+Container revolutionieren also die Bereitstellung von Anwendungen, haben jedoch auch eine große Auswirkung auf die Anwendungsarchitektur und entfalten so beispielsweise das volle Potential von Microservices.
 
 Container eignen sich aufgrund dieser Eigenschaften perfekt, Microservice-basierte Anwendungen zusammenzustellen und auszuführen. 
 

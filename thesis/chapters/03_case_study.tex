@@ -2,23 +2,30 @@
 
 Nachdem die theoretischen Grundlagen nun erläutert worden sind, wird mit der Fallstudie begonnen. In diesem Kapitel wird das Problem der Fallstudie beschrieben. \\
 \\
-
+Festlegung des Technologie-Stacks
 
 \section{Entwurf der Microservices}
 
-
+Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Microservice-System als Ganzes. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
 
 \subsection{Makro-Architektur}
 
+Die Makro-Architektur befasst sich mit dem Enwurf des Gesamtsystems. Die Aufteilung der Funktionalitäten auf die Microservices und die Kommunikationstechnologien für die Integration der einzelnen Microservices ist hier von Interesse. Wie genau die einzelnen Microservices umgesetzt werden und welcher Technologie-Stack verwendet wird, ist für das Gesamtsystem nicht relevant.
+
 \subsection{Micro-Architektur}
 
-\subsection{Integration}
+Die Mikro-Architektur befasst sich mit der Architektur eines einzelnen Microservice. Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Aus diesem Grund besitzt man eine große Freiheit bei der Auswahl. Es sollte die Architektur, welche am Simpelsten alle Anforderungen bietet. Der ausgewählte Technologie-Stack schränkt natürlich die möglichen Architekturen auch weiter ein.
+
+Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. Da eine Frontend 
+
 
 \section{Implementierung}
 
 \subsection{Services}
 
 \subsection{Frontend}
+
+Das Frontend. Das Frontend soll später auch mit Kubernetes bereitgestellt werden, es wird aber nicht als Microservices angesehen.
 
 \subsection{Datenbank}
 
