@@ -23,32 +23,46 @@ spec:
     
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: opportunity-db
   labels:
     app: opportunity-db
 spec:
-  selector: 
+  serviceName: opportunity-db-service
+  replicas: 1
+  selector:
     matchLabels:
       app: opportunity-db
-  replicas: 1
   template:
     metadata:
       labels:
         app: opportunity-db
-      name: opportunity-db-service
+        name: opportunity-db-service
     spec:
       containers:
-      - image: mongo:latest
-        name: opportunity-db
-        ports:
-        - containerPort: 27017
-          name: opportunity-db
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: "1"
-          requests:
-            memory: 128Mi
-            cpu: "0.25"
+        - name: opportunity-db
+          image: mongo:latest
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: "1"
+            requests:
+              memory: 128Mi
+              cpu: "0.25"
+          ports:
+            - containerPort: 27017
+              name: opportunity-db
+          volumeMounts:
+            - name: opportunity-db-pvc
+              mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: opportunity-db-pvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Mi
