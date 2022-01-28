@@ -135,6 +135,11 @@ Herausforderung: Microservice-Systeme sind schwer änderbar (auf Makro Ebene)
 
 Architektur eines Microservice: Erklärung Schichtenarchitektur, wenige Vorgaben, wird vom Team gehandhabt
 
+Für die Skalierbarkeit ist es wichtig, dass mehrere Instanzen vom selben Microservice gestartet werden können. Das bedeutet, dass Microservices keinen Zustand speichern dürfen.
+Es ist ratsam, dass jeder Microservice eine eigene Datenbank besitzt. Das führt zu einer dezentralen Datenbankstruktur im System. Dadurch sind die Datenschemata weniger komplex und genau auf die Anforderungen des einen Microservices spezialisiert.  Wenn Datenbanken von mehreren Microservices verwendet werden ist bei Änderungen an der Datenbank ein höher Abstimmungsaufwand nötig.
+
+Die lose gekoppelten Microservices dürfen keinen Zustand speichern. Nur so können mehrere Instanzen vom selben Microservice gestartet werden und die 
+
 \subsubsection{Integration und Kommunikation}
 
 Microservices müssen miteinander kommunizieren. Die Integration der Services ist auf drei verschiedenen Ebenen denkbar.
@@ -147,22 +152,24 @@ Microservices müssen miteinander kommunizieren. Die Integration der Services is
 
 Zuletzt müssen natürlich auch Microservices direkt miteinander kommunizieren, um so Funktionalität von anderen Services aufzurufen. Die meist verbreitetste Technologie ist HTTP REST. Es gibt auch weitere Ansätze wie SOAP oder Message-Systeme.
 
-{Definition REST}
+Als Application Programming Interface (API) wird eine Programmierschnittstelle bezeichnet. Diese Schnittstellenart, erlaubt anderen Programmen die Anbindung an ein System. Bei der Schnittstelle, die in diesem Projekt entworfen wird, handelt es sich um eine sogenannte Programmierschnittstelle. Mit einer API wird sichergestellt, dass die Unternehmensinfrastruktur flexibel, zukunftssicher und nicht abhängig von einer einzigen Technologie bleibt. Auch können mit einer API ganz einfach Daten freigegeben und universell zur Verfügung gestellt werden. [\cite[S. 95ff]{koflerDigitale2018}]
 
+Die API in diesem Projekt soll nach dem REST-Architekturstil erstellt werden. Representational State Transfer (REST) ist ein weit verbreitetes Paradigma, welches die Struktur und das Verhalten von Schnittstellen vereinheitlichen soll. Eine REST-API verwendet HTTP-Anfragen mit verschiedenen HTTP-Anfragemethoden, um auf Daten zuzugreifen. Jeder Endpunkt einer REST-API muss eine eindeutige Adresse, den Uniform Resource Locator (URL), besitzen. [\cite[S. 76ff]{fieldingArchitectural2000}]
 
-\subsubsection{Bereitstellung und Betrieb}
-
-
-
-\subsubsection{Fazit}
-
-Viele Vorteile
-Wichtige Dinge um die sich gekümmert werden müssen: Skalierung, Deployment, Service Discovery werden durch Kubernetes übernommen und erleichtert.
+REST basiert auf den folgenden sechs Prinzipien:
+\begin{itemize}
+\item Client-Server: Ein Server stellt einen Dienst bereit, der bei Bedarf vom Client angefragt wird.
+\item Zustandslosigkeit: Jede Anfrage eines Clients ist in sich geschlossen und enthält alle benötigten Informationen.
+\item Caching: HTTP-Caching soll verwendet werden.
+\item Einheitliche Schnittstelle: Die Ressourcen sollen klar adressierbar sein und alle Nachrichten sollen selbstbeschreibend sein.
+\item Mehrschichtige Systeme: Die Systeme sollen mehrschichtig aufgebaut sein.
+\item Code on Demand: Nur im Bedarfsfall wird Code an den Client zur lokalen Ausführung übermittelt.
+\end{itemize}
 
 
 \subsection{Docker}
 
-Anwendungen mit Microservice-Architektur verwenden heutzutage häufig Containervirtualisierung zur Bereitstellung. Durch die leichtgewichtige Containervirtualisierung können mehrere isolierte Instanzen eines Betriebssystem auf dem selben Kernel ausgeführt werden. Dadurch sind die Container ressourcenschonender als die Virtualisierung mittels Hypervisor, bei dem jede virtuelle Maschine sein eigenes Betriebssystem ausführt.
+Anwendungen mit Microservice-Architektur verwenden heutzutage häufig Containervirtualisierung zur Bereitstellung. Durch die leichtgewichtige Containervirtualisierung können mehrere isolierte Instanzen eines Betriebssystem auf dem selben Kernel ausgeführt werden. Dadurch sind die Container ressourcenschonender als die herkömmliche Virtualisierung mittels Hypervisor, bei dem jede virtuelle Maschine ein eigenes vollständiges Betriebssystem ausführt. Außerdem verbraucht der Hypervisor selbst auch Rechenleistung und Arbeitsspeicher.
 
 \begin{figure}[H] 
     \centering
@@ -172,54 +179,84 @@ Anwendungen mit Microservice-Architektur verwenden heutzutage häufig Containerv
 
 Für die Ausführung einer Anwendung werden Abhängigkeiten wie Bibliotheken, Compiler und Interpreter benötigt. Des Weiteren muss die Anwendung richtig konfiguriert werden. Vor allem bei einer Microservice-Architektur kann das ein Problem werden, da die Microservices über große Netzwerke verteilt auf verschiedenartigen Rechnern bereitgestellt werden sollen. Containervirtualisierung löst dieses Problem, mit einem standardisierten Image-Datei, das die Anwendung mitsamt aller Abhängigkeiten und Konfigurationen beinhaltet [\cite[S. 9]{arundelCloud2019}]. Diese Image-Datei läuft unabhängig von der Plattform auf jedem Rechner, sofern die zugehörige Containervirtualisierungssoftware installiert ist. \\
 \\
-Eine freie Software zur Containervirtualisierung ist Docker. Docker ergänzt die Containervirtualisierung mit benutzerfreundlichen Werkzeugen  und ist der Branchenstandard für Containervirtualisierung. Im Folgenden werden die wichtigsten Begriffe und Funktionen von Docker näher beschrieben. \\
+Eine freie Software zur Containervirtualisierung ist Docker. Es ergänzt die Containervirtualisierung mit benutzerfreundlichen Werkzeugen  und ist der Branchenstandard für Containervirtualisierung. Docker basiert auf der Virtualisierung mit Linux-Containern. Durch herkömmliche Virtualisierung kann Docker jedoch auch auf anderen Betriebssystemen betrieben werden. Im Folgenden werden die wichtigsten Begriffe und Funktionen von Docker näher beschrieben. \\
 \\
 
-\subsection{Docker Image}
+\subsubsection{Docker Image}
 
-Ein Docker Image ist das Speicherabbild eines Containers. Das Image beinhaltet alle Informationen, die zum Starten eines Containers notwendig sind.  Bei Docker besteht das Image aus mehreren Schichten. Jede Schicht repräsentiert eine Abhängigkeit oder Konfiguration, welche für die Anwendung benötigt wird. Docker optimiert automatisch den verwendeten Speicherplatz durch Wiederverwendung, wenn zwei Images eine gleiche Schicht verwenden. Die Docker Images sind portabel. Über zentrale Registrys können die Images verwaltet, gespeichert und verteilt werden. Docker Hub ist die größte öffentliche Registry mit einer Vielzahl an Images, die von anderen Benutzern bereitgestellt werden. Beim Ausführen eines Images wird auf Basis des Images ein Container gestartet. Ein Container ist die aktive Instanz eines Images. Er besitzt eine begrenzte Lebensdauer und wird, nachdem der in ihm laufende Prozess abgeschlossen ist, beendet. Das Image ist wiederverwendbar und es können beliebig viele Container aus einem Image erzeugt werden.
+Ein Docker Image ist das Speicherabbild eines Containers. Das Image beinhaltet alle Informationen, die zum Starten eines Containers notwendig sind.  Bei Docker besteht das Image aus mehreren Schichten. Jede Schicht repräsentiert eine Abhängigkeit oder Konfiguration, welche für die Anwendung benötigt wird. Docker optimiert automatisch den verwendeten Speicherplatz durch Wiederverwendung, wenn zwei Images eine gleiche Schicht verwenden. Die Docker Images sind portabel. Über zentrale Registrys können die Images verwaltet, gespeichert und verteilt werden. Docker Hub ist die größte öffentliche Registry mit einer Vielzahl an Images, die von anderen Benutzern bereitgestellt werden. Beim Ausführen eines Images wird auf Basis des Images ein Container gestartet. Das Image ist wiederverwendbar und es können beliebig viele Container aus einem Image erzeugt werden. 
 
-\subsection{Dockerfile}
+\subsubsection{Dockerfile}
 
 Ein Dockerfile ist eine Textdatei mit mehreren Befehlen, die ein Docker Image beschreiben. Aus einem Dockerfile kann das entsprechende Image gebaut werden. Dazu werden die einzelnen Befehle abgearbeitet und für jeden Befehl eine neue Schicht in dem zugehörigen Image angelegt. Begonnen wird meistens mit einem Basis-Image, welches bereits vorhanden ist. Danach folgen spezifische Änderungen, damit die gewünschte Anwendung ausgeführt werden kann.
 
+\subsubsection{Container}
+Ein Container ist die aktive Instanz eines Images. Er besitzt eine begrenzte Lebensdauer und wird, nachdem der in ihm laufende Prozess abgeschlossen ist, beendet. Container sind in der Regel unveränderlich. Soll ein Container geändert werden, so wird der alte Container gegen einen neuen ausgetauscht. Jeder Container besitzt sein eigenes Dateisystem, Anteil an CPU, Speicher und Prozessraum. Er besitzt auch seine eigenen Bibliotheken, Compiler und Interpreter und ist so unabhängig von allen Softwareversionen, die auf dem eigentlichen Betriebssystem installiert sind. Lediglich der Kernel wird geteilt und bildet somit die einzige Abhängigkeit. 
 
-{Vorteile}
-
-Container revolutionieren also die Bereitstellung von Anwendungen, haben jedoch auch eine große Auswirkung auf die Anwendungsarchitektur und entfalten so beispielsweise das volle Potential von Microservices.
-
-Container eignen sich aufgrund dieser Eigenschaften perfekt, Microservice-basierte Anwendungen zusammenzustellen und auszuführen. 
-
-Container sind normalerweise unveränderlich. Soll ein Container geändert werden, so wird der alte Container gegen einen neuen ausgetauscht.
-
-Ein Container besitzt sein eigenes Dateisystem, Anteil an CPU, Speicher und Prozessraum. 
-
-Containervirtualisierung 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/DockerFileImageContainer.png}
+    \caption{Weg vom Dockerfile zum Container}
+\end{figure}
 
 \subsection{Kubernetes}
 
-Der Name Kubernetes ist Griechisch und bedeutet Steuermann. Kubernetes wird häufig auch mit dem Kürzel "K8s" abgekürzt. Kubernetes ist jedoch kein Betriebssystem. Es benötigt ein installiertes Betriebssystem auf den Nodes.
-
-Kubernetes ist eine Open-Source-Plattform zur Orchestrierung und Verwaltung von Container-Awendungen. Wie Kubernetes bei der Bereitstellung und dem Betrieb von Microservices hilft wird in diesem Abschnitt erklärt. Zuerst muss jedoch Containervirtualisierung verstanden werden.
-
-Kubernetes bietet viele Funktionen, die helfen eine entkoppelte Microservice-Architektur zu bauen.
+Wenn Microservices in Containern bereitgestellt werden, wird es schnell nicht mehr möglich, die Container manuell bereitzustellen. Auch die Skalierung und die Lastverteilung gestaltet sich als aufwendig. Die Open-Source-Plattform Kubernetes versucht diese Probleme zu lösen. Der Name "Kubernetes" stammt aus dem griechischen und bedeutet soviel wie Steuermann. Kubernetes hilft bei der Koordination und Sequenzierung verschiedener Aktivitäten. Darüber hinaus unterstütze die Plattform bei der Verwaltung der verfügbaren Ressourcen und bei einer effizienten Lastverteilung [\cite[S. 11]{arundelCloud2019}]. Kubernetes bietet somit viele Funktionen, die helfen eine Microservice-Architektur umzusetzen. Häufig wird Kubernetes mit Docker verwendet, es unterstützt aber auch andere Anwendungen zur Containervirtualisierung.
 
 \subsubsection{Aufbau}
 
+Die größte Organisationseinheit der Plattform ist ein Kubernetes Cluster. Ein Cluster besteht aus mindestens einem Control Plane und einem Node. Der Control Plane verwaltet sämtliche Nodes. Um Ausfallsicherheit zu gewährleisten können auch mehrere Control Planes in einem Cluster betrieben werden. Ein Control Plane enthählt eine Key-Value-Datenbank etcd. In ihr wird die gesamte Konfiguration des Clusters gespeichert. Des Weiteren enthält der Control Plane einen \ac{API}-Server, mit der die Nodes kommunizieren. Auch externe Komponenten können mit ac{API}-Server kommunizieren und so Informationen abfragen oder das Cluster konfigurieren. Der Controller Manager steuert über den ac{API}-Server die einzelnen Nodes. Des Weiteren besitzt der Control Plane einen Scheduler, der die Last verteilt und überwacht.  \\
+\\
+In der Regel besteht ein Cluster aus vielen Nodes. Dabei kann es sich um physische Rechner aber auch um virtuelle Maschinen handeln. Auf den Nodes laufen die Container mit den eigentlichen Anwendungen. Außerdem besitzt jeder Node einen Kubelet. Dieser Kubelet kommuniziert mit dem Controller Manager und verwaltet den Status der Container auf dem jeweiligen Node. \\
+\\
+{https://kubernetes.io/docs/concepts/overview/components/}
 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/KubernetesCluster.png}
+    \caption{Aufbau eines Kubernetes Cluster}
+\end{figure}
 
 \subsubsection{Objekte}
 
-\subsubsection{Wobei hilft Kubernetes im Bezug auf Microservices}
+Kubernetes stellt eine Reihe von abstrakten Objekten zur Verfügung, mit denen der Status des Systems dargestellt wird und welche es erleichtern eine Microservice-Architektur zu bauen [\cite[S. 13]{hightowerKubernetes2018}]. Diese Objekte werden in Manifesten beschrieben. Bei den Manifesten handelt es sich um YAML-Dateien. Die Manifeste sind deklarativ aufgebaut, das bedeutet der gewünschte Ausgangszustand wird beschrieben. Nachdem das Manifest übergeben wurde, führt Kubernetes die entsprechenden Aktionen aus, um den beschriebenen Zustand zu erreichen. \\
+\\
+Pods sind die kleinste einsetzbare Einheit von Kubernetes. Ein Pod repräsentiert eine einen einzelnen Container oder eine Gruppe von Containern. Alle Container in einem Pod laufen immer auf dem gleichen Node. Um eine Menge zusammengehöriger Pods zu verwalten, gibt es Deployments. Deployments repräsentieren eine Anwendung. 
 
-- Service Discovery
-- Load Balancing
-- Skalierbarkeit
-- Monitoring (evtl. auch Logging)
-- Deployment
+\begin{itemize}
+\item Pods sind die kleinste einsetzbare Einheit. Ein Pod besteht aus einem Container oder mehreren zusammengehörigen Containern.
+\item: Namespaces werden zur logischen Unterteilung des Clusters verwendet. Sie können zur Isolation verschiedener Entwicklerteams oder Anwendungsmodule genutzt werden.
+\item: Services bieten Adressen und Lastverteilung für einen Pod oder mehrere gleichartige Pods.
+\item: Volumes bieten persistenten Speicher, der auch nach der Lebenszeit eines Pods bestehen bleibt.
+\item: ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare. Sie können beispielsweise von Pods als Umgebungsvariablen konsumiert werden.
+\item Deployments repräsentieren eine zustandslose Anwendung beziehungsweise eine Microservice. Durch Deployments kann eine Menge an zusammengehörigen Pods verwaltet und konfiguriert werden. 
+\item StatefulSets sind vergleichbar mit Deployments, jedoch für zustandsbezogene Anwendungen.
+\item Labels können anderen Objekten zugeordnet werden, um diese zu Gruppieren.
+\end{itemize}
+
+Die Kubernetes Objekte werden durch Ressourcen-Manifeste beschrieben. Manifeste
+sind deklarativ und üblicherweise im YAML-Dateiformat.
+
+%\subsubsection{Bereitstellung}
+%
+%-> Deployments
+%
+%\subsubsection{Service Discovery}
+%
+%-> Services
+%
+%\subsubsection{Load Balancing}
+%
+%-> Service
+%
+%\subsubsection{Skalierung}
+%
+%-> Autoscaling
 
 \subsubsection{Kubectl}
 
+Kubectl ist der offizielle Kubernetes-Client und dient der Steuerung von Kubernetes. Bei Kubectl handelt es sich um ein Befehlszeilenwerkzeug für die Interaktion mit dem \ac{API}-Server des Control Planes. Mit kubetl können beispielsweise Objekte verwaltet werden und der Status des gesamten Clusters untersucht werden.
+
 \subsubsection{Minikube}
 
-Minikube ist ein Werkzeug, um ein lokales Kubernetes Cluster zu betreiben. Minikube erstellt ein Cluster bestehend aus nur einem Node in einer virtuellen Maschine. Der Node fungiert dabei sowohl als Master sowie auch als Worker. Minikube unterstützt mittlerweile auch den Betrieb mit mehreren Nodes. Des Weiteren kann das Cluster auch in einem Docker Container anstatt in einer virtuellen Maschine betrieben werden. Da Minikube über eine virtuelle Maschine oder in einem Docker Container läuft, kann minikube auch über Linux hinaus auf Windows oder MacOS betrieben werden.
+Minikube ist ein Werkzeug, um ein lokales Kubernetes Cluster zu betreiben. Minikube erstellt ein Cluster bestehend aus nur einem Node in einer virtuellen Maschine. Der Node fungiert dabei sowohl als Control Plane sowie auch als Node. Minikube unterstützt mittlerweile auch den Betrieb mit mehreren Nodes. Des Weiteren kann das gesamte Cluster selbst auch in einem Docker Container anstatt in einer virtuellen Maschine betrieben werden. Minikube erstellt beim Start automatisch eine kubectl-Konfiguration, welche auf das Cluster zeigt und somit über kubectl-Befehle gesteuert werden kann. 
