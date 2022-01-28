@@ -108,7 +108,7 @@ class OpportunityForm extends Component {
                                 <Form.Group className="mb-3" >
                                     <Form.Label>Realted contact</Form.Label>
                                     <Form.Select aria-label="Default select example" name='relatedContactId' value={opportunity.relatedContactId} onChange={this.handleOpportunityChange} >
-                                        <option value="">Select form of opportunity</option>
+                                        <option value="">Select related Contact ID</option>
                                         {contacts.map(contact =>
                                             <option key={contact.id} value={contact.id}>{contact.id.substr(contact.id.length - 8) + ", " + contact.firstName + " " + contact.lastName}</option>
                                         )}
