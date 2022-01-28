@@ -52,7 +52,7 @@ public class OpportunityServiceImpl implements OpportunityService {
 
         logger.debug("Verify contact ID");
         String contactService = System.getenv().getOrDefault("CONTACT_SERVICE", "localhost:8080");
-        String contactApi = "http://" + contactService + "/contacts/" + newOpportunity.getRelatedContactId();
+        String contactApi = "http://" + contactService + ":8080/contacts/" + newOpportunity.getRelatedContactId();
         RestTemplate restTemplate = new RestTemplate();
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(contactApi, String.class);
