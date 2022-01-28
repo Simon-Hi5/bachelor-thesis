@@ -61,12 +61,16 @@ public class ContactApplication implements CommandLineRunner {
 
             contactService.deleteAllContacts();
 
-            Address address1 = new Address("Straße 1", "Apartment A",
-                    "80963", "München", Country.GERMANY);
-            Contact contact1 = new Contact("Thorsten", "Schlott");
-            Contact contact2 = new Contact("Max", "Mustermann", Gender.MALE,
-                    LocalDate.of(1999, Month.JULY, 23), "test@test.de",
+            Address address1 = new Address("Eichenstraße 11", "Apartment A",
+                    "80331", "München", Country.GERMANY);
+            Address address2 = new Address("Lindenstraße 21", "",
+                    "6020", "Innsbruck", Country.AUSTRIA);
+            Contact contact1 = new Contact("Max", "Mustermann", Gender.MALE,
+                    LocalDate.of(1999, Month.JULY, 3), "max@mustermann.de",
                     "+49012940323", address1);
+            Contact contact2 = new Contact("Erika", "Mustermann", Gender.FEMALE,
+                    LocalDate.of(1983, Month.DECEMBER, 23), "erika@mustermann.de",
+                    "+49042946782", address2);
 
             contactService.saveContact(contact1);
             contactService.saveContact(contact2);

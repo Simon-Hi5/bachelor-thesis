@@ -60,9 +60,10 @@ public class OpportunityApplication implements CommandLineRunner {
             opportunityService.deleteAllOpportunities();
 
             Opportunity opportunity1 = new Opportunity(LocalDate.of(2023, Month.JANUARY, 6),
-                    Status.PLANNED, "");
+                    1800.0, 1800.0, 100.0, Status.PLANNED, "Hohes Kaufinteresse geäußert",
+                    "");
             Opportunity opportunity2 = new Opportunity(LocalDate.of(2022, Month.DECEMBER, 23),
-                    120000.0, 130000.0, 8000.0, Status.IN_PROGRESS, "Notiz",
+                    12000.0, 13000.0, 800.0, Status.IN_PROGRESS, "",
                     "");
 
             opportunityService.saveOpportunity(opportunity1);
