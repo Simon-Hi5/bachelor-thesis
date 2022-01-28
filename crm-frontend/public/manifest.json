@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Micro-CRM",
+  "name": "Micro-CRM",
   "icons": [
     {
       "src": "favicon.ico",
