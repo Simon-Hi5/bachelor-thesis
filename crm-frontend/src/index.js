@@ -17,12 +17,14 @@ import NewInteraction from './pages/interaction/NewInteraction';
 import Interaction from './pages/interaction/Interaction';
 import NewOpportunity from './pages/opportunity/NewOpportunity';
 import Opportunity from './pages/opportunity/Opportunity';
+import Home from './pages/Home';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route exact path='/' element={<App />}>
+          <Route index element={<Home />} />
           <Route exact path='contacts' element={<Contacts />} />
           <Route path="contacts/new" element={<NewContact />} />
           <Route path="contacts/:id" element={<Contact />} />
