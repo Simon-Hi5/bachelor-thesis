@@ -23,32 +23,46 @@ spec:
     
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: interaction-db
   labels:
     app: interaction-db
 spec:
-  selector: 
+  serviceName: interaction-db-service
+  replicas: 1
+  selector:
     matchLabels:
       app: interaction-db
-  replicas: 1
   template:
     metadata:
       labels:
         app: interaction-db
-      name: interaction-db-service
+        name: interaction-db-service
     spec:
       containers:
-      - image: mongo:latest
-        name: interaction-db
-        ports:
-        - containerPort: 27017
-          name: interaction-db
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: "1"
-          requests:
-            memory: 128Mi
-            cpu: "0.25"
+        - name: interaction-db
+          image: mongo:latest
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: "1"
+            requests:
+              memory: 128Mi
+              cpu: "0.25"
+          ports:
+            - containerPort: 27017
+              name: interaction-db
+          volumeMounts:
+            - name: interaction-db-pvc
+              mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: interaction-db-pvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Mi
