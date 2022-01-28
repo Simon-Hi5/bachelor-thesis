@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/interactions")
+@CrossOrigin(origins = "*")
 @Api(tags = {SwaggerConfig.CONTACT_TAG})
 public class InteractionController {
 
