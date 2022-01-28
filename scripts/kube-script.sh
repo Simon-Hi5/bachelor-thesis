@@ -23,3 +23,6 @@ minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000
 
 # Deploy CRM Frontend
 ./deploy-crm-frontend.sh
+
+# Deploy CRM Frontend
+./deploy-horizontal-autoscaler.sh
