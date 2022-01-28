@@ -4,7 +4,7 @@
 eval "$(minikube docker-env)"
 
 
-echo "REACT_APP_BACKEND=\"$(minikube ip)\"" > ../../crm-forntend/.env.production
+echo "REACT_APP_BACKEND=\"$(minikube ip)\"" > ../../crm-frontend/.env.production
 
 # Build image from dockerfile
 docker build -f ../../crm-frontend/Dockerfile -t crm-frontend:latest ../../crm-frontend
