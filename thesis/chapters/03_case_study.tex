@@ -18,25 +18,46 @@ Die Zugriffskontrolle und Benutzersicherheit wird bei der Anwendung nicht beacht
 
 \section{Entwurf der Microservices}
 
-Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Microservice-System als Ganzes. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
+Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Gesamtsystem. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
 
 \subsection{Makro-Architektur}
 
-Die Makro-Architektur befasst sich mit dem Enwurf des Gesamtsystems. Die Aufteilung der Funktionalitäten auf die Microservices und die Kommunikationstechnologien für die Integration der einzelnen Microservices ist hier von Interesse. Wie genau die einzelnen Microservices umgesetzt werden und welcher Technologie-Stack verwendet wird, ist für das Gesamtsystem nicht relevant. Die Makro-Architektur ist besonders wichtig, da Veränderungen hier zu einem späteren Zeitpunkt sehr aufwendig werden können.
+Für die Makro-Architektur ist die genaue Umsetzung der einzelnen Microservices nicht relevant. Die Makro-Architektur ist besonders wichtig, da Veränderungen hier zu einem späteren Zeitpunkt sehr aufwendig werden können. Das Wichtigste ist die Aufteilung in Microservices nach der Fachlichkeit.
+Das CRM-System lässt sich in drei fachliche Bereiche unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung.
+Das System besitzt zudem drei Datenobjekte. Die Microservices werden nach den Bereichen aufgeteilt. Jeder Microservice kümmert sich um ein entsprechendes Datenobjekt.
 
-Microservices sollen nach der Fachlichkeit aufgeteilt werden. Eine Änderung einer Fachlichkeit soll so idealerweise nur einen Microservice und ein Entwicklerteam betreffen. Diese Aufteilung ist die zentrale Herausforderung von Microservices. Wenn eine Aufteilung nach der Fachlichkeit nicht stattfindet können Microservices nicht ihre Vorteile ausspielen.
-
-Das System besitzt diese drei Datenobjekte. Grenze an den Datenobjekten ziehen.
-
-Das CRM-System lässt sich in drei fachliche Bereiche unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung. Da sich Interaktionen und Verkaufschancen einem Kontakt bzw. Kunden zuordnen lassen sollen, ist eine Abhängigkeit zwischen diesen Microservices zu erwarten. Da Microservices nur eine lose Kopplung aufweisen, sollten Abhängigkeiten vermieden werden. Zu viele Abhängigkeiten können ein Zeichen für ein schlechte Einteilung der Fachlichkeit sein. Zyklische Abhängigkeiten sind zu vermeiden.
+Da sich Interaktionen und Verkaufschancen einem Kontakt bzw. Kunden zuordnen lassen sollen, ist eine Abhängigkeit zwischen diesen Microservices zu erwarten. Da Microservices nur eine lose Kopplung aufweisen, sollten Abhängigkeiten vermieden werden. Zu viele Abhängigkeiten können ein Zeichen für ein schlechte Einteilung der Fachlichkeit sein. Zyklische Abhängigkeiten sind zu vermeiden.
 
 Jeder der Microservices soll eine eigene Datenbank besitzen.
 
 Die Integration der Microservices wird über REST-Schnittstellen implementiert.
 
+\begin{table}[H]
+\centering
+    \begin{tabular}[H]{l|l|l|l}
+        Endpunkt & HTTP-Methode & Parameter & Beschreibung \\
+        \hline
+        /contacts & GET & - & Gibt alle Kontakte zurück \\
+        \hline
+        /contacts & POST & neuer Kontakt & Fügt einen neuen Kontakt hinzu \\
+        \hline
+        /contacts/\{ID\} & GET & - & Gibt einen Kontakt zurück \\
+        \hline
+        /contacts/\{ID\} & PUT & veränderter Kontakt & Ändert einen Kontakt \\
+        \hline
+        /contacts/\{ID\} & DELETE & - & Löscht einen Kontakt \\
+        \hline
+    \end{tabular}
+    \caption{Prozessoren}
+\end{table}
+
 Alle Funktionalitäten werden in einem zentralen Frontend integriert.
 
 Der Vorteil ist, dass das System leicht um weitere Funktionalitäten in neuen Microservices ergänzt werden können. Eine gute Strategie kann es auch sein mit einem Service zu beginnen und diesen Aufzuteilen, wenn man eine neue Komponente implementieren möchte.
+
+Um das Monitoring, Service Discovery, Load Balancing wird mit Kubernetes gelöst. Unser System muss diese Aufgaben also nicht selbst bewältigen und diese Dinge können für diesen Teil der Arbeit ignoriert werden.
+
+Die Integration des Frontends und die Kommunikation zwischen den Microservices läuft über die selben REST-Schnittstellen, die jeder Service mit sich bringt.
 
 \begin{figure}[H] 
     \centering
@@ -48,27 +69,149 @@ Der Vorteil ist, dass das System leicht um weitere Funktionalitäten in neuen Mi
 
 Die Mikro-Architektur befasst sich mit der Architektur eines einzelnen Microservice. Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Aus diesem Grund besitzt man eine große Freiheit bei der Auswahl. Es sollte die Architektur, welche am Simpelsten alle Anforderungen bietet. Der ausgewählte Technologie-Stack schränkt natürlich die möglichen Architekturen auch weiter ein.
 
-Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. Da eine Frontend 
+Für alle drei Microservices wird hier derselbe Technologie-Stack verwendet, um den Entwicklungsaufwand geringer zu halten.
 
-Für die Architektur der Microservices wird eine hexagonale Architektur verwendet. Eine Hexagonale Architektur bietet sich 
+Auch wenn das Frontend später genau wie die Microservices im Kubernetes Cluster bereitgestellt werden soll, wird zwischen Microservice und Frontend unterschieden.
+
+Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. 
+
+Für die Architektur der Microservices wird eine hexagonale Architektur (Ports und Adapter) verwendet. Eine Hexagonale Architektur bietet sich 
 
 
 \section{Implementierung}
 
+In diesem Kapitel wird das CRM-System dem Entwurf nach implementiert. Als Erstes wird die Implementierung der Microservices erklärt, da alle drei durch den gleichen Technologie-Stack sehr ähnlich sind. Anschließend wird das Frontend, welches alle Microservices integriert, implementiert.
 
 \subsection{Microservices}
 
+Alle drei Microservices benötigen die \ac{URI} ihrer Datenbank, um mit ihr eine Verbindung aufzubauen. Der Interaktions-Microservice und der Verkaufschancen-Microservice brauchen darüber hinaus die Adresse des Kontakt-Microservices, um mit diesem zu Kommunizieren. Diese Verbindungsinformationen, werden den Anwendungen über Umgebungsvariablen übergeben. Später bei der Bereitstellung, kann mit Kubernetes den Containern die passenden Umgebungsvariablen übergeben werden.
+
 \subsection{Frontend}
 
-Das Frontend. Das Frontend soll später auch mit Kubernetes bereitgestellt werden, es wird aber nicht als Microservices angesehen.
+Das Frontend. Das Frontend soll später auch mit Kubernetes bereitgestellt werden, es wird aber nicht als Microservices angesehen. Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben.
 
 \section{Bereitstellung mit Kubernetes}
 
+Im letzten Teil der Fallstudie wird das fertige CRM-System nun mit Kubernetes bereitgestellt.
+
 \subsection{Containerisierung}
+
+Um die Microservices und das Frontend in Pods in einem Kubernetes Cluster laufen zu lassen, müssen sie erst mit Docker containerisiert werden. Dazu wird als Erstes ein Dockerfile für jeden Microservice erstellt. Anschließend kann aus dem Dockerfile ein Docker Image gebaut werden, mit dem dann ein entsprechender Container gestartet werden kann. \\
+\\
+
+Dockerfiles besitzen eine eigene Syntax. Ein großgeschriebener Befehl wird gefolgt von einem oder mehreren Parametern. Es ist aufgebaut wie eine Anleitung, welche Schritt für Schritt abgearbeitet wird. Die Dockerfiles der Microservices haben alle den selben Aufbau, da alle drei Projekte auch die selben Aufbau und die selben Technologien verwenden. Der erste Befehl in den Dockerfiles bestimmt, auf welchem Docker Image unser eigenes Image basieren soll. Hier wird ein Image mit einer Java-Plattform verwendet, welches automatisch aus dem öffentlichen DockerHub heruntergeladen wird. Anschließend wird die JAR-Datei der Anwendung in das Image kopiert. Als letzter Befehl wird festgelegt, dass die JAR-Datei beim Start des Containers ausgeführt werden soll.
+
+\begin{lstlisting}[language=dockerfile, caption=Dockerfile für Kontakt-Microservice]
+FROM openjdk:11-jdk-slim
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
+\end{lstlisting}
+
+Das Frontend benötigt ein eigenes Dockerfile. Dieses hat einen mehrstufigen Aufbau. Im ersten Stufe, der Build-Stage, wird unsere React-Anwendung gebaut. Um die fertig gebaute Webanwendung an einen Browser auszuliefern wird ein Webserver benötigt. In der zweiten Stufe des Dockerfiles basiert auf einem Image mit dem Webserver Nginx. Die React-Anwendung aus der Build-Stage wird nun in das finale Image kopiert.
+
+\begin{lstlisting}[language=dockerfile, caption=Dockerfile für Frontend]
+FROM node:alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --silent
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=build /app/build .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+\end{lstlisting}
+
+Für die Datenbanken müssen keine eigenen Dockerfiles erstellt werden. Hier reichen unveränderte Images, welche aus dem DockerHub heruntergeladen werden können, aus. Mit dem folgenden Befehl kann aus dem Dockerfile nun ein Docker Image gebaut werden.
+
+\begin{lstlisting}[language=bash, caption=Befehl , captionpos=b]
+docker build -t contact-microservice:latest .
+\end{lstlisting}
+
 
 \subsection{Bereitstellung}
 
+Für jede Datenbank wird eine Anwendung 
+
+Jetzt müssen die fertigen Images in unserem Kubernetes Cluster bereitgestellt werden. Dafür werden YAML-Dateien erstellt, in denen die gewünschten Kubernetes Objekte beschrieben werden. Für jeden der drei Microservices und das Frontend muss ein Service und ein Deployment erstellt werden. Das Deployment repräsentiert die Anwendung. Mit Parametern kann festgelegt werden wie viele Pods mit der Anwendung gestartet werden sollen.
+
+\begin{lstlisting}[language=YAML, caption=Befehl]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: contact-service
+    spec:
+      containers:
+        - name: contact-service
+          image: contact-microservice:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8080
+          env:
+            - name: MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: contact-db-config  
+                  key: host
+\end{lstlisting}
+
+\begin{lstlisting}[language=YAML, morekeywords=host, caption=Befehl , captionpos=b]
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: contact-service-config
+data:
+ host: contact-service
+\end{lstlisting}
+
+Nach der Erstellung der Services wird die Service Discovery und Lasterverteilung von Kubernetes übernommen. 
+
+\begin{lstlisting}[language=YAML, caption=Befehl , captionpos=b]
+kind: Service
+apiVersion: v1
+metadata:
+  name: contact-service
+spec:
+  selector:
+    app: contact-service
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30010
+  type: NodePort
+\end{lstlisting}
+
+Nun müssen nur noch alle YAML-Dateien über den folgenden kubectl-Befehl angewendet werden. Kubernetes sorg nun dafür, dass die beschriebenen Objekte, erstellt werden.
+
+\begin{lstlisting}[language=bash, caption=Befehl , captionpos=b]
+kubectl apply -f contact-microservice.yaml
+\end{lstlisting}
+
 \subsection{Skalierung}
 
-\subsection{Lastverteilung}
+Um die Vorteile von unseren Microservices auszunutzen, sollen die Microservices nun horizontal skaliert werden. Auch dafür wird eine YAML-Datei erstellt, in der ein HorizontalPodAutoscaler-Objekt für jeden Microservice beschrieben wird. In der Datei wird angegeben, welches Deployment skaliert werden soll. Als Metrik, wann hochskaliert werden soll, kann die CPU-Auslastung des Pods verwendet werden. Darüber hinaus wird angegeben wie viele Pods von dem entsprechenden Microservice minimal und maximal ausgeführt werden sollen.
 
+\begin{lstlisting}[language=YAML, caption=Befehl , captionpos=b]
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: contact-service
+spec:
+    scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: contact-service
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 80
+\end{lstlisting}

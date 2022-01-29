@@ -24,7 +24,7 @@
 \usepackage{listings}
 
 % Use different colors
-\usepackage{xcolor}
+\usepackage[usenames,dvipsnames]{xcolor}
 
 % Embed urls
 \usepackage[urlcolor=blue, pdfborder={0 0 0}]{hyperref}
@@ -70,22 +70,36 @@
 
 \renewcommand\lstlistlistingname{Quellcodeverzeichnis}
 
-\lstset{ %
+\lstset{
     backgroundcolor=\color{white},
-    basicstyle=\footnotesize,
+    basicstyle=\footnotesize\ttfamily,
     breaklines=true,
     captionpos=b,
-    commentstyle=\color{green},
+    commentstyle=\color{Gray},
     escapeinside={\%*}{*)},
-    keywordstyle=\color{blue},
-    stringstyle=\color{purple},
+    keywordstyle=\color{MidnightBlue},
+    stringstyle=\color{OliveGreen},
     showstringspaces=false,
     showspaces=false,
     numbers=left,
     numberstyle=\tiny,
-    frame=lines
+    frame=lines,
+    aboveskip=20pt,
+    belowskip=20pt
 }
 
+\lstdefinelanguage{Dockerfile}
+{
+  morekeywords={FROM, RUN, CMD, LABEL, MAINTAINER, EXPOSE, ENV, ADD, COPY, ENTRYPOINT, VOLUME, USER, WORKDIR, ARG, ONBUILD, STOPSIGNAL, HEALTHCHECK, SHELL},
+  morecomment=[l]{\#},
+  morestring=[b]"
+}
+
+\lstdefinelanguage{YAML}
+{
+  morekeywords={apiVersion, kind, metadata, name, data, app, spec, selector, replicas, template, containers, image, imagePullPolicy, containerPort, env, valueFrom, configMapKeyRef, key, resources, limits, memory, cpu, requests, type, nodePort, type, protocol, ports, port, matchLabels, labels},
+  morecomment=[l]{},
+}
 
 % **************************************************
 % Header and footer
