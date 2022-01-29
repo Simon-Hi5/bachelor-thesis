@@ -9,7 +9,7 @@ spec:
         name: contact-service
     minReplicas: 2
     maxReplicas: 4
-    targetCPUUtilizationPercentage: 10
+    targetCPUUtilizationPercentage: 80
 
 ---
 apiVersion: autoscaling/v1
@@ -21,9 +21,9 @@ spec:
         apiVersion: apps/v1
         kind: Deployment
         name: interaction-service
-    minReplicas: 1
-    maxReplicas: 3
-    targetCPUUtilizationPercentage: 50
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 80
 
 ---
 apiVersion: autoscaling/v1
@@ -35,6 +35,6 @@ spec:
         apiVersion: apps/v1
         kind: Deployment
         name: opportunity-service
-    minReplicas: 1
-    maxReplicas: 3
-    targetCPUUtilizationPercentage: 50
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 80
