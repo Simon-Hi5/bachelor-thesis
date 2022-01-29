@@ -4,9 +4,9 @@
 chmod a+x ./**/*.sh
 
 # Build all microservices
-(cd ../contact-microservice;mvn install -DskipTests=true)
-(cd ../interaction-microservice;mvn install -DskipTests=true)
-(cd ../opportunity-microservice;mvn install -DskipTests=true)
+(cd ../contact-microservice;mvn clean install -DskipTests=true)
+(cd ../interaction-microservice;mvn clean install -DskipTests=true)
+(cd ../opportunity-microservice;mvn clean install -DskipTests=true)
 
 # Change directory
 cd ./kube || exit
