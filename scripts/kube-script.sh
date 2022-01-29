@@ -3,6 +3,11 @@
 # Make scripts executable
 chmod a+x ./**/*.sh
 
+# Build all microservices
+(cd ../contact-microservice;mvn install -DskipTests=true)
+(cd ../interaction-microservice;mvn install -DskipTests=true)
+(cd ../opportunity-microservice;mvn install -DskipTests=true)
+
 # Change directory
 cd ./kube || exit
 
