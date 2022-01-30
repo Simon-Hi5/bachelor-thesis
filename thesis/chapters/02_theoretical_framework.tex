@@ -14,7 +14,7 @@ DevOps wird immer wichtiger, da durch das Aufkommen von Cloud Computing die Entw
     \caption{Kategorisierung von Unternehmen [\cite[S. 11]{halstenbergDevOps2020}]}
 \end{figure}
 
-Eine reduzierte Time-to-Market kann durch engere Abstimmung und Automatisierung erreicht werden. Die Time-to-Market gibt an, wie lange es dauert eine Änderung zum Kunden, also auf die Produktionsumgebung, zu bringen. So können Änderungen schnell ausgeliefert werden und Feedback vom Endanwender erreicht schneller die Entwickler. Zur Umsetzung können Methoden wie Continuous-Integration und Continuous-Delivery eingesetzt werden, aber auch Architekturmuster wie Microservices und Werkzeuge wie Docker und Kubernetes können dabei unterstützen.
+Eine reduzierte Time-to-Market kann durch engere Abstimmung und Automatisierung erreicht werden. Die Time-to-Market gibt an, wie lange es dauert eine Änderung zum Kunden, also auf die Produktionsumgebung, zu bringen. So können Änderungen schnell ausgeliefert werden und Feedback vom Endanwender erreicht schneller die Entwickler. Zur Umsetzung können Methoden wie Continuous-Integration und Continuous-Delivery eingesetzt werden, aber auch Architekturmuster wie Microservices und Werkzeuge wie Docker und Kubernetes können dabei unterstützen. Diese Begriffe werden im Folgenden näher behandelt.
 
 \subsection{Microservices}
 
@@ -44,33 +44,29 @@ Die Größe eines Microservices ist nicht zwangsläufig entscheidend [\cite[S. 2
 \\
 Um von Microservices zu profitieren müssen Strukturen in Unternehmen überarbeitet werden. Das Gesetz von Conway besagt, dass durch die Kommunikationsstrukturen einer Organisation auch die Struktur der Systeme, welche die Organisation entwirft, vorgegeben wird [\cite{conwayHow1968}]. Bei monolithischen Anwendungen werden die Entwicklerteams häufig nach ihrem Fachbereich aufgeteilt. Es bilden sich so beispielsweise Teams spezialisiert auf das Frontend, das Backend und die Datenbank. Die entwickelte Anwendung wird, nach dem Gesetz von Conway, auch aus diesen drei Bereichen bestehen. Wenn nun ein neues Feature umgesetzt werden soll, müssen sich alle drei Teams miteinander absprechen. Um eine Microservice-Architektur umzusetzen muss also auch die Struktur des Unternehmens verändert werden. Die Entwicklerteams müssen crossfunktional mit Spezialisten aus verschiedenen Fachbereichen aufgebaut werden. Der Vorteil ist das Änderungen so häufig nur ein Entwicklerteam betreffen und der Koordinationsaufwand sinkt. \\
 \\
-Microservices werden häufig mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen [\cite[S. 2]{wolffMicroservices2018}]. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können. \\
-\\
+Microservices werden häufig mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen [\cite[S. 2]{wolffMicroservices2018}]. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können.
 
 \subsubsection{Vorteile}
 
-Bei monolithischen Anwendungen, entstehen schnell unerwünschte Abhängigkeiten zwischen verschiedenen Komponenten. Die vielen Abhängigkeiten sind schwer zu überblicken und die Änderung von einer Komponente wird erschwert, da es zu unerwünschten Nebeneffekten kommen kann. In der Praxis wird so die Architektur von den Monolithen mit der Zeit zunehmend schlechter [\cite[S. 3]{wolffMicroservices2018}]. Die Microservices besitzen nur eine lose Kopplung über explizite Schnittstellen. Unerwünschte Abhängigkeiten treten dadurch seltener auf. Durch die expliziten Schnittstellen ist es auch einfach einen gesamten Microservice zu ersetzten. Der neue Microservice muss lediglich die selbe Schnittstelle anbieten wie der Alte. Das neu schreiben eines Microservices ist durch die begrenzte Größe in der Regel nicht schwer. Somit können Microservices schneller zu neuen Technologie-Stacks migriert werden. Die Ablösung von großen Monolithen gestaltet sich dagegen häufig als eine fast unmögliche Aufgaben [\cite[S. 29]{newmanMicroservices2015}]. 
-
-Microservices können auch unabhängig voneinander skaliert werden. So kann eine einzelne Funktionalität, welcher stärker genutzt wird, einzeln hoch skaliert werden, ohne das gesamte System zu skalieren [\cite[S. 5]{wolffMicroservices2018}]. Flaschenhälse welche eine Anwendung ausbremsen, können somit besser vermieden werden. Die Last kann durch Microservices auch besser verteilt werden, da sie auf unterschiedlichen Rechnern laufen können. Durch Microservices können so Kosten eingespart werden. Es gibt wenige Architekturmuster wie dieses, welche so eng mit Kosteneinsparungen verbunden sind. (\cite[S. 27]{newmanMicroservices2015}).
-
-Die Unabhängigkeit der Microservices führt zu einer großen Technologiefreiheit. Die eingesetzten Technologien müssen lediglich die entsprechende Schnittstelle anbieten können [\cite[S. 5]{wolffMicroservices2018}]. Somit kann für jeden Microservice kompromisslos die am besten geeignete Technologie gewählt werden. Dadurch sinken auch die möglichen Auswirkungen von falschen Entscheidungen bei der Technologieauswahl.
-
+Bei monolithischen Anwendungen, entstehen schnell unerwünschte Abhängigkeiten zwischen verschiedenen Komponenten. Die vielen Abhängigkeiten sind schwer zu überblicken und die Änderung von einer Komponente wird erschwert, da es zu unerwünschten Nebeneffekten kommen kann. In der Praxis wird so die Architektur von den Monolithen mit der Zeit zunehmend schlechter [\cite[S. 3]{wolffMicroservices2018}]. Die Microservices besitzen nur eine lose Kopplung über explizite Schnittstellen. Unerwünschte Abhängigkeiten treten dadurch seltener auf. Durch die expliziten Schnittstellen ist es auch einfach einen gesamten Microservice zu ersetzten. Der neue Microservice muss lediglich die selbe Schnittstelle anbieten wie der Alte. Das neu schreiben eines Microservices ist durch die begrenzte Größe in der Regel nicht schwer. Somit können Microservices schneller zu neuen Technologie-Stacks migriert werden. Die Ablösung von großen Monolithen gestaltet sich dagegen häufig als eine fast unmögliche Aufgaben [\cite[S. 29]{newmanMicroservices2015}]. \\
+\\
+Microservices können unabhängig voneinander skaliert werden. So kann eine einzelne Funktionalität, welcher stärker genutzt wird, einzeln hoch skaliert werden, ohne das gesamte System zu skalieren [\cite[S. 5]{wolffMicroservices2018}]. Flaschenhälse welche eine Anwendung ausbremsen, können somit besser vermieden werden. Die Last kann durch Microservices auch besser verteilt werden, da sie auf unterschiedlichen Rechnern laufen können. Durch Microservices können so Kosten eingespart werden. Es gibt wenige Architekturmuster wie dieses, welche so eng mit Kosteneinsparungen verbunden sind. (\cite[S. 27]{newmanMicroservices2015}). \\
+\\
+Die Unabhängigkeit der Microservices führt zu einer großen Technologiefreiheit. Die eingesetzten Technologien müssen lediglich die entsprechende Schnittstelle anbieten können [\cite[S. 5]{wolffMicroservices2018}]. Somit kann für jeden Microservice kompromisslos die am besten geeignete Technologie gewählt werden. Dadurch sinken auch die möglichen Auswirkungen von falschen Entscheidungen bei der Technologieauswahl. \\
+\\
 Ein weiterer wesentlicher Grund für Microservices ist \ac{CD}. Die Microservices können unabhängig voneinander bereitgestellt werden. Tritt bei einer Bereitstellung ein Fehler auf, sind die verbundenen Risiken deutlich geringer. Es ist nicht das gesamte System davon betroffen, sondern nur der entsprechende Service. Dadurch, dass nur der veränderte Microservice neu bereitgestellt werden muss, ist die Bereitstellung schneller als bei einem Monolithen. Vor allem bei geringen Änderungen ist die erneute Bereitstellung eines gesamten Monolithen sehr unliebsam. Außerdem kann zur Absicherung bei Microservices leicht parallel eine alte Version des Microservices betrieben werden. Bei Monolithen wäre in so einem Fall der Ressourcenverbrauch doppelt so hoch, wie die Anwendung eigentlich benötigt.
 
 \subsubsection{Herausforderungen}
 
-Doch natürlich haben Microservices wie jedes Architekturmuster auch einige Nachteile. Die Aufteilung eines Systems in viele Microservices erhöht die Komplexität. 
-
-Die Beziehungen unter den Microservices können schnell unüberschaubar werden. Welcher Microservice eine Schnittstelle eines anderen Microservices benutzt oder benötigt kann von außen nicht direkt eingesehen werden. Dies ist aber wichtig, um zu Wissen, welche Microservices von der Änderung einer Schnittstelle betroffen werden. Auch muss dabei geachtet werden, dass es auf Code-Ebene nicht zu ungewollten Abhängigkeiten kommt. Wenn mehrere Microservices die selbe Bibliothek verwenden, geht die Unabhängigkeit verloren und die Microservices müssen unter umständen gemeinsam bereitgestellt werden [\cite[S. 75]{wolffMicroservices2018}].
-
-Bei Monolithen können Teile des Codes leicht von einer Komponente in eine Andere verschoben werden kann. Bei Microservices müssen die Teile in einen anderes eigenständiges Programm verschoben werden und der Aufwand ist deutlich höher. Die Auswirkungen von Fehlentscheidungen bei der Einteilung und Abgrenzung sind somit sehr hoch, weil ein Refactoring über mehrere Microservices kompliziert ist.
-
-Microservices sind verteilte Systeme und bringen auch die damit verbundenen Nachteile mit sich. Da die Kommunikation mit den Microservices über das Netzwerk läuft, ist die Antwortzeit der Microservices von der Latenz abhängig. Da wird vor allem dann problematisch wenn ein Microservice viele Dienste von anderen Microservices in Anspruch nimmt. Deshalb sollten Microservices untereinander möglichst wenig kommunizieren müssen. Besitzen zwei Microservices viele Abhängigkeiten, kann dies ein Hinweis auf eine falsche Einteilung der Microservices sein. Des Weiteren muss das Netzwerk die höhere Last durch die Aufrufe standhalten. Außerdem ist Kommunikation über das Netzwerk immer unzuverlässig.
-
-Die technologische Freiheit der Microservices kann schnell zu einer Herausforderung werden. Wenn jeder Microservice einen komplett unterschiedlichen Technologie-Stack verwendet, steigt die Komplexität des Gesamtsystems. Auch wird der Wechsel von Mitarbeitern zu anderen Teams schwieriger. Es bietet sich also an den Technologie-Stack einzuschränken und übergreifende Richtlinien für alle Microservices zu bestimmen.
-
-Microservices besitzen eine höhere technische Komplexität, die sich vor allem auf den Betrieb auswirkt.
-Der Betrieb von Microservices ist sehr komplex. Die vielen Microservices müssen orchestriet werden.
+Doch natürlich bringen Microservices wie jedes Architekturmuster auch einige Nachteile mit sich. Die Aufteilung eines Systems in viele Microservices erhöht die Komplexität. Die Beziehungen unter den Microservices können schnell unüberschaubar werden. Welcher Microservice eine Schnittstelle eines anderen Microservices benutzt oder benötigt kann von außen nicht direkt eingesehen werden. Dies ist aber wichtig, um zu Wissen, welche Microservices von der Änderung einer Schnittstelle betroffen werden. Auch muss dabei geachtet werden, dass es auf Code-Ebene nicht zu ungewollten Abhängigkeiten kommt. Wenn mehrere Microservices die selbe Bibliothek verwenden, geht die Unabhängigkeit verloren und die Microservices müssen unter umständen gemeinsam bereitgestellt werden [\cite[S. 75]{wolffMicroservices2018}]. \\
+\\
+Bei Monolithen können Teile des Codes leicht von einer Komponente in eine Andere verschoben werden kann. Bei Microservices müssen die Teile in einen anderes eigenständiges Programm verschoben werden und der Aufwand ist deutlich höher. Die Auswirkungen von Fehlentscheidungen bei der Einteilung und Abgrenzung sind somit sehr hoch, weil ein Refactoring über mehrere Microservices kompliziert ist. \\
+\\
+Microservices sind verteilte Systeme und bringen auch die damit verbundenen Nachteile mit sich. Da die Kommunikation mit den Microservices über das Netzwerk läuft, ist die Antwortzeit der Microservices von der Latenz abhängig. Da wird vor allem dann problematisch wenn ein Microservice viele Dienste von anderen Microservices in Anspruch nimmt. Deshalb sollten Microservices untereinander möglichst wenig kommunizieren müssen. Besitzen zwei Microservices viele Abhängigkeiten, kann dies ein Hinweis auf eine falsche Einteilung der Microservices sein. Des Weiteren muss das Netzwerk die höhere Last durch die Aufrufe standhalten. Außerdem ist Kommunikation über das Netzwerk immer unzuverlässig. \\
+\\
+Die technologische Freiheit der Microservices kann schnell zu einer Herausforderung werden. Wenn jeder Microservice einen komplett unterschiedlichen Technologie-Stack verwendet, steigt die Komplexität des Gesamtsystems. Auch wird der Wechsel von Mitarbeitern zu anderen Teams schwieriger. Es bietet sich also an den Technologie-Stack einzuschränken und übergreifende Richtlinien für alle Microservices zu bestimmen. \\
+\\
+Microservices besitzen eine höhere technische Komplexität, die sich vor allem auf den Betrieb auswirkt. Der Betrieb von Microservices ist sehr komplex. Die vielen Microservices müssen orchestriet werden.
 
 \subsubsection{Architektur}
 
@@ -80,13 +76,15 @@ Die zentrale Herausforderung der Makro-Architektur ist die Aufteilung in einzeln
 \\
 Um Unabhängige Bearbeitung zu gewährleisten, wäre es auch ratsam jeden Microservice mit einer UI auzustatten. Dann sind können alle Änderungen, egal ob sie UI, Logik, oder Datenbank betreffen, von einem Entwicklerteam umgesetzt werden. Allerdings kann eine UI, die Größe des Microservices aufblähen. Da heutzutage meist von Unterschiedlichen Frontends, wie Webseiten, mobile Apps und nativen Anwendungen, auf die selben Services zugegriffen, kann es sinnvoll sein die UI auszugliedern. Die Integration von vielen einzelnen UIs gestaltet sich als komplex. Es gibt aber mittlerweile den Micro-Frontends, welcher den Microservice Ansatz auf Frontends überträgt.  \\
 \\
-Die Micro-Architektur besitzt keine relevanz für das Gesamtsystem. Sie ist von außen nicht sichtbar, lediglich die festgelegten Schnittstellen. Entwicklerteams sollten möglichst viel Freiheit bei den Architekturentscheidungen eines einzelnen Microservices haben. Dadurch können sie die best mögliche Lösung für den entsprechenden Microservice entwerfen. Während Microservices untereinander lose gekoppelt sind, sollten die Komponenten eines Microservices eine starke Kopplung aufweisen. Dadurch wird gewährleistet, dass die Bestandteile wirklich zusammengehören. Außerdem sollten die Microservices Zustandslos sein, da er ansonsten nicht  \\
+Die Micro-Architektur besitzt keine relevanz für das Gesamtsystem. Sie ist von außen nicht sichtbar, lediglich die festgelegten Schnittstellen. Entwicklerteams sollten möglichst viel Freiheit bei den Architekturentscheidungen eines einzelnen Microservices haben. Dadurch können sie die best mögliche Lösung für den entsprechenden Microservice entwerfen. Während Microservices untereinander lose gekoppelt sind, sollten die Komponenten eines Microservices eine starke Kopplung aufweisen. Dadurch wird gewährleistet, dass die Bestandteile wirklich zusammengehören. Außerdem sollten die Microservices Zustandslos sein, da die Skalierbarkeit sonst nicht gegeben ist. \\
 \\
 Damit Microservices sich gegenseitig zuarbeiten können müssen sie miteinander kommunizieren. Das Wichtigste dabei ist, dass die Microservices ihre Unabhängigkeit voneinander wahren. Zu viele Verbindungen zwischen Microservices sind ein Hinweis auf eine Schlechte Aufteilung. Auch zyklische Abhängigkeiten sind zu vermeiden, da dort ohne weitere Abstimmung Änderungen in einem der beiden Services nicht möglich sind. \\
 
 \subsubsection{Integration}
 
-Microservices müssen miteinander kommunizieren. Die Integration der Services ist auf drei verschiedenen Ebenen denkbar.
+Die Integration und Kommunikation der einzelnen Miroservices wird in diesem Abschnitt noch etwas genauer erläutert. Sie ist einer der wichtigsten Aspekte bei der Umsetzung von Microservices. Damit Microservices sich gegenseitig zuarbeiten können müssen sie miteinander kommunizieren. Die weitgehende Unabhängigkeit der einzelnen Microservices muss jedoch bewahrt werden. Die Integration der Services ist auf drei verschiedenen Ebenen denkbar. \\
+
+Auf der UI-Ebene können 
 
 \paragraph{UI}
 
@@ -182,17 +180,14 @@ Pods sind die kleinste einsetzbare Einheit von Kubernetes. Ein Pod repräsentier
 Die Kubernetes Objekte werden durch Ressourcen-Manifeste beschrieben. Manifeste
 sind deklarativ und üblicherweise im YAML-Dateiformat.
 
-%\subsubsection{Bereitstellung}
+%\subsubsection{Workloads}
 %
 %-> Deployments
+%-> StatefulSets
 %
 %\subsubsection{Service Discovery}
 %
-%-> Services
-%
-%\subsubsection{Load Balancing}
-%
-%-> Service
+%-> Services (auch Load Balancing)
 %
 %\subsubsection{Skalierung}
 %

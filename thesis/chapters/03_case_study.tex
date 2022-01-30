@@ -10,27 +10,44 @@ Das CRM-System soll die folgenden primären Funktionen implementieren:
 \item Kontakte sollen mit Namen, Geburtsdatum, Geschlecht, Telefonnummer, E-Mail-Adresse und Adresse angelegt, angezeigt, geändert und gelöscht werden können
 \item Interaktionen mit einem Kontakt sollen mit Art der Interaktion, Datum, Uhrzeit, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
 \item Mögliche Verkaufschancen sollen mit Status, voraussichtlichem Abschlussdatum, Verkaufswert, Rabatt, Budget des Kunden, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
-\item Benutzung aller Funktionen über eine grafische Benutzeroberfläche mit einem Webbrowser
-\item Benutzung aller Funktionen über eine REST-API
 \end{itemize} 
 
+Alle Funktionen sollen über eine grafische Benutzeroberfläche mit dem Webbrowser bedienbar sein. Darüber hinaus sollen alle Funktionen auch über eine REST-API aufrufbar sein. Die Anwendung sollte flexibel skaliert werden können. \\
+\\
 Die Zugriffskontrolle und Benutzersicherheit wird bei der Anwendung nicht beachtet.
 
+\clearpage
 \section{Entwurf der Microservices}
+
+An dieser Stelle sei auch erwähnt, dass der gesamte Quellcode im folgenden GitHub Repository einsehbar ist: \href{https://github.com/SimonHirner/bachelor-thesis}{github.com/SimonHirner/bachelor-thesis}.
 
 Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Gesamtsystem. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
 
 \subsection{Makro-Architektur}
 
-Für die Makro-Architektur ist die genaue Umsetzung der einzelnen Microservices nicht relevant. Die Makro-Architektur ist besonders wichtig, da Veränderungen hier zu einem späteren Zeitpunkt sehr aufwendig werden können. Das Wichtigste ist die Aufteilung in Microservices nach der Fachlichkeit.
-Das CRM-System lässt sich in drei fachliche Bereiche unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung.
-Das System besitzt zudem drei Datenobjekte. Die Microservices werden nach den Bereichen aufgeteilt. Jeder Microservice kümmert sich um ein entsprechendes Datenobjekt.
+Für die Makro-Architektur ist die genaue Umsetzung der einzelnen Microservices nicht relevant. Die Makro-Architektur ist besonders wichtig, da Veränderungen hier zu einem späteren Zeitpunkt sehr aufwendig werden können. Das Wichtigste ist die Aufteilung in Microservices nach der Fachlichkeit. Das CRM-System lässt sich in drei fachliche Bereiche unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung. Die Microservices werden nach den Bereichen aufgeteilt. Jeder dieser drei bereiche Besitzt ein eigenes Datenobjekt. Das  ist ein weiterer Hinweis für eine gute Aufteilung. Die Microervices machen ihre Dienste über REST-Schnittstellen verfügbar. Für die Skalierbarkeit ist es wichtig, dass die Microservices selbst keinen zustandlos sind. Alle persistenten Daten werden in Datenbanken gehalten.
 
-Da sich Interaktionen und Verkaufschancen einem Kontakt bzw. Kunden zuordnen lassen sollen, ist eine Abhängigkeit zwischen diesen Microservices zu erwarten. Da Microservices nur eine lose Kopplung aufweisen, sollten Abhängigkeiten vermieden werden. Zu viele Abhängigkeiten können ein Zeichen für ein schlechte Einteilung der Fachlichkeit sein. Zyklische Abhängigkeiten sind zu vermeiden.
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/ContextMap.png}
+    \caption{Context Map}
+    \label{fig:CRMENTWURF}
+\end{figure}
 
-Jeder der Microservices soll eine eigene Datenbank besitzen.
+Alle der drei eingeteilten Microservices sollen eine eigene Datenbank erhalten. Dadurch sind die Datenschemata übersichtlich und Änderungen haben nur unmittelbare Auswirkungen auf einen Microservice. \\
+\\
+Das Frontend wird monolithisch Aufgebaut und integriert alle Funktionalitäten der Microservices. Das Frontend ist dadurch einheitlich. Das System könnte auch um andere Frontends erweitert werden. Das Frontend wird dabei eine clientseitige Webanwendung, welche die REST-Schnittstellen der Microservices konsumiert. \\
+\\
+Da sich Interaktionen und Verkaufschancen einem Kontakt bzw. Kunden zuordnen lassen sollen, ist eine Abhängigkeit zwischen diesen Microservices zu erwarten. Auch die Kommunikation zwischen Microservices soll über die gleichen REST-Schnittstellen laufen. Daraus ergibt sich der folgende Entwurf. \\
+\\
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/CRMEntwurf.png}
+    \caption{Entwurf des \acp{CRM-System}}
+    \label{fig:CRMENTWURF}
+\end{figure}
 
-Die Integration der Microservices wird über REST-Schnittstellen implementiert.
+Die REST-Schnittstellen sollten einheitlich über alle Microservices hinweg sein. Die folgende Tabelle zeigt unter welchen Endpunkten, mit welchen HTTP-Methoden und welchen Parametern die REST-APIs aufrufbar sein sollen.
 
 \begin{table}[H]
 \centering
@@ -51,33 +68,46 @@ Die Integration der Microservices wird über REST-Schnittstellen implementiert.
     \caption{Prozessoren}
 \end{table}
 
-Alle Funktionalitäten werden in einem zentralen Frontend integriert.
-
-Der Vorteil ist, dass das System leicht um weitere Funktionalitäten in neuen Microservices ergänzt werden können. Eine gute Strategie kann es auch sein mit einem Service zu beginnen und diesen Aufzuteilen, wenn man eine neue Komponente implementieren möchte.
-
-Um das Monitoring, Service Discovery, Load Balancing wird mit Kubernetes gelöst. Unser System muss diese Aufgaben also nicht selbst bewältigen und diese Dinge können für diesen Teil der Arbeit ignoriert werden.
-
-Die Integration des Frontends und die Kommunikation zwischen den Microservices läuft über die selben REST-Schnittstellen, die jeder Service mit sich bringt.
-
-\begin{figure}[H] 
-    \centering
-    \includegraphics[width=0.71\textwidth]{figures/CRMEntwurf.png}
-    \caption{Entwurf des \acp{CRM-System}}
-\end{figure}
+Für das Frontend wird React verwendet. [React Erklärung]
+Für alle drei Microservices wird derselbe Technologie-Stack verwendet, um den Entwicklungsaufwand geringer zu halten. Es wird Java mit dem Framework Spring Boot verwendet. Als Datenbank wird MongoDB eingesetzt. [MongoDB Erklärung] Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handelt es sich ein Werkzeug zur sprachunabhängigen Spezifikation von APIs. Swagger kann durch eine Abhängigkeit zu Spring Boot hinzu gefügt werden. Es erstellt automatisch eine Webseite mit der Dokumentation unserer API. Um das Monitoring, Service Discovery, Load Balancing wird mit Kubernetes gelöst. Unser System muss diese Aufgaben also nicht selbst bewältigen und diese Bestandteile werden erst in der Bereitstellung konfiguriert.
 
 \subsection{Micro-Architektur}
 
 Die Mikro-Architektur befasst sich mit der Architektur eines einzelnen Microservice. Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Aus diesem Grund besitzt man eine große Freiheit bei der Auswahl. Es sollte die Architektur, welche am Simpelsten alle Anforderungen bietet. Der ausgewählte Technologie-Stack schränkt natürlich die möglichen Architekturen auch weiter ein.
 
-Für alle drei Microservices wird hier derselbe Technologie-Stack verwendet, um den Entwicklungsaufwand geringer zu halten.
+Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. Die folgenden Domänenmodelle zeigen, welche Daten von den entsprechenden Microservices verwaltet werden müssen.
 
-Auch wenn das Frontend später genau wie die Microservices im Kubernetes Cluster bereitgestellt werden soll, wird zwischen Microservice und Frontend unterschieden.
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/KontaktUMLDiagram.png}
+    \caption{Context Map}
+    \label{fig:CRMENTWURF}
+\end{figure} 
 
-Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/InteraktionUMLDiagram.png}
+    \caption{Context Map}
+    \label{fig:CRMENTWURF}
+\end{figure} 
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/ChanceUMLDiagram.png}
+    \caption{Context Map}
+    \label{fig:CRMENTWURF}
+\end{figure} 
 
 Für die Architektur der Microservices wird eine hexagonale Architektur (Ports und Adapter) verwendet. Eine Hexagonale Architektur bietet sich 
 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/HexagonalDesignConcept.png}
+    \caption{Entwurf des \acp{Hexagonale Architektur}}
+    \label{fig:CRMENTWURF}
+\end{figure}
 
+\clearpage
 \section{Implementierung}
 
 In diesem Kapitel wird das CRM-System dem Entwurf nach implementiert. Als Erstes wird die Implementierung der Microservices erklärt, da alle drei durch den gleichen Technologie-Stack sehr ähnlich sind. Anschließend wird das Frontend, welches alle Microservices integriert, implementiert.
@@ -86,10 +116,32 @@ In diesem Kapitel wird das CRM-System dem Entwurf nach implementiert. Als Erstes
 
 Alle drei Microservices benötigen die \ac{URI} ihrer Datenbank, um mit ihr eine Verbindung aufzubauen. Der Interaktions-Microservice und der Verkaufschancen-Microservice brauchen darüber hinaus die Adresse des Kontakt-Microservices, um mit diesem zu Kommunizieren. Diese Verbindungsinformationen, werden den Anwendungen über Umgebungsvariablen übergeben. Später bei der Bereitstellung, kann mit Kubernetes den Containern die passenden Umgebungsvariablen übergeben werden.
 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/HexagonalDesign.png}
+    \caption{Entwurf des \acp{Hexagonale Architektur}}
+    \label{fig:CRMENTWURF}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/UMLKlassenDiagram.png}
+    \caption{Entwurf des \acp{Hexagonale Architektur}}
+    \label{fig:CRMENTWURF}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/UMLSequenzdiagramm.png}
+    \caption{Entwurf des \acp{Hexagonale Architektur}}
+    \label{fig:CRMENTWURF}
+\end{figure}
+
 \subsection{Frontend}
 
 Das Frontend. Das Frontend soll später auch mit Kubernetes bereitgestellt werden, es wird aber nicht als Microservices angesehen. Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben.
 
+\clearpage
 \section{Bereitstellung mit Kubernetes}
 
 Im letzten Teil der Fallstudie wird das fertige CRM-System nun mit Kubernetes bereitgestellt.
@@ -136,6 +188,13 @@ docker build -t contact-microservice:latest .
 \subsection{Bereitstellung}
 
 Für jede Datenbank wird eine Anwendung 
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/DeploymentDiagramm.png}
+    \caption{Entwurf des \acp{Hexagonale Architektur}}
+    \label{fig:CRMENTWURF}
+\end{figure}
 
 Jetzt müssen die fertigen Images in unserem Kubernetes Cluster bereitgestellt werden. Dafür werden YAML-Dateien erstellt, in denen die gewünschten Kubernetes Objekte beschrieben werden. Für jeden der drei Microservices und das Frontend muss ein Service und ein Deployment erstellt werden. Das Deployment repräsentiert die Anwendung. Mit Parametern kann festgelegt werden wie viele Pods mit der Anwendung gestartet werden sollen.
 
