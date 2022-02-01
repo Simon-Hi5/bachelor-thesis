@@ -33,21 +33,17 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - run: |
-        working-directory: crm-frontend
-        npm run build
-        
-    - run: |
-        working-directory: contact-microservice
-        mvn install
-        
-    - run: |
-        working-directory: interaction-microservice
-        mvn install
-        
-    - run: |
-        working-directory: opportunity-microservice
-        mvn install
+    - working-directory: crm-frontend 
+      run: npm run build
+      
+    - working-directory: contact-microservice
+      run: mvn install
+      
+    - working-directory: interaction-microservice
+      run: mvn install
+      
+    - working-directory: opportunity-microservice
+      run: mvn install
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
