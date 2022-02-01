@@ -7,7 +7,8 @@
 	12pt,
 	bibtotoc,
 	listof=totoc,
-	titlepage
+	titlepage,
+	parskip=half
 ]{scrartcl}
 
 
@@ -93,7 +94,13 @@
 \pagenumbering{Roman}
 \setcounter{page}{5}
 \thispagestyle{plain}
-\printbibliography
+\printbibheading
+\printbibliography[type=book, heading=subbibliography, title={Bücher}]
+\printbibliography[type=article, heading=subbibliography,title={Artikel}]
+\printbibliography[type=report, heading=subbibliography,title={Berichte}]
+\printbibliography[type=inproceedings, heading=subbibliography,title={Konferenzpapier}]
+\printbibliography[type=online, heading=subbibliography,title={Online}]
+\printbibliography[nottype=online, nottype=article, nottype=book, nottype=report, nottype=inproceedings, heading=subbibliography, title={Sonstige}]
 
 \clearpage
 \thispagestyle{plain}

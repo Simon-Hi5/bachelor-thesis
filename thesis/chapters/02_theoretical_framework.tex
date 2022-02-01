@@ -1,24 +1,30 @@
 \section{Theoretische Grundlagen}
 
-In diesem Kapitel werden die grundlegenden Begriffe und Konzepte erläutert, welche wichtig für das Verständnis der Arbeit sind. Es wird zunächst der DevOps-Ansatz und das Architekturmuster der Microservices beschrieben. Anschließend wird Containervirtualisierung sowie Kubernetes erklärt.
+In diesem Kapitel werden die grundlegenden Begriffe und Konzepte erläutert, welche wichtig für das Verständnis der Arbeit sind. Es wird zunächst der DevOps-Ansatz und das Architekturmuster der Microservices beschrieben. Im Anschluss werden die Grundlagen von Docker sowie Kubernetes erklärt.
 
 \subsection{DevOps}
 
-Alle der in diesem Kapitel beschriebenen Architekturmuster, Methoden und Werkzeuge lassen sich dem DevOps-Ansatz zuordnen. Für das Verständnis der Arbeit ist es also essentiell zu Verstehen was DevOps bedeutet und warum es so populär ist. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Für DevOps gibt es keine einheitliche Definition. Es ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. Der Kundennutzen wird dabei immer in den Mittelpunkt gestellt [\cite[S. 1]{halstenbergDevOps2020}]. Das Ziel ist es die Softwarequalität zu verbessern und die Geschwindigkeit der Entwicklung und Bereitstellung zu erhöhen [\cite[S. 6]{arundelCloud2019}]. Um die Ziele umzusetzen bedient sich DevOps etablierten Methoden und Werkzeuge um daraus einen ganzheitlichen Ansatz zu formulieren. \\
-\\
-DevOps wird immer wichtiger, da durch das Aufkommen von Cloud Computing die Entwicklung und der Betrieb von Anwendungen nicht mehr trennbar ist. DevOps in ein Unternehmen einzuführen ist ein langwieriger Prozess, da insbesondere die Unternehmenskultur transformiert werden muss. Vor allem in großen Unternehmen zeigt sich das viele Prozesse schwerfällig geworden sind und nicht mehr dem eigentlichen Kundennutzen dienen. DevOps soll dieses Problem lösen und Unternehmen wieder anpassungsfähiger machen, ohne geordnete Strukturen zu verlieren.
+Alle der in diesem Kapitel beschriebenen Architekturmuster, Methoden und Werkzeuge lassen sich dem DevOps-Ansatz zuordnen. Um den Gesamtkontext zu verstehen, ist es deshalb sehr bedeutsam zu wissen, was DevOps bedeutet und warum es so populär ist. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Für DevOps gibt es keine einheitliche Definition. Es ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. Der Kundennutzen wird dabei immer in den Mittelpunkt gestellt \parencite[vgl.][S. 1]{halstenbergDevOps2020}. Das Ziel ist es die Softwarequalität zu verbessern sowie die Geschwindigkeit der Entwicklung und Bereitstellung zu erhöhen \parencite[vgl.][S. 6]{arundelCloud2019}. Um die Ziele zu erreichen, werden etablierte Methoden und Werkzeuge eingesetzt. Die einzelnen Phasen der Entwicklung und des Betriebs miteinander zu einem Prozess, der von jedem Programminkrement durchlaufen wird \parencite[vgl.][S. 63]{trempArchitekturen2021}.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/DevOpsDiagramm.png}
-    \caption{Kategorisierung von Unternehmen [\cite[S. 11]{halstenbergDevOps2020}]}
+    \includegraphics[width=0.75\textwidth]{figures/DevOpsKreislauf.png}
+    \caption{Kreislauf und Schritte von DevOps \parencite[vgl.][S. 63]{trempArchitekturen2021}}
 \end{figure}
 
-Eine reduzierte Time-to-Market kann durch engere Abstimmung und Automatisierung erreicht werden. Die Time-to-Market gibt an, wie lange es dauert eine Änderung zum Kunden, also auf die Produktionsumgebung, zu bringen. So können Änderungen schnell ausgeliefert werden und Feedback vom Endanwender erreicht schneller die Entwickler. Zur Umsetzung können Methoden wie Continuous-Integration und Continuous-Delivery eingesetzt werden, aber auch Architekturmuster wie Microservices und Werkzeuge wie Docker und Kubernetes können dabei unterstützen. Diese Begriffe werden im Folgenden näher behandelt.
+Durch eine engere Abstimmung, Automatisierung, Continuous-Integration und Continuous-Delivery kann beispielsweise die Time-to-Market reduziert werden. Diese Kennzahl gibt an, wie lange es dauert eine Änderung zum Kunden, also auf die Produktionsumgebung, zu bringen \parencite[vgl.][S. 7]{halstenbergDevOps2020}. Auch Microservice-Architekturen und Werkzeuge wie Docker und Kubernetes können dabei unterstützen.
+
+DevOps wird immer wichtiger, da durch das Aufkommen von Cloud Computing die Entwicklung und der Betrieb von Anwendungen nicht mehr trennbar ist. DevOps in ein Unternehmen einzuführen ist ein langwieriger Prozess. Neben der Einführung der neuen Technologien ist vor allem die Transformation der Unternehmenskultur besonders schwierig. In großen Unternehmen zeigt sich das viele Prozesse schwerfällig geworden sind und nicht mehr dem eigentlichen Kundennutzen dienen. DevOps soll dieses Problem lösen und Unternehmen wieder anpassungsfähiger machen, ohne geordnete Strukturen zu verlieren.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/DevOpsDiagramm.png}
+    \caption{Kategorisierung von Unternehmen nach Anpassungsfähigkeit und Formalismus \parencite[vgl.][S. 11]{halstenbergDevOps2020}}
+\end{figure}
 
 \subsection{Microservices}
 
-Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software [\cite[S. 15]{newmanMicroservices2015}]. Eine einheitliche Definition für Microservices gib es nicht [\cite[S. 2]{wolffMicroservices2018}]. Bei der Beschreibung von Microservices werden Prinzipien und Merkmale einer standardisierten Definition vorgezogen. Im Folgenden werden die wichtigsten Merkmale kurz beschrieben.
+Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software [\cite[S. 15]{newmanMicroservices2015}]. Eine einheitliche Definition für Microservices gib es nicht \parencite[vgl.][S. 2]{wolffMicroservices2018}. Bei der Beschreibung von Microservices werden Prinzipien und Merkmale einer standardisierten Definition vorgezogen. Im Folgenden werden die wichtigsten Merkmale kurz erläutert.
 
 \subsubsection{Merkmale}
 
@@ -45,6 +51,8 @@ Die Größe eines Microservices ist nicht zwangsläufig entscheidend [\cite[S. 2
 Um von Microservices zu profitieren müssen Strukturen in Unternehmen überarbeitet werden. Das Gesetz von Conway besagt, dass durch die Kommunikationsstrukturen einer Organisation auch die Struktur der Systeme, welche die Organisation entwirft, vorgegeben wird [\cite{conwayHow1968}]. Bei monolithischen Anwendungen werden die Entwicklerteams häufig nach ihrem Fachbereich aufgeteilt. Es bilden sich so beispielsweise Teams spezialisiert auf das Frontend, das Backend und die Datenbank. Die entwickelte Anwendung wird, nach dem Gesetz von Conway, auch aus diesen drei Bereichen bestehen. Wenn nun ein neues Feature umgesetzt werden soll, müssen sich alle drei Teams miteinander absprechen. Um eine Microservice-Architektur umzusetzen muss also auch die Struktur des Unternehmens verändert werden. Die Entwicklerteams müssen crossfunktional mit Spezialisten aus verschiedenen Fachbereichen aufgebaut werden. Der Vorteil ist das Änderungen so häufig nur ein Entwicklerteam betreffen und der Koordinationsaufwand sinkt. \\
 \\
 Microservices werden häufig mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen [\cite[S. 2]{wolffMicroservices2018}]. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können.
+
+SOA als Vorgänger der Micrservices.
 
 \subsubsection{Vorteile}
 
