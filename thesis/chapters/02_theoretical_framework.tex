@@ -4,7 +4,7 @@ In diesem Kapitel werden die grundlegenden Begriffe und Konzepte erläutert, wel
 
 \subsection{DevOps}
 
-Alle der in diesem Kapitel beschriebenen Architekturmuster, Methoden und Werkzeuge lassen sich dem DevOps-Ansatz zuordnen. Um den Gesamtkontext zu verstehen, ist es deshalb sehr bedeutsam zu wissen, was DevOps bedeutet und warum es so populär ist. Wie das Kofferwort "DevOps" bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Für DevOps gibt es keine einheitliche Definition. Es ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. Der Kundennutzen wird dabei immer in den Mittelpunkt gestellt \parencite[vgl.][S. 1]{halstenbergDevOps2020}. Das Ziel ist es die Softwarequalität zu verbessern sowie die Geschwindigkeit der Entwicklung und Bereitstellung zu erhöhen \parencite[vgl.][S. 6]{arundelCloud2019}. Um die Ziele zu erreichen, werden etablierte Methoden und Werkzeuge eingesetzt. Die einzelnen Phasen der Entwicklung und des Betriebs miteinander zu einem Prozess, der von jedem Programminkrement durchlaufen wird \parencite[vgl.][S. 63]{trempArchitekturen2021}.
+Alle der in diesem Kapitel beschriebenen Architekturmuster, Methoden und Werkzeuge lassen sich dem DevOps-Ansatz zuordnen. Um den Gesamtkontext zu verstehen, ist es deshalb sehr bedeutsam zu wissen, was DevOps bedeutet und warum es so populär ist. Wie das Kofferwort \glqq DevOps\grqq{} bereits andeutet, beschreibt er einen Ansatz für eine effektivere und stärkere Zusammenarbeit zwischen Softwareentwicklung (Development) und IT-Betrieb (Operations). Für DevOps gibt es keine einheitliche Definition. Es ist ein Überbegriff für Denkweisen, Kultur, Methoden, Technologien und Werkzeuge. Der Kundennutzen wird dabei immer in den Mittelpunkt gestellt \parencite[vgl.][S. 1]{halstenbergDevOps2020}. Das Ziel ist es die Softwarequalität zu verbessern sowie die Geschwindigkeit der Entwicklung und Bereitstellung zu erhöhen \parencite[vgl.][S. 6]{arundelCloud2019}. Um die Ziele zu erreichen, werden etablierte Methoden und Werkzeuge eingesetzt. Die einzelnen Phasen der Entwicklung und des Betriebs miteinander zu einem Prozess, der von jedem Programminkrement durchlaufen wird \parencite[vgl.][S. 63]{trempArchitekturen2021}.
 
 \begin{figure}[H] 
     \centering
@@ -18,120 +18,99 @@ DevOps wird immer wichtiger, da durch das Aufkommen von Cloud Computing die Entw
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/DevOpsDiagramm.png}
+    \includegraphics[width=0.7\textwidth]{figures/DevOpsKategroisierung.png}
     \caption{Kategorisierung von Unternehmen nach Anpassungsfähigkeit und Formalismus \parencite[vgl.][S. 11]{halstenbergDevOps2020}}
 \end{figure}
 
 \subsection{Microservices}
 
-Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software [\cite[S. 15]{newmanMicroservices2015}]. Eine einheitliche Definition für Microservices gib es nicht \parencite[vgl.][S. 2]{wolffMicroservices2018}. Bei der Beschreibung von Microservices werden Prinzipien und Merkmale einer standardisierten Definition vorgezogen. Im Folgenden werden die wichtigsten Merkmale kurz erläutert.
+Im Mittelpunkt dieser Arbeit stehen Microservices. Bei Microservices handelt es sich um ein Architekturmuster zur Modularisierung von Software \parencite[vgl.][S. 15]{newmanMicroservices2015}. Eine einheitliche Definition für Microservices gib es nicht \parencite[vgl.][S. 2]{wolffMicroservices2018}. Bei der Beschreibung von Microservices werden Prinzipien und Merkmale einer standardisierten Definition vorgezogen. Im Folgenden werden die wichtigsten Merkmale kurz erläutert.
 
 \subsubsection{Merkmale}
 
-Microservices sind das Gegenteil von klassischen monolithischen Softwarearchitekturen. Ein Monolith ist eine einzelne, zusammenhängende und untrennbare Einheit. Die Erweiterbarkeit und Wartbarkeit von Monolithen ist häufig komplex, da die Codebasis umfangreich ist und mit der Zeit immer stärker wächst. Die Arbeit von mehreren Entwicklerteams ist ineffizient, dar ein höher Abstimmungsbedarf nötig ist. Des Weiteren lässt ist die Skalierbarkeit des schwergewichtigen Monolithen sehr beschränkt. Durch Modularisierung einer Anwendung lassen sich diese Probleme abschwächen, können jedoch nicht komplett behoben werden.
+Microservices sind das Gegenteil von klassischen monolithischen Softwarearchitekturen. Ein Monolith ist eine einzelne, zusammenhängende und untrennbare Einheit. Die Erweiterbarkeit und Wartbarkeit von Monolithen ist häufig komplex, da die Codebasis umfangreich ist und mit der Zeit immer stärker wächst. Die Arbeit von mehreren Entwicklerteams ist ineffizient, da ein hoher Abstimmungsbedarf nötig ist. Des Weiteren lässt ist die Skalierbarkeit des schwergewichtigen Monolithen sehr beschränkt. Durch Modularisierung einer Anwendung lassen sich diese Probleme abschwächen, können jedoch nicht vollständig behoben werden.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.2\textwidth]{figures/Monolith.png}
+    \includegraphics[width=0.2\textwidth]{figures/AufbauMonolith.png}
     \caption{Beispielhafter Aufbau einer monolithischen Architektur}
 \end{figure}
 
-Genau hier setzten Microservices an. Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits deutlich älter [\cite[S. 15]{newmanMicroservices2015}]. Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme werden schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Das Architekturmuster der Microservices zählt zu den verteilten Systemen. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern und kommunizieren über das Netzwerk.
+Genau hier setzten Microservices an. Obwohl der Begriff Microservices noch realtiv jung ist, sind die dahinterstehenden Konzepte bereits deutlich älter \parencite[vgl.][S. 15]{newmanMicroservices2015}. Zur Verständlichkeit und leichteren Weiterentwicklung werden große Systeme schon lange in kleine Module unterteilt. Die Besonderheit von Microservices liegt darin, dass die Module einzelne Programme sind. Das Architekturmuster der Microservices zählt zu den verteilten Systemen. Die einzelnen Microservices laufen zumeist auf vielen unterschiedlichen Rechnern und kommunizieren über das Netzwerk.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.71\textwidth]{figures/Microservices.png}
+    \includegraphics[width=0.71\textwidth]{figures/AufbauMicroservices.png}
     \caption{Beispielhafter Aufbau einer Microservice-Architektur}
 \end{figure}
 
-Ein einzelner Microservice soll eine Aufgabe bestmöglich erledigen. Dieser Ansatz ist angelehnt an die \acs{UNIX}-Philosophie: "Mache nur eine Sache und mache sie gut" [\cite[]{salusQuarter1994}]. Jeder Microservice bildet so eine klar definierte Funktion des Gesamtsystems ab. Die Microservices müssen eigenständig sein, sodass sie unabhängig voneinander verändert und bereitgestellt werde können. Die Kommunikation zwischen den Microservices erfolgt ausschließlich über das Netzwerk mittels sprachunabhängiger Schnittstellen, sogenannte \acp{API} [\cite[S. 64]{trempArchitekturen2021}]. \\
-\\
-Die Größe eines Microservices ist nicht zwangsläufig entscheidend [\cite[S. 2]{wolffMicroservices2018}]. Der Name "Microservices" deutet bereits an, dass es sich um kleine Services handelt, jedoch ist eine genaue Festlegung der Größe nicht sinnig [\cite[S. 22]{newmanMicroservices2015}]. Eine Messung der Größe durch die Anzahl der Codezeilen wäre zwar denkbar, jedoch hängen derartige Kriterien stark von der verwendeten Programmiersprache ab. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Eine Obergrenze für die Größe eines Microservices stellt die Teamgröße dar. An einem Microservice darf immer nur ein Entwicklerteam arbeiten [\cite[S. 23]{newmanMicroservices2015}]. Kann der Microservice nicht mehr von einem Team alleine entwickelt und gewartet werden, so ist er zu groß. Ein Microservice sollte auch nur so groß sein, dass er von einem Entwickler allumfassend verstanden werden kann. Ein Microservice sollte jedoch auch nicht zu klein gewählt werden, da ansonsten der Aufwand für die Bereitstellung der vielen Microservices sehr groß wird und die Kommunikation über das Netzwerk ansteigt. \\
-\\
-Um von Microservices zu profitieren müssen Strukturen in Unternehmen überarbeitet werden. Das Gesetz von Conway besagt, dass durch die Kommunikationsstrukturen einer Organisation auch die Struktur der Systeme, welche die Organisation entwirft, vorgegeben wird [\cite{conwayHow1968}]. Bei monolithischen Anwendungen werden die Entwicklerteams häufig nach ihrem Fachbereich aufgeteilt. Es bilden sich so beispielsweise Teams spezialisiert auf das Frontend, das Backend und die Datenbank. Die entwickelte Anwendung wird, nach dem Gesetz von Conway, auch aus diesen drei Bereichen bestehen. Wenn nun ein neues Feature umgesetzt werden soll, müssen sich alle drei Teams miteinander absprechen. Um eine Microservice-Architektur umzusetzen muss also auch die Struktur des Unternehmens verändert werden. Die Entwicklerteams müssen crossfunktional mit Spezialisten aus verschiedenen Fachbereichen aufgebaut werden. Der Vorteil ist das Änderungen so häufig nur ein Entwicklerteam betreffen und der Koordinationsaufwand sinkt. \\
-\\
-Microservices werden häufig mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen [\cite[S. 2]{wolffMicroservices2018}]. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können.
+Ein einzelner Microservice soll eine Aufgabe bestmöglich erledigen. Dieser Ansatz ist angelehnt an die Philosophie von \ac{UNIX}: \glqq Mache nur eine Sache und mache sie gut\grqq{} \parencite[vgl.][]{salusQuarter1994}. Jeder Microservice bildet so eine klar definierte Funktion des Gesamtsystems ab \parencite[vgl.][S. 64]{trempArchitekturen2021}. Die Microservices müssen dabei eigenständig sein, sodass sie unabhängig voneinander verändert und bereitgestellt werden können. Die Kommunikation zwischen den Microservices erfolgt über das Netzwerk mittels sprachunabhängiger Schnittstellen, sogenannte \acp{API}. Um die Microservices unabhängig voneinander skalieren zu können, müssen sie zustandlos sein.
 
-SOA als Vorgänger der Micrservices.
+Die Größe eines Microservices ist nicht zwangsläufig entscheidend \parencite[vgl.][S. 2]{wolffMicroservices2018}. Der Name deutet bereits an, dass es sich um kleine Services handelt, jedoch ist eine genaue Festlegung der Größe nicht sinnvoll \parencite[vgl.][S. 22]{newmanMicroservices2015}. Eine Messung der Größe durch die Anzahl der Codezeilen wäre zwar denkbar, jedoch hängen derartige Kriterien stark von der verwendeten Programmiersprache ab. Stattdessen sollte sich die Größe an fachliche Gegebenheiten anpassen. Je kleiner die Services gestaltet werden, umso stärker kommen die in den nachfolgenden Abschnitten beschriebenen Vor- und Nachteile zur Geltung. Eine Obergrenze für die Größe eines Microservices stellt die Teamgröße dar. An einem Microservice darf immer nur ein Entwicklerteam arbeiten \parencite[vgl.][S. 23]{newmanMicroservices2015}. Kann der Microservice nicht mehr von einem Team alleine entwickelt und gewartet werden, so ist er zu groß. Ein Microservice sollte auch nur so groß sein, dass er von einem Entwickler allumfassend verstanden werden kann. Jedoch sollten Microservices auch nicht zu klein gewählt werden, da ansonsten der die Bereitstellung der vielen Microservices zu aufwendig wird.
+
+Microservices wirken sich auf die Organisation und den Entwicklungsprozess aus \parencite[vgl.][S. 2]{wolffMicroservices2018}. Um von Microservices zu profitieren müssen Strukturen in Unternehmen überarbeitet werden. Das Gesetz von Conway besagt, dass durch die Kommunikationsstrukturen einer Organisation auch die Struktur der Systeme, welche die Organisation entwirft, vorgegeben wird \parencite[vgl.]{conwayHow1968}. Bei monolithischen Anwendungen werden die Entwicklerteams häufig nach ihrem Fachbereich aufgeteilt. Es bilden sich so beispielsweise Teams spezialisiert auf das Frontend, das Backend und die Datenbank. Die entwickelte Anwendung wird, nach dem Gesetz von Conway, auch aus diesen drei Bereichen bestehen. Wenn nun ein neues Feature umgesetzt werden soll, müssen sich alle drei Teams miteinander absprechen. Bei einer Microservice-Architektur müssen die Entwicklerteams crossfunktional mit Spezialisten aus verschiedenen Fachbereichen aufgebaut werden. Änderungen betreffen so häufig nur ein Entwicklerteam und der Koordinationsaufwand sinkt.
+
+Häufig werden Microservices mit \ac{SOA} in Verbindung gebracht. Microservices übernehmen viele Prinzipien von \ac{SOA}. \ac{SOA} ist ein Ansatz mit dem Ziel Funktionalitäten von betrieblichen Anwendungen durch Services von außerhalb zugreifbar zu machen \parencite[vgl.][S. 2]{wolffMicroservices2018}. Ein Service bildet in diesem Kontext einen Geschäftsprozess ab. Dadurch soll Flexibilität und Wiederverwendbarkeit in der IT von Unternehmen erhöht werden. Es gibt also durchaus viele Parallelen zu Microservices, jedoch setzen sie an verschiedenen Ebenen an. Während Microservices ein konkretes Architekturmuster für ein einzelnes System ist, beschreibt \ac{SOA} wie viele Systeme in einem Unternehmens miteinander interagieren können.
 
 \subsubsection{Vorteile}
 
-Bei monolithischen Anwendungen, entstehen schnell unerwünschte Abhängigkeiten zwischen verschiedenen Komponenten. Die vielen Abhängigkeiten sind schwer zu überblicken und die Änderung von einer Komponente wird erschwert, da es zu unerwünschten Nebeneffekten kommen kann. In der Praxis wird so die Architektur von den Monolithen mit der Zeit zunehmend schlechter [\cite[S. 3]{wolffMicroservices2018}]. Die Microservices besitzen nur eine lose Kopplung über explizite Schnittstellen. Unerwünschte Abhängigkeiten treten dadurch seltener auf. Durch die expliziten Schnittstellen ist es auch einfach einen gesamten Microservice zu ersetzten. Der neue Microservice muss lediglich die selbe Schnittstelle anbieten wie der Alte. Das neu schreiben eines Microservices ist durch die begrenzte Größe in der Regel nicht schwer. Somit können Microservices schneller zu neuen Technologie-Stacks migriert werden. Die Ablösung von großen Monolithen gestaltet sich dagegen häufig als eine fast unmögliche Aufgaben [\cite[S. 29]{newmanMicroservices2015}]. \\
-\\
-Microservices können unabhängig voneinander skaliert werden. So kann eine einzelne Funktionalität, welcher stärker genutzt wird, einzeln hoch skaliert werden, ohne das gesamte System zu skalieren [\cite[S. 5]{wolffMicroservices2018}]. Flaschenhälse welche eine Anwendung ausbremsen, können somit besser vermieden werden. Die Last kann durch Microservices auch besser verteilt werden, da sie auf unterschiedlichen Rechnern laufen können. Durch Microservices können so Kosten eingespart werden. Es gibt wenige Architekturmuster wie dieses, welche so eng mit Kosteneinsparungen verbunden sind. (\cite[S. 27]{newmanMicroservices2015}). \\
-\\
-Die Unabhängigkeit der Microservices führt zu einer großen Technologiefreiheit. Die eingesetzten Technologien müssen lediglich die entsprechende Schnittstelle anbieten können [\cite[S. 5]{wolffMicroservices2018}]. Somit kann für jeden Microservice kompromisslos die am besten geeignete Technologie gewählt werden. Dadurch sinken auch die möglichen Auswirkungen von falschen Entscheidungen bei der Technologieauswahl. \\
-\\
-Ein weiterer wesentlicher Grund für Microservices ist \ac{CD}. Die Microservices können unabhängig voneinander bereitgestellt werden. Tritt bei einer Bereitstellung ein Fehler auf, sind die verbundenen Risiken deutlich geringer. Es ist nicht das gesamte System davon betroffen, sondern nur der entsprechende Service. Dadurch, dass nur der veränderte Microservice neu bereitgestellt werden muss, ist die Bereitstellung schneller als bei einem Monolithen. Vor allem bei geringen Änderungen ist die erneute Bereitstellung eines gesamten Monolithen sehr unliebsam. Außerdem kann zur Absicherung bei Microservices leicht parallel eine alte Version des Microservices betrieben werden. Bei Monolithen wäre in so einem Fall der Ressourcenverbrauch doppelt so hoch, wie die Anwendung eigentlich benötigt.
+Bei monolithischen Anwendungen, entstehen schnell unerwünschte Abhängigkeiten zwischen verschiedenen Komponenten. Die vielen Abhängigkeiten sind schwer zu überblicken und die Änderung von einer Komponente wird erschwert, da es zu unerwünschten Nebeneffekten kommen kann. In der Praxis wird so die Architektur von Monolithen mit der Zeit zunehmend schlechter \parencite[vgl.][S. 3]{wolffMicroservices2018}. Die Microservices besitzen dagegen nur eine lose Kopplung über explizite Schnittstellen. Die Hindernisse für unerwünschte Abhängigkeiten sind hier deutlich höher.
+
+Durch die expliziten Schnittstellen ist es auch einfach einen gesamten Microservice zu ersetzten. Der neue Microservice muss lediglich die selbe Schnittstelle anbieten wie der Alte. Auch die vollständige Neuentwicklung eines Microservices ist durch die begrenzte Größe in der Regel nicht schwer. Somit können Microservices schneller an neue Technologien angepasst werden. Die Ablösung von großen Monolithen gestaltet sich dagegen häufig als eine fast unmögliche Aufgabe \parencite[vgl.][S. 29]{newmanMicroservices2015}. Darüber können Microservices auch komplett unterschiedliche Technologie-Stacks verwenden \parencite[vgl.][S. 5]{wolffMicroservices2018}. Die eingesetzten Technologien müssen dabei lediglich die entsprechende Schnittstelle anbieten können. Durch diese Freiheit kann für jeden Microservice kompromisslos die am besten geeignete Technologie ausgewählt werden.
+
+Ein weiterer wesentlicher Grund für Microservices ist \ac{CD}. Die Microservices können unabhängig voneinander bereitgestellt werden. Tritt bei einer Bereitstellung ein Fehler auf, sind die verbundenen Risiken deutlich geringer. Es ist nicht das gesamte System davon betroffen, sondern nur der entsprechende Service. Dadurch, dass nur der veränderte Microservice neu bereitgestellt werden muss, ist die Bereitstellung schneller als bei einem Monolithen. Dadurch ermöglichen Microservices eine bessere Time-to-Market. Außerdem ist die Absicherung einer Bereitstellung, durch das parallele betreiben einer älteren Version, deutlich ressourcenschonender. Bei Monolithen wäre in so einem Fall der Ressourcenverbrauch doppelt so hoch, wie die gesamte Anwendung eigentlich benötigt.
+
+Microservices können unabhängig voneinander skaliert werden. So kann eine einzelne Funktionalität, welcher stärker genutzt wird, einzeln hoch skaliert werden, ohne das gesamte System zu skalieren \parencite[vgl.][S. 5]{wolffMicroservices2018}]. Flaschenhälse welche eine Anwendung ausbremsen, können somit besser vermieden werden. Auch kann die Last kann durch Microservices besser verteilt werden, da sie verteilt auf unterschiedlichen Rechnern laufen können. Durch eine bestmögliche Ressourcenausnutzung können so Kosten eingespart werden \parencite[vgl.][S. 27]{newmanMicroservices2015}.
 
 \subsubsection{Herausforderungen}
 
-Doch natürlich bringen Microservices wie jedes Architekturmuster auch einige Nachteile mit sich. Die Aufteilung eines Systems in viele Microservices erhöht die Komplexität. Die Beziehungen unter den Microservices können schnell unüberschaubar werden. Welcher Microservice eine Schnittstelle eines anderen Microservices benutzt oder benötigt kann von außen nicht direkt eingesehen werden. Dies ist aber wichtig, um zu Wissen, welche Microservices von der Änderung einer Schnittstelle betroffen werden. Auch muss dabei geachtet werden, dass es auf Code-Ebene nicht zu ungewollten Abhängigkeiten kommt. Wenn mehrere Microservices die selbe Bibliothek verwenden, geht die Unabhängigkeit verloren und die Microservices müssen unter umständen gemeinsam bereitgestellt werden [\cite[S. 75]{wolffMicroservices2018}]. \\
-\\
-Bei Monolithen können Teile des Codes leicht von einer Komponente in eine Andere verschoben werden kann. Bei Microservices müssen die Teile in einen anderes eigenständiges Programm verschoben werden und der Aufwand ist deutlich höher. Die Auswirkungen von Fehlentscheidungen bei der Einteilung und Abgrenzung sind somit sehr hoch, weil ein Refactoring über mehrere Microservices kompliziert ist. \\
-\\
-Microservices sind verteilte Systeme und bringen auch die damit verbundenen Nachteile mit sich. Da die Kommunikation mit den Microservices über das Netzwerk läuft, ist die Antwortzeit der Microservices von der Latenz abhängig. Da wird vor allem dann problematisch wenn ein Microservice viele Dienste von anderen Microservices in Anspruch nimmt. Deshalb sollten Microservices untereinander möglichst wenig kommunizieren müssen. Besitzen zwei Microservices viele Abhängigkeiten, kann dies ein Hinweis auf eine falsche Einteilung der Microservices sein. Des Weiteren muss das Netzwerk die höhere Last durch die Aufrufe standhalten. Außerdem ist Kommunikation über das Netzwerk immer unzuverlässig. \\
-\\
-Die technologische Freiheit der Microservices kann schnell zu einer Herausforderung werden. Wenn jeder Microservice einen komplett unterschiedlichen Technologie-Stack verwendet, steigt die Komplexität des Gesamtsystems. Auch wird der Wechsel von Mitarbeitern zu anderen Teams schwieriger. Es bietet sich also an den Technologie-Stack einzuschränken und übergreifende Richtlinien für alle Microservices zu bestimmen. \\
-\\
-Microservices besitzen eine höhere technische Komplexität, die sich vor allem auf den Betrieb auswirkt. Der Betrieb von Microservices ist sehr komplex. Die vielen Microservices müssen orchestriet werden.
+Microservices bringen neben den vielen Vorteilen auch einige erhebliche Herausforderungen mit sich. Die Aufteilung eines Systems in viele Microservices erhöht die Komplexität. Die Struktur des Systems kann mit einem schlechten Architekturmanagement schnell unübersichtlich werden \parencite[vgl.][S. 77]{wolffMicroservices2018}. Welcher Microservice eine Schnittstelle eines anderen Microservices aufruft kann von außen nicht direkt eingesehen werden. Auch auf Code-Ebene können sich ungewollte Abhängigkeiten einschleichen. Wenn mehrere Microservices beispielsweise die selbe Bibliothek verwenden, geht die lose Kopplung verloren und die Microservices können unter Umständen nicht mehr unabhängig voneinander bereitgestellt werden.
+
+Die technologische Freiheit der Microservices kann schnell zu einer Herausforderung werden. Zu viele unterschiedliche Technologien in den Microservices erhöhen die Komplexität und den Erhalt von Fachwissen \parencite[vgl.][S.65]{trempArchitekturen2021}. Darüber hinaus wird der Wechsel von Mitarbeitern in andere Entwicklerteams erschwert.
+
+Während Änderungen in einem Microservice sehr einfach sind gestalten sich Refactoring über mehrere Microservices hinweg als deutlich komplizierter. Bei Monolithen können Teile des Codes leicht von einer Komponente in eine Andere verschoben werden kann. Bei Microservices müssen die Teile in einen anderes  Programm verschoben werden, welches vielleicht sogar einen anderen Technologie-Stack verwendet. Die Auswirkung von Fehlentscheidungen bei der Einteilung der Microservices sind somit sehr hoch \parencite[vgl.][S. 6]{wolffMicroservices2018}.
+
+Microservices sind verteilte Systeme und bringen auch die damit verbundenen Nachteile mit sich. Da die Kommunikation zwischen den Microservices über das Netzwerk läuft, ist die Geschwindigkeit der Microservices von der Netzwerklatenz abhängig. In der Zeit, die ein Microservice benötigt, um einen anderen Microservice aufzurufen, könnte ein moderner Prozessor Millionen von Instruktionen abarbeiten \parencite[vgl.][S. 73]{wolffMicroservices2018}. Außerdem ist Kommunikation über ein Netzwerk unzuverlässig \parencite[vgl.][S. 76]{wolffMicroservices2018}. Ausfälle von einzelnen Microservices können die Funktionalität des Gesamtsystems einschränken.
 
 \subsubsection{Architektur}
 
-Die Architektur von Microservices lässt sich in zwei Bereiche untergliedern. Die Makro-Architektur befasst sich mit dem Enwurf des Gesamtsystems. Die Micro-Architektur bezieht sich auf die Architektur eines einzelnen Microservices. \\
-\\
-Die zentrale Herausforderung der Makro-Architektur ist die Aufteilung in einzelne Microservices [\cite[S. 102]{wolffMicroservices2018}]. Die Architekturentscheidungen sollten hierbei gut überlegt sein, da das Refactoring zwischen Microservices aufwendig ist. Eine Änderung einer Fachlichkeit soll so idealerweise nur einen Microservice und ein Entwicklerteam betreffen. Wenn eine Aufteilung nach der Fachlichkeit nicht stattfindet können Microservices nicht ihre Vorteile ausspielen. Jeder Microservice solle also eine fachlichen Kontext darstellen, der eine abgeschlossene Funktionalität darstellt. Es ist hilfreich zu Beginn mit wenigen größeren Microservices zu beginnen und bei der Weiterentwicklung Komponenten in neue Microservices ausgliedert. Eine frühe Aufteilung in zu viele Services birgt die Gefahr einer falschen Aufteilung. Die Makro-Architektur sollte auch eine technologische Basis definieren. Bei der Umsetzung der einzelnen Microservices sollte größtenteils technologische Freiheit bestehen, es sollen jedoch gemeinsame Schnittstellen und Kommunikationprotokolle festgelegt werden. Außerdem sollte Service Discovery, Lastverteilung und Skalierbarkeit beachtet werden. Durch Service Discovery wird geregelt wie die Microservices sich gegenseitig finden können. Mit Service Discovery sollte auch Lastverteilung eingeführt werden, um Anfragen gleichmäßig auf mehrere Instanzen des selben Microservices zu verteilen. Alle diese Dinge kann Kubernetes übernehmen und werden im nächsten Kapitel erklärt. Für die Skalierbarkeit ist es wichtig, dass mehrere Instanzen vom selben Microservice parallel laufen können. Das bedeutet, dass Microservices keinen Zustand speichern dürfen. \\
-\\
-Um Unabhängige Bearbeitung zu gewährleisten, wäre es auch ratsam jeden Microservice mit einer UI auzustatten. Dann sind können alle Änderungen, egal ob sie UI, Logik, oder Datenbank betreffen, von einem Entwicklerteam umgesetzt werden. Allerdings kann eine UI, die Größe des Microservices aufblähen. Da heutzutage meist von Unterschiedlichen Frontends, wie Webseiten, mobile Apps und nativen Anwendungen, auf die selben Services zugegriffen, kann es sinnvoll sein die UI auszugliedern. Die Integration von vielen einzelnen UIs gestaltet sich als komplex. Es gibt aber mittlerweile den Micro-Frontends, welcher den Microservice Ansatz auf Frontends überträgt.  \\
-\\
-Die Micro-Architektur besitzt keine relevanz für das Gesamtsystem. Sie ist von außen nicht sichtbar, lediglich die festgelegten Schnittstellen. Entwicklerteams sollten möglichst viel Freiheit bei den Architekturentscheidungen eines einzelnen Microservices haben. Dadurch können sie die best mögliche Lösung für den entsprechenden Microservice entwerfen. Während Microservices untereinander lose gekoppelt sind, sollten die Komponenten eines Microservices eine starke Kopplung aufweisen. Dadurch wird gewährleistet, dass die Bestandteile wirklich zusammengehören. Außerdem sollten die Microservices Zustandslos sein, da die Skalierbarkeit sonst nicht gegeben ist. \\
-\\
-Damit Microservices sich gegenseitig zuarbeiten können müssen sie miteinander kommunizieren. Das Wichtigste dabei ist, dass die Microservices ihre Unabhängigkeit voneinander wahren. Zu viele Verbindungen zwischen Microservices sind ein Hinweis auf eine Schlechte Aufteilung. Auch zyklische Abhängigkeiten sind zu vermeiden, da dort ohne weitere Abstimmung Änderungen in einem der beiden Services nicht möglich sind. \\
+Die Architektur von Microservices lässt sich in die Micro-Architektur und die Makro-Architektur untergliedern. Die Micro-Architektur bezieht sich auf die Architektur eines einzelnen Microservices. Sie besitzt keine Relevanz für das Gesamtsystem und ist von außen nicht einsehbar. Lediglich die Schnittstellen sind von Bedeutung. Das Entwicklerteam eines Microservices sollte bei der Micro-Architektur größtmögliche Freiheit haben.
+
+Bei der Makro-Architektur liegt die zentrale Herausforderung in der Aufteilung der Microservices \parencite[vgl.][S. 102]{wolffMicroservices2018}. Die Architekturentscheidungen sollten hierbei gut überlegt sein, da das Refactoring zwischen Microservices aufwendig ist. Jeder Microservice soll eine abgeschlossene Funktion in einem fachlichen Kontext darstellen. Die Aufteilung nach Fachlichkeit ist wichtig, damit die Microservices ihre Vorteile ausspielen können. Eine Änderung an einer Fachlichkeit sollte so idealerweise nur einen Microservice und ein Entwicklerteam betreffen. Der Abstimmungsaufwand in Unternehmen wird somit minimiert. Eine frühe Aufteilung in zu viele Services erhöht die Gefahr einer falschen Aufteilung. Es ist ratsam, mit wenigen Microservices zu beginnen und diese, ab einer gewissen Größe, weiter aufzuteilen.
+
+Zur Einteilung der Microservices wird häufig \ac{DDD} eingesetzt. \ac{DDD} ist eine Vorgehensweise für die Modellierung komplexer Systeme \parencite[vgl.][S. 66]{evansDomainDriven2015}. Dabei werden Kontextgrenzen (Bounded Context) als Trennung zwischen unabhängigen Problembereichen, sogenannten Domänen, identifiziert. Innerhalb eines Bounded Context wird eine einheitliche fachlich orientierte Sprache verwendet  (Ubiquitous Language). Eine Context Map gibt einen Überblick über alle Bounded Contexts und deren Interaktionen.
+
+Bei der Implementierung der einzelnen Microservices sollte größtenteils technologische Freiheit bestehen. Die gemeinsamen Schnittstellen und Kommunikationsprotokolle sollten jedoch von der Makro-Architektur definiert werden. Außerdem sollte geklärt werden, wie Service Discovery, Lastverteilung und Skalierung implementiert wird. Alle diese Funktionen kann Kubernetes übernehmen und werden im entsprechenden Abschnitt genauer beschrieben.
 
 \subsubsection{Integration}
 
-Die Integration und Kommunikation der einzelnen Miroservices wird in diesem Abschnitt noch etwas genauer erläutert. Sie ist einer der wichtigsten Aspekte bei der Umsetzung von Microservices. Damit Microservices sich gegenseitig zuarbeiten können müssen sie miteinander kommunizieren. Die weitgehende Unabhängigkeit der einzelnen Microservices muss jedoch bewahrt werden. Die Integration der Services ist auf drei verschiedenen Ebenen denkbar. \\
-
-Auf der UI-Ebene können 
-
-\paragraph{UI}
-
-\paragraph{Datenbank}
-
-Dafür ist es ratsam, dass jeder Microservice eine eigene Datenbank besitzt, auf die nur er zugreift. Dadurch sind die Datenschemata weniger komplex und genau auf die Anforderungen des einen Microservices spezialisiert.  Wenn Datenbanken von mehreren Microservices verwendet werden ist bei Änderungen an der Datenbank ein höher Abstimmungsaufwand nötig.
-
-\paragraph{Microservices}
-
-Zuletzt müssen natürlich auch Microservices direkt miteinander kommunizieren, um so Funktionalität von anderen Services aufzurufen. Die meist verbreitetste Technologie ist HTTP REST. Es gibt auch weitere Ansätze wie SOAP oder Message-Systeme.
-
-Als Application Programming Interface (API) wird eine Programmierschnittstelle bezeichnet. Diese Schnittstellenart, erlaubt anderen Programmen die Anbindung an ein System. Bei der Schnittstelle, die in diesem Projekt entworfen wird, handelt es sich um eine sogenannte Programmierschnittstelle. Mit einer API wird sichergestellt, dass die Unternehmensinfrastruktur flexibel, zukunftssicher und nicht abhängig von einer einzigen Technologie bleibt. Auch können mit einer API ganz einfach Daten freigegeben und universell zur Verfügung gestellt werden. [\cite[S. 95ff]{koflerDigitale2018}]
-
-Die API in diesem Projekt soll nach dem REST-Architekturstil erstellt werden. Representational State Transfer (REST) ist ein weit verbreitetes Paradigma, welches die Struktur und das Verhalten von Schnittstellen vereinheitlichen soll. Eine REST-API verwendet HTTP-Anfragen mit verschiedenen HTTP-Anfragemethoden, um auf Daten zuzugreifen. Jeder Endpunkt einer REST-API muss eine eindeutige Adresse, den Uniform Resource Locator (URL), besitzen. [\cite[S. 76ff]{fieldingArchitectural2000}]
-
-REST basiert auf den folgenden sechs Prinzipien:
-\begin{itemize}
-\item Client-Server: Ein Server stellt einen Dienst bereit, der bei Bedarf vom Client angefragt wird.
-\item Zustandslosigkeit: Jede Anfrage eines Clients ist in sich geschlossen und enthält alle benötigten Informationen.
-\item Caching: HTTP-Caching soll verwendet werden.
-\item Einheitliche Schnittstelle: Die Ressourcen sollen klar adressierbar sein und alle Nachrichten sollen selbstbeschreibend sein.
-\item Mehrschichtige Systeme: Die Systeme sollen mehrschichtig aufgebaut sein.
-\item Code on Demand: Nur im Bedarfsfall wird Code an den Client zur lokalen Ausführung übermittelt.
-\end{itemize}
-
-
-\subsection{Docker}
-
-Anwendungen mit Microservice-Architektur verwenden heutzutage häufig Containervirtualisierung zur Bereitstellung. Durch die leichtgewichtige Containervirtualisierung können mehrere isolierte Instanzen eines Betriebssystem auf dem selben Kernel ausgeführt werden. Dadurch sind die Container ressourcenschonender als die herkömmliche Virtualisierung mittels Hypervisor, bei dem jede virtuelle Maschine ein eigenes vollständiges Betriebssystem ausführt. Außerdem verbraucht der Hypervisor selbst auch Rechenleistung und Arbeitsspeicher.
+Die Integration und Kommunikation der einzelnen Microservices ist einer der wichtigsten Aspekte. Die Integration und Kommunikation der Microservices ist auf drei verschiedenen Ebenen denkbar.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/containervirtualisierung.png}
+    \includegraphics[width=0.60\textwidth]{figures/IntegrationMicroservices.png}
+    \caption{Integration von Microservices auf verschiedenen Ebenen \parencite[vgl.][S. 167]{wolffMicroservices2018}}
+\end{figure}
+
+Auf Datenbank-Ebene können Microservices integriert werden, indem sie auf dieselbe Datenbank zugreifen. Diese Methode ist einfach zu implementieren, aber bringt jedoch Nachteile mit sich \parencite[vgl.][S. 69]{newmanMicroservices2015}. Wenn durch Änderungen in einem Microservice die Datenstruktur angepasst wird, wirkt sich das auf die anderen Microservices aus und die Unabhängigkeit wird reduziert. Auch die Technologiefreiheit wird dadurch beschränkt. Eigene Datenbanken oder zumindest Datenbankschemata erlauben so mehr Freiheiten und eine schnellere Änderung von Datenstrukturen.
+
+Die Benutzerschnittstelle oder \ac{UI} ist die Ebene auf der alle Funktionalitäten der Microservices zusammengeführt werden. Um auch hier ein hohe Unabhängigkeit zu gewährleisten, ist es ratsam jeden Microservice mit einer UI auszustatten. Sommit könnten alle Änderungen, egal ob sie UI, Logik, oder Datenbank betreffen, von einem Entwicklerteam umgesetzt werden. Das Problem ist jedoch, dass \acp{} schnell sehr umfangreich werden und so einen Microservice unnötig groß machen. Außerdem benötigen moderne Anwendungen häufig unterschiedliche Frontends für verschiedene Gerätetypen. Deshalb werden Frontends häufig weiterhin monolithisch Aufgebaut. Mittlerweile gibt es jedoch auch immer mehr Micro-Frontends, welche den Microservice-Ansatz auf Frontends übertragen \parencite[vgl.][S. 1]{peltonenMotivations2021}.
+
+Zuletzt können Microservices auf Logik-Ebene miteinander verbunden werden. Microservices müssen untereinander kommunizieren, wenn sie die Funktionalität eines anderen Microservices benötigen. Wichtig dabei ist, dass die Microservices trotzdem eine größtmögliche Unabhängigkeit bewahren. Zu viel Kommunikation zwischen zwei Microservices sind ein Hinweis auf eine schlechte Aufteilung \parencite[vgl.][S. 104]{wolffMicroservices2018}. Zyklische Abhängigkeiten sollten unter allen Umständen vermieden werden. Die Kommunikation läuft über \acp{API}. Eine beliebter Architekturstil für \acp{API} ist \ac{REST}. \ac{REST} vereinheitlicht die Struktur und das Verhalten von Schnittstellen \parencite[vgl.][S. 76]{fieldingArchitectural2000}. Bei einer \ac{REST}-\acp{API} gibt es eine Vielzahl von Ressourcen, die über eindeutige \acp{URI}, identifiziert werden. Die Ressourcen können über \acs{HTTP}-Anfragen mit verschiedenen \acs{HTTP}-Anfragemethoden manipuliert werden.
+
+\subsection{Docker}
+
+Anwendungen mit Microservice-Architektur verwenden häufig Containervirtualisierung zur Bereitstellung. Durch die leichtgewichtige Containervirtualisierung können mehrere isolierte Instanzen eines Betriebssystems auf dem selben Kernel ausgeführt werden. Dadurch sind die Container ressourcenschonender als die herkömmliche Virtualisierung mittels Hypervisor, bei dem jede virtuelle Maschine ein eigenes vollständiges Betriebssystem ausführt \parencite[vgl.][S. 166f]{newmanMicroservices2015}.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/VergleichVirtualisierung.png}
     \caption{Vergleich Virtualisierung mittels Hypervisor und Container}
 \end{figure}
 
-Für die Ausführung einer Anwendung werden Abhängigkeiten wie Bibliotheken, Compiler und Interpreter benötigt. Des Weiteren muss die Anwendung richtig konfiguriert werden. Vor allem bei einer Microservice-Architektur kann das ein Problem werden, da die Microservices über große Netzwerke verteilt auf verschiedenartigen Rechnern bereitgestellt werden sollen. Containervirtualisierung löst dieses Problem, mit einem standardisierten Image-Datei, das die Anwendung mitsamt aller Abhängigkeiten und Konfigurationen beinhaltet [\cite[S. 9]{arundelCloud2019}]. Diese Image-Datei läuft unabhängig von der Plattform auf jedem Rechner, sofern die zugehörige Containervirtualisierungssoftware installiert ist. \\
-\\
-Eine freie Software zur Containervirtualisierung ist Docker. Es ergänzt die Containervirtualisierung mit benutzerfreundlichen Werkzeugen  und ist der Branchenstandard für Containervirtualisierung. Docker basiert auf der Virtualisierung mit Linux-Containern. Durch herkömmliche Virtualisierung kann Docker jedoch auch auf anderen Betriebssystemen betrieben werden. Im Folgenden werden die wichtigsten Begriffe und Funktionen von Docker näher beschrieben.
+Für die Ausführung einer Anwendung werden Abhängigkeiten wie zum Beispiel Bibliotheken, Compiler und Interpreter benötigt. Des Weiteren muss die Anwendung richtig konfiguriert werden. Vor allem bei einer Microservice-Architektur kann das ein Problem werden, da die Microservices über große Netzwerke verteilt auf verschiedenartigen Rechnern bereitgestellt werden sollen. Containervirtualisierung löst dieses Problem mit einem standardisierten Image-Datei, das die Anwendung mitsamt aller Abhängigkeiten und Konfigurationen beinhaltet \parencite[vgl.][S. 9]{arundelCloud2019}. Diese Image-Datei läuft unabhängig von der Plattform auf jedem Rechner, sofern die zugehörige Containervirtualisierungssoftware installiert ist.
+
+Eine freie Software zur Containervirtualisierung ist Docker \parencite[vgl.][]{dockerinc.Docker2022}. Sie ist die beliebteste und verbreitetste Software für diesen Zweck \parencite[vgl.][S. 20]{hightowerKubernetes2018} und ergänzt die Containervirtualisierung um benutzerfreundliche Werkzeuge. Docker basiert auf der Virtualisierung mit Linux-Containern. Durch herkömmliche Virtualisierung kann Docker jedoch auch auf anderen Betriebssystemen betrieben werden. Im Folgenden werden die wichtigsten Begriffe und Funktionen von Docker näher beschrieben.
 
 \subsubsection{Docker Image}
 
@@ -152,15 +131,13 @@ Ein Container ist die aktive Instanz eines Images. Er besitzt eine begrenzte Leb
 
 \subsection{Kubernetes}
 
-Wenn Microservices in Containern bereitgestellt werden, wird es schnell nicht mehr möglich, die Container manuell bereitzustellen. Auch die Skalierung und die Lastverteilung gestaltet sich als aufwendig. Die Open-Source-Plattform Kubernetes versucht diese Probleme zu lösen. Der Name "Kubernetes" stammt aus dem griechischen und bedeutet soviel wie Steuermann. Kubernetes hilft bei der Koordination und Sequenzierung verschiedener Aktivitäten. Darüber hinaus unterstütze die Plattform bei der Verwaltung der verfügbaren Ressourcen und bei einer effizienten Lastverteilung [\cite[S. 11]{arundelCloud2019}]. Kubernetes bietet somit viele Funktionen, die helfen eine Microservice-Architektur umzusetzen. Häufig wird Kubernetes mit Docker verwendet, es unterstützt aber auch andere Anwendungen zur Containervirtualisierung.
+Wenn Microservices in Containern bereitgestellt werden, wird es schnell nicht mehr möglich, die Container manuell zu verwalten. Service Discovery, Skalierung und die Lastverteilung gestaltet sich als aufwendige Probleme. Die Open-Source-Plattform Kubernetes versucht diese Probleme zu lösen \parencite[vgl.][]{linuxfoundationKubernetes2022}. Der Name \glqq Kubernetes\grqq{} stammt aus dem griechischen und bedeutet soviel wie Steuermann. Kubernetes hilft bei der Koordination und Sequenzierung verschiedener Aktivitäten sowie bei der Verwaltung der verfügbaren Ressourcen und bei einer effizienten Lastverteilung \parencite[vgl.][S. 11]{arundelCloud2019}. Kubernetes bietet somit viele Funktionen, die die Bereitstellung von Microservices erleichtern. Häufig wird Kubernetes mit Docker verwendet, es unterstützt aber auch andere Anwendungen zur Containervirtualisierung.
 
 \subsubsection{Aufbau}
 
-Die größte Organisationseinheit der Plattform ist ein Kubernetes Cluster. Ein Cluster besteht aus mindestens einem Control Plane und einem Node. Der Control Plane verwaltet sämtliche Nodes. Um Ausfallsicherheit zu gewährleisten können auch mehrere Control Planes in einem Cluster betrieben werden. Ein Control Plane enthählt eine Key-Value-Datenbank etcd. In ihr wird die gesamte Konfiguration des Clusters gespeichert. Des Weiteren enthält der Control Plane einen \ac{API}-Server, mit der die Nodes kommunizieren. Auch externe Komponenten können mit ac{API}-Server kommunizieren und so Informationen abfragen oder das Cluster konfigurieren. Der Controller Manager steuert über den ac{API}-Server die einzelnen Nodes. Des Weiteren besitzt der Control Plane einen Scheduler, der die Last verteilt und überwacht.  \\
-\\
-In der Regel besteht ein Cluster aus vielen Nodes. Dabei kann es sich um physische Rechner aber auch um virtuelle Maschinen handeln. Auf den Nodes laufen die Container mit den eigentlichen Anwendungen. Außerdem besitzt jeder Node einen Kubelet. Dieser Kubelet kommuniziert mit dem Controller Manager und verwaltet den Status der Container auf dem jeweiligen Node. \\
-\\
-{https://kubernetes.io/docs/concepts/overview/components/}
+Die größte Organisationseinheit der Plattform ist ein Kubernetes Cluster. Ein Cluster besteht aus mindestens einem Control Plane und einem Node. Der Control Plane verwaltet sämtliche Nodes. Um Ausfallsicherheit zu gewährleisten können auch mehrere Control Planes in einem Cluster betrieben werden. Ein Control Plane enthählt eine Key-Value-Datenbank namens etcd. In ihr wird die gesamte Konfiguration des Clusters gespeichert. Des Weiteren enthält der Control Plane einen \ac{API}-Server, mit der die Nodes kommunizieren. Auch externe Komponenten können mit ac{API}-Server kommunizieren und so Informationen abfragen oder das Cluster konfigurieren. Der Controller Manager steuert über den ac{API}-Server die einzelnen Nodes. Des Weiteren besitzt der Control Plane einen Scheduler, der die Last verteilt und überwacht.
+
+In der Regel besteht ein Cluster aus vielen Nodes. Dabei kann es sich um physische Rechner aber auch um virtuelle Maschinen handeln. Auf den Nodes laufen die Container mit den eigentlichen Anwendungen. Außerdem besitzt jeder Node einen Kubelet. Dieser Kubelet kommuniziert mit dem Controller Manager und verwaltet den Status der Container auf dem jeweiligen Node.
 
 \begin{figure}[H] 
     \centering
@@ -170,40 +147,34 @@ In der Regel besteht ein Cluster aus vielen Nodes. Dabei kann es sich um physisc
 
 \subsubsection{Objekte}
 
-Kubernetes stellt eine Reihe von abstrakten Objekten zur Verfügung, mit denen der Status des Systems dargestellt wird und welche es erleichtern eine Microservice-Architektur zu bauen [\cite[S. 13]{hightowerKubernetes2018}]. Diese Objekte werden in Manifesten beschrieben. Bei den Manifesten handelt es sich um YAML-Dateien. Die Manifeste sind deklarativ aufgebaut, das bedeutet der gewünschte Ausgangszustand wird beschrieben. Nachdem das Manifest übergeben wurde, führt Kubernetes die entsprechenden Aktionen aus, um den beschriebenen Zustand zu erreichen. \\
-\\
-Pods sind die kleinste einsetzbare Einheit von Kubernetes. Ein Pod repräsentiert eine einen einzelnen Container oder eine Gruppe von Containern. Alle Container in einem Pod laufen immer auf dem gleichen Node. Um eine Menge zusammengehöriger Pods zu verwalten, gibt es Deployments. Deployments repräsentieren eine Anwendung. 
+Kubernetes stellt eine Reihe von abstrakten Objekten zur Verfügung, mit denen der Status des Systems dargestellt wird und welche es erleichtern eine Microservice-Architektur zu bauen [\cite[S. 13]{hightowerKubernetes2018}]. Diese Objekte werden in Manifesten beschrieben. Bei den Manifesten handelt es sich um YAML-Dateien. Die Manifeste sind deklarativ aufgebaut, das bedeutet der gewünschte Ausgangszustand wird beschrieben. Nachdem das Manifest übergeben wurde, führt Kubernetes die entsprechenden Aktionen aus, um den beschriebenen Zustand zu erreichen.
 
+Zu den grundlegenden Objekten gehören die Folgenden:
 \begin{itemize}
-\item Pods sind die kleinste einsetzbare Einheit. Ein Pod besteht aus einem Container oder mehreren zusammengehörigen Containern.
-\item: Namespaces werden zur logischen Unterteilung des Clusters verwendet. Sie können zur Isolation verschiedener Entwicklerteams oder Anwendungsmodule genutzt werden.
-\item: Services bieten Adressen und Lastverteilung für einen Pod oder mehrere gleichartige Pods. Pods sind temporäre Ressourcen, sie können gestartet und gestoppt werden und das auf allen Nodes im Cluster. Durch Skalierung kann es viele gleichartige Pods geben. Ein Service stellt einen festen Endpunkt bereit, unter dem alle dieser Pods erreichbar sind. Die Lastverteilung auf die einzelnen Pods wird von Kubernetes übernommen. Kubernetes hat viele Erweiterungen. Die Services sind dem Controll Plane bekannt und somit übernimmt er die Service Discovery. DNS!
-\item: Volumes bieten persistenten Speicher, der auch nach der Lebenszeit eines Pods bestehen bleibt.
-\item: ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare. Sie können beispielsweise von Pods als Umgebungsvariablen konsumiert werden.
-\item Deployments repräsentieren eine zustandslose Anwendung beziehungsweise eine Microservice. Durch Deployments kann eine Menge an zusammengehörigen Pods verwaltet und konfiguriert werden. 
-\item StatefulSets sind vergleichbar mit Deployments, jedoch für zustandsbezogene Anwendungen.
+\item Pods sind die kleinste einsetzbare Einheit. Ein Pod repräsentiert eine einen einzelnen Container oder eine Gruppe von Containern. Alle Container in einem Pod laufen immer auf dem gleichen Node.
+\item Deployments
+\item Namespaces werden zur logischen Unterteilung des Clusters verwendet. Sie können zur Isolation verschiedener Entwicklerteams oder Anwendungsmodule genutzt werden.
+\item Volumes bieten persistenten Speicher, der auch nach der Lebenszeit eines Pods bestehen bleibt.
+\item ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare. Sie können beispielsweise von Pods als Umgebungsvariablen konsumiert werden.
 \item Labels können anderen Objekten zugeordnet werden, um diese zu Gruppieren.
 \end{itemize}
 
-Die Kubernetes Objekte werden durch Ressourcen-Manifeste beschrieben. Manifeste
-sind deklarativ und üblicherweise im YAML-Dateiformat.
+In den nächsten Abschnitten werden noch ein paar weitere Objekte beschrieben, welche für die Bereitstellung, Service Discovery und Skalierung nützlich sind.
 
-%\subsubsection{Workloads}
-%
-%-> Deployments
-%-> StatefulSets
-%
-%\subsubsection{Service Discovery}
-%
-%-> Services (auch Load Balancing)
-%
-%\subsubsection{Skalierung}
-%
-%-> Autoscaling
+\subsubsection{Workloads}
+
+
+
+\subsubsection{Service Discovery}
+Kubernetes ist ein dynamisches System. Ein Microservice, der in einem Pod läuft, kann schnell gestoppt, gestartet oder repliziert werden. Da auch mehrere Instanzen eines Microservices gleichzeitig laufen können, wird ein fester Enpunkt benötigt, über den gleichartige Pods erreichbar sind. In Kubernetes kann dafür ein Service-Objekt erstellt werden. Ein Service stellt eine unveränderliche virtuelle IP-Adresse bereit, welche Kubernetes per Lastverteilung auf die passenden Pods verteilt. Innerhalb des Clusters kann ein Service auch über den Service-Namen aufgerufen werden, welcher mit \ac{DNS} aufgelöst wird. Ein Service vom Typ ClusterIP ist von außerhalb nicht aufrufbar. Mit dem Typ NodePort wird die Kommunikation auf einen Port aller Nodes weitergeleitet und der Service wird somit von außen zugänglich.
+
+\subsubsection{Skalierung}
+
+
 
 \subsubsection{Kubectl}
 
-Kubectl ist der offizielle Kubernetes-Client und dient der Steuerung von Kubernetes. Bei Kubectl handelt es sich um ein Befehlszeilenwerkzeug für die Interaktion mit dem \ac{API}-Server des Control Planes. Mit kubetl können beispielsweise Objekte verwaltet werden und der Status des gesamten Clusters untersucht werden.
+kubectl ist der offizielle Kubernetes-Client und dient der Steuerung von Kubernetes. Bei kubectl handelt es sich um ein \ac{CLI} für die Interaktion mit dem \ac{API}-Server des Control Planes. Mit kubectl können beispielsweise Objekte verwaltet werden und der Status des gesamten Clusters untersucht werden.
 
 \subsubsection{Minikube}
 
