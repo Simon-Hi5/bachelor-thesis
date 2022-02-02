@@ -70,6 +70,7 @@
 
 \renewcommand\lstlistlistingname{Quelltextverzeichnis}
 
+\definecolor{backcolour}{HTML}{F2F2F2}
 \lstset{
     backgroundcolor=\color{white},
     basicstyle=\footnotesize\ttfamily,
@@ -83,9 +84,10 @@
     showspaces=false,
     numbers=left,
     numberstyle=\tiny,
-    frame=lines,
     aboveskip=20pt,
-    belowskip=20pt
+    belowskip=20pt,
+    showtabs=false,   
+    breaklines=true         
 }
 
 \lstdefinelanguage{Dockerfile}
