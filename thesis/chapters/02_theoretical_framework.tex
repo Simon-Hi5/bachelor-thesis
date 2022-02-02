@@ -147,30 +147,39 @@ In der Regel besteht ein Cluster aus vielen Nodes. Dabei kann es sich um physisc
 
 \subsubsection{Objekte}
 
-Kubernetes stellt eine Reihe von abstrakten Objekten zur Verfügung, mit denen der Status des Systems dargestellt wird und welche es erleichtern eine Microservice-Architektur zu bauen [\cite[S. 13]{hightowerKubernetes2018}]. Diese Objekte werden in Manifesten beschrieben. Bei den Manifesten handelt es sich um YAML-Dateien. Die Manifeste sind deklarativ aufgebaut, das bedeutet der gewünschte Ausgangszustand wird beschrieben. Nachdem das Manifest übergeben wurde, führt Kubernetes die entsprechenden Aktionen aus, um den beschriebenen Zustand zu erreichen.
+Kubernetes stellt eine Reihe von abstrakten Objekten zur Verfügung, mit denen der Status des Systems dargestellt wird und welche es erleichtern eine Microservice-Architektur zu bauen \parencite[vgl.][S. 13]{hightowerKubernetes2018}. Diese Objekte werden in Manifesten beschrieben. Bei den Manifesten handelt es sich üblicherweise um YAML-Dateien. Die Manifeste sind deklarativ aufgebaut, das bedeutet der gewünschte Ausgangszustand wird beschrieben. Nachdem das Manifest übergeben wurde, führt Kubernetes die entsprechenden Aktionen aus, um den beschriebenen Zustand zu erreichen.
 
 Zu den grundlegenden Objekten gehören die Folgenden:
 \begin{itemize}
 \item Pods sind die kleinste einsetzbare Einheit. Ein Pod repräsentiert eine einen einzelnen Container oder eine Gruppe von Containern. Alle Container in einem Pod laufen immer auf dem gleichen Node.
-\item Deployments
 \item Namespaces werden zur logischen Unterteilung des Clusters verwendet. Sie können zur Isolation verschiedener Entwicklerteams oder Anwendungsmodule genutzt werden.
 \item Volumes bieten persistenten Speicher, der auch nach der Lebenszeit eines Pods bestehen bleibt.
 \item ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare. Sie können beispielsweise von Pods als Umgebungsvariablen konsumiert werden.
 \item Labels können anderen Objekten zugeordnet werden, um diese zu Gruppieren.
+\item ReplicaSets sorgen dafür, dass eine bestimmte Anzahl von Kopien eines Pods gleichzeitig laufen zu lassen.
+\item Deployments repräsentieren eine zustandslose Anwendung. Deployments verwenden ReplicaSets. Ein Deployment überwacht fortlaufend den Status der Container und kann sie beispielsweise bei Bedarf neu starten.
 \end{itemize}
 
-In den nächsten Abschnitten werden noch ein paar weitere Objekte beschrieben, welche für die Bereitstellung, Service Discovery und Skalierung nützlich sind.
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/KubernetesDeployment.png}
+    \caption{Aufbau von einem Deployment}
+\end{figure}
 
-\subsubsection{Workloads}
-
-
+In den nächsten Abschnitten werden noch ein paar weitere Objekte beschrieben, welche für die Service Discovery und Skalierung nützlich sind.
 
 \subsubsection{Service Discovery}
-Kubernetes ist ein dynamisches System. Ein Microservice, der in einem Pod läuft, kann schnell gestoppt, gestartet oder repliziert werden. Da auch mehrere Instanzen eines Microservices gleichzeitig laufen können, wird ein fester Enpunkt benötigt, über den gleichartige Pods erreichbar sind. In Kubernetes kann dafür ein Service-Objekt erstellt werden. Ein Service stellt eine unveränderliche virtuelle IP-Adresse bereit, welche Kubernetes per Lastverteilung auf die passenden Pods verteilt. Innerhalb des Clusters kann ein Service auch über den Service-Namen aufgerufen werden, welcher mit \ac{DNS} aufgelöst wird. Ein Service vom Typ ClusterIP ist von außerhalb nicht aufrufbar. Mit dem Typ NodePort wird die Kommunikation auf einen Port aller Nodes weitergeleitet und der Service wird somit von außen zugänglich.
+Kubernetes ist ein dynamisches System. Ein Microservice, der in einem Pod läuft, kann schnell gestoppt, gestartet oder repliziert werden. Da auch mehrere Instanzen eines Microservices gleichzeitig laufen können, wird ein fester Enpunkt benötigt, über den gleichartige Pods erreichbar sind. In Kubernetes kann dafür ein Service-Objekt erstellt werden. Ein Service stellt eine unveränderliche virtuelle IP-Adresse bereit, welche Kubernetes per Lastverteilung auf die passenden Pods verteilt. Innerhalb des Clusters kann ein Service auch über den Service-Namen aufgerufen werden, welcher mit dem \ac{DNS} aufgelöst wird. Ein Service vom Typ ClusterIP ist von außerhalb des Clusters nicht aufrufbar. Mit dem Typ NodePort kann der Service von außen zugänglich gemacht werden. Dazu wird ein fester Port auf allen Nodes geöffnet und der Datenverkehr über diesen Port an den entsprechenden Service weitergeleitet.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/KubernetesService.png}
+    \caption{Service als Endpunkt für eine Gruppe von Pods \parencite[vgl.][S. 67]{arundelCloud2019}}
+\end{figure}
 
 \subsubsection{Skalierung}
 
-
+Über ReplicaSets lässt sich eine feste Anzahl von Kopien eines Pods festlegen. In der Praxis soll die Anzahl häufig nach der Auslastung skaliert werden. Diese Aufgabe kann Kubernetes automatisiert werden. Dafür wird das das Objekt \ac{HPA} angeboten. Mit dem \ac{HPA} kann beispielsweise eine Skalierung in Abhängigkeit der CPU-Auslastung vorgenommen werden. Des Weiteren wird in dem Objekt angegeben, wie viele Kopien mindestens vorhanden sein sollten und wie viele maximal erstellt werden dürfen. 
 
 \subsubsection{Kubectl}
 
