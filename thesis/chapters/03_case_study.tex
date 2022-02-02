@@ -1,25 +1,25 @@
-\section{Erläuterung Fallstudie}
-Nachdem die theoretischen Grundlagen nun erläutert worden sind, wird mit der Fallstudie begonnen. Für die Fallstudie soll ein vereinfachtes \ac{CRM}-System entwickelt und bereitgestellt werden. Ein \ac{CRM}-System ist eine Software für das Kundenbeziehungsmanagement. In diesem Kapitel werden die Anforderungen an das \ac{CRM}-System beschrieben.
+\section{Erläuterung Fallbeispiel}
+Ziel des Fallbeispieles ist es, ein Verfahren vom Entwurf bis zur Bereitstellung von containerisierten Microservices mit Kubernetes zu implementieren. Anschließend sollen auf Basis dieses Verfahrens Aussagen zur Umsetzung und dem Anwendungsgebiet getroffen werden können. Als Beispiel wird ein vereinfachtes \ac{CRM}-System verwendet. In diesem Kapitel werden die Vorgaben an das Fallbeispiel beschrieben.
 
 \subsection{Anwendungseinsatz}
-Das CRM-System soll für das \ac{B2C} Umfeld entwickelt werden. Die Kernfunktionalität des zu erstellenden CRM-Systems ist das Anlegen, Anzeigen, Bearbeiten und Löschen von Kontakten, Interaktionen und Verkaufschancen. Die Software soll mit einer Microservice-Architektur umgesetzt werden und containerisiert mit Kubernetes bereitgestellt werden. Das System soll über eine grafische Benutzeroberfläche mit einem Webbrowser bedienbar sein.
+Ein \ac{CRM}-System ist eine Software für das Kundenbeziehungsmanagement. CRM-Systeme sind komplexe betriebliche Anwendungssysteme. Durch ihre Größe und vielen verwobenen Diensten gestaltet sich der Entwurf und die Weiterentwicklung häufig schwierig. \ac{CRM}-System haben eine große fachliche Breite, was zu einem hohen Koordinationsaufwand bei der Entwicklung und Bereitstellung führt \parencite[vgl.][S. 62]{trempArchitekturen2021}. Dadurch eignet sich ein \ac{CRM}-System als gutes Beispiel für die Umsetzung mit einer Microservice-Architektur, welche die Probleme weitgehend entschärfen soll. 
+
+Das \ac{CRM}-System soll für das \ac{B2C} Umfeld entwickelt werden. Es soll bei der Verwaltung von Kontakten beziehungsweise Kunden helfen. Zu jedem Kontakt sollen Informationen und eine Historie mit allen Interaktionen abgespeichert werden. Darüber hinaus soll es auch möglich sein Verkaufschancen zu verwalten und einem Kontakt zuzuordnen.
 
 \subsection{Anwendungsfunktionen}
-Das CRM-System soll die folgenden primären Funktionen implementieren:
+Die Kernfunktionalität des zu erstellenden \ac{CRM}-Systems ist das Anlegen, Anzeigen, Bearbeiten und Löschen von Kontakten, Interaktionen und Verkaufschancen. Konkret sollen die folgenden funktionalen Anforderungen von dem System erfüllt werden:
 \begin{itemize}
 \item Kontakte sollen mit Namen, Geburtsdatum, Geschlecht, Telefonnummer, E-Mail-Adresse und Adresse angelegt, angezeigt, geändert und gelöscht werden können
 \item Interaktionen mit einem Kontakt sollen mit Art der Interaktion, Datum, Uhrzeit, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
 \item Mögliche Verkaufschancen sollen mit Status, voraussichtlichem Abschlussdatum, Verkaufswert, Rabatt, Budget des Kunden, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
 \end{itemize} 
 
-Alle Funktionen sollen über eine grafische Benutzeroberfläche mit dem Webbrowser bedienbar sein. Darüber hinaus sollen alle Funktionen auch über eine REST-API aufrufbar sein. Die Anwendung sollte flexibel skaliert werden können. \\
-\\
-Die Zugriffskontrolle und Benutzersicherheit wird bei der Anwendung nicht beachtet.
+Alle Funktionen sollen über eine sowohl über eine einfache grafische Benutzeroberfläche mit dem Webbrowser bedienbar sein, als auch über eine REST-API angesteurt werden können. Durch eine Microservice-Architektur, sollen die einzelnen Module nur lose gekoppelt sein. Dadurch soll eine flexible Skalierung und Erweiterbarkeit der Anwendung gewährleistet werden. Authentifizierung, Autorisierung und andere Sicherheitsfunktionen sollen nicht beachtet werden.
 
 \clearpage
 \section{Entwurf der Microservices}
 
-An dieser Stelle sei auch erwähnt, dass der gesamte Quellcode im folgenden GitHub Repository einsehbar ist: \href{https://github.com/SimonHirner/bachelor-thesis}{github.com/SimonHirner/bachelor-thesis}.
+
 
 Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Gesamtsystem. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
 
@@ -110,6 +110,8 @@ Für die Architektur der Microservices wird eine hexagonale Architektur (Ports u
 \clearpage
 \section{Implementierung}
 
+An dieser Stelle sei auch erwähnt, dass der gesamte Quellcode im folgenden GitHub Repository einsehbar ist: \href{https://github.com/SimonHirner/bachelor-thesis}{github.com/SimonHirner/bachelor-thesis}.
+
 In diesem Kapitel wird das CRM-System dem Entwurf nach implementiert. Als Erstes wird die Implementierung der Microservices erklärt, da alle drei durch den gleichen Technologie-Stack sehr ähnlich sind. Anschließend wird das Frontend, welches alle Microservices integriert, implementiert.
 
 \subsection{Microservices}
@@ -144,7 +146,7 @@ Das Frontend. Das Frontend soll später auch mit Kubernetes bereitgestellt werde
 \clearpage
 \section{Bereitstellung mit Kubernetes}
 
-Im letzten Teil der Fallstudie wird das fertige CRM-System nun mit Kubernetes bereitgestellt.
+Im letzten Teil des Fallbeispiels wird das fertige CRM-System nun mit Kubernetes bereitgestellt.
 
 \subsection{Containerisierung}
 

@@ -4,7 +4,7 @@
 
 \documentclass[
 	a4paper,
-	12pt,
+	fontsize=12pt,
 	bibtotoc,
 	listof=totoc,
 	titlepage,
@@ -58,6 +58,7 @@
 
 \addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
+\thispagestyle{empty}
 
 \clearpage
 \pagenumbering{Roman}
@@ -67,11 +68,8 @@
 
 \clearpage
 \thispagestyle{plain}
-\listoftables
-
-\clearpage
-\thispagestyle{plain}
 \lstlistoflistings
+\listoftables
 
 \clearpage
 \thispagestyle{plain}
@@ -92,7 +90,7 @@
 
 \clearpage
 \pagenumbering{Roman}
-\setcounter{page}{5}
+\setcounter{page}{4}
 \thispagestyle{plain}
 \printbibheading
 \printbibliography[type=book, heading=subbibliography, title={Bücher}]
