@@ -9,50 +9,53 @@ Das \ac{CRM}-System soll für das \ac{B2C} Umfeld entwickelt werden. Es soll bei
 \subsection{Anwendungsfunktionen}
 Die Kernfunktionalität des zu erstellenden \ac{CRM}-Systems ist das Anlegen, Anzeigen, Bearbeiten und Löschen von Kontakten, Interaktionen und Verkaufschancen. Konkret sollen die folgenden funktionalen Anforderungen von dem System erfüllt werden:
 \begin{itemize}
-\item Kontakte sollen mit Namen, Geburtsdatum, Geschlecht, Telefonnummer, E-Mail-Adresse und Adresse angelegt, angezeigt, geändert und gelöscht werden können
-\item Interaktionen mit einem Kontakt sollen mit Art der Interaktion, Datum, Uhrzeit, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
-\item Mögliche Verkaufschancen sollen mit Status, voraussichtlichem Abschlussdatum, Verkaufswert, Rabatt, Budget des Kunden, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
+\item Kontakte sollen mit Identifikationsnummer, Namen, Geburtsdatum, Geschlecht, Telefonnummer, E-Mail-Adresse und Adresse angelegt, angezeigt, geändert und gelöscht werden können
+\item Interaktionen mit einem Kontakt sollen mit Identifikationsnummer, Art der Interaktion, Datum, Uhrzeit, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
+\item Mögliche Verkaufschancen sollen mit Identifikationsnummer, Status, voraussichtlichem Abschlussdatum, Verkaufswert, Rabatt, Budget des Kunden, Notizen und dem zugehörigen Kontakt angelegt, angezeigt, geändert und gelöscht werden können
 \end{itemize} 
 
-Alle Funktionen sollen über eine sowohl über eine einfache grafische Benutzeroberfläche mit dem Webbrowser bedienbar sein, als auch über eine REST-API angesteurt werden können. Durch eine Microservice-Architektur, sollen die einzelnen Module nur lose gekoppelt sein. Dadurch soll eine flexible Skalierung und Erweiterbarkeit der Anwendung gewährleistet werden. Authentifizierung, Autorisierung und andere Sicherheitsfunktionen sollen nicht beachtet werden.
+Alle Funktionen sollen über eine sowohl über eine einfache grafische Benutzeroberfläche mit dem Webbrowser bedienbar sein. Des Weiteren sollen auch alle Funktionen über eine API angesteuert werden können, um die Integrierbarkeit mit anderen Systemen zu erleichtern. Durch eine Microservice-Architektur, sollen die einzelnen Module nur lose gekoppelt sein. Dadurch soll eine flexible Skalierung und Erweiterbarkeit der Anwendung gewährleistet werden. Authentifizierung, Autorisierung und andere Sicherheitsfunktionen sollen nicht beachtet werden.
 
 \clearpage
 \section{Entwurf der Microservices}
 
-
-
-Als Erstes wird die Architektur der Microservices festgelegt. Bei der Architektur kann zwischen Makro-Architektur und Mikro-Architektur unterschieden werden. Die Makro-Architektur befasst sich mit dem Gesamtsystem. In der Mikro-Architektur geht es um den Aufbau der einzelnen Microservices.
+Als Erstes wird die Microservice-Architektur entworfen. Dabei wird zuerst die Makro-Architektur des Gesamtsystems ausgearbeitet und anschließend die Mikro-Architektur der einzelnen Microservices festgelegt.
 
 \subsection{Makro-Architektur}
 
-Für die Makro-Architektur ist die genaue Umsetzung der einzelnen Microservices nicht relevant. Die Makro-Architektur ist besonders wichtig, da Veränderungen hier zu einem späteren Zeitpunkt sehr aufwendig werden können. Das Wichtigste ist die Aufteilung in Microservices nach der Fachlichkeit. Das CRM-System lässt sich in drei fachliche Bereiche unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung. Die Microservices werden nach den Bereichen aufgeteilt. Jeder dieser drei bereiche Besitzt ein eigenes Datenobjekt. Das  ist ein weiterer Hinweis für eine gute Aufteilung. Die Microervices machen ihre Dienste über REST-Schnittstellen verfügbar. Für die Skalierbarkeit ist es wichtig, dass die Microservices selbst keinen zustandlos sind. Alle persistenten Daten werden in Datenbanken gehalten.
+Die Makro-Architektur muss gut überlegt sein, da Veränderungen zu einem späteren Zeitpunkt sehr aufwendig werden können. Das Wichtigste ist eine gute fachliche Aufteilung der Microservices. Für die Aufteilung wird nach dem \ac{DDD} vorgegangen. Die Anwendung lässt sich in drei Bounded Contexts unterteilen: Kontaktverwaltung, Interaktionsverwaltung und Chancenverwaltung. Jeder dieser drei Bereiche besitzt ein eigenes Datenobjekt für einen Kontakt, eine Interaktion oder eine Chance. Da eine Interaktion und eine Chance einem Kontakt zugeordnet werden können, benötigen diese Bounded Contexts einen Teil der Kontaktdaten. Die Identifikationsnummer eines Kontaktes reicht aus, um einer Interaktion oder Chance einen eindeutigen Kontakt zuzuordnen. Daraus ergibt sich die folgenden Context Map, mit den drei Bounded Contexts und den Daten, an denen jeder Bounded Context interessiert ist. Anhand der identifizierten Kontextgrenzen wird die Anwendung in drei Microservices aufgeteilt.
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.71\textwidth]{figures/ContextMap.png}
+    \includegraphics[width=0.65\textwidth]{figures/ContextMap.png}
     \caption{Context Map}
     \label{fig:CRMENTWURF}
 \end{figure}
 
-Alle der drei eingeteilten Microservices sollen eine eigene Datenbank erhalten. Dadurch sind die Datenschemata übersichtlich und Änderungen haben nur unmittelbare Auswirkungen auf einen Microservice. \\
-\\
-Das Frontend wird monolithisch Aufgebaut und integriert alle Funktionalitäten der Microservices. Das Frontend ist dadurch einheitlich. Das System könnte auch um andere Frontends erweitert werden. Das Frontend wird dabei eine clientseitige Webanwendung, welche die REST-Schnittstellen der Microservices konsumiert. \\
-\\
-Da sich Interaktionen und Verkaufschancen einem Kontakt bzw. Kunden zuordnen lassen sollen, ist eine Abhängigkeit zwischen diesen Microservices zu erwarten. Auch die Kommunikation zwischen Microservices soll über die gleichen REST-Schnittstellen laufen. Daraus ergibt sich der folgende Entwurf. \\
-\\
+Nachdem die fachliche Einteilung erledigt ist, kann die technische Architektur entworfen werden. Zur flexiblen Skalierbarkeit müssen die Microservices zustandslos sein. Alle persistenten Daten werden also in einer Datenbank abgelegt. Um eine möglichst große Unabhängigkeit zwischen den Microservices zu haben, soll jeder Microservice einer eigenen Datenbank mit einem eigenen Datenbankschema zugeordnet werden. So können die Datenbanken geändert werden, ohne unbeabsichtigte Auswirkungen auf andere Microservices zu haben.
+
+Der Interaktions-Microservice und der Chancen-Microservice benötigen Informationen vom Kontakt-Microservice, damit eine Interaktion beziehungsweise einer Chance ein entsprechender Kontakt zugeordnet werden kann. Zwischen Kontaktverwaltung und Interaktionsverwaltung sowie zwischen Kontaktverwaltung und Chancenverwaltung ist somit eine Kommunikation nötig. Gibt es zu viele solcher Abhängigkeiten oder zyklische Aufrufe, sollte die Einteilung der Microservices überarbeitet werden. Außerdem sollen alle Funktionalitäten auch über eine API angeboten werden. Es bietet sich an, die Kommunikation zwischen den Microservices auch über diese \acp{API} abzuwickeln. 
+
+Um die Microservices klein zu halten soll ein einheitliches und zentrales Frontend entwickelt werden, welches alle Funktionalitäten der Microservices bündelt. Um die Funktionalitäten zu integrieren, greift das Frontend auch auf die \acp{API} der Microservices zu. Somit ergibt sich der folgende Architekturentwurf.
+
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.71\textwidth]{figures/CRMEntwurf.png}
-    \caption{Entwurf des \acp{CRM-System}}
+    \caption{Makro-Architektur des \ac{CRM}-Systems}
     \label{fig:CRMENTWURF}
 \end{figure}
 
-Die REST-Schnittstellen sollten einheitlich über alle Microservices hinweg sein. Die folgende Tabelle zeigt unter welchen Endpunkten, mit welchen HTTP-Methoden und welchen Parametern die REST-APIs aufrufbar sein sollen.
+Als Nächstes müssen die \acp{API} einheitlich spezifiziert werden. Die \ac{API} wird nach dem \ac{REST}-Architekturstil entworfen. Die Kommunikation erfolgt dabei über \ac{HTTP}. Die \ac{REST}-Ressourcen sollen im \ac{JSON}-Format dargestellt werden. Für jeden Microservice werden die Endpunkte unter der die API aufrufbar ist, die HTTP-Anfragemethode und die zu übergebenden Parameter bestimmt. Wie die einzelnen Ressourcen aufgebaut sind, wird erst in der Mikro-Architektur bestimmt, wenn das Datenmodell der einzelnen Microservices erstellt wurde.
 
-\begin{table}[H]
+\begin{figure}[H] 
 \centering
-    \begin{tabular}[H]{l|l|l|l}
-        Endpunkt & HTTP-Methode & Parameter & Beschreibung \\
+    \begin{tabular}[H]{|l|l|l|l|}
+    		\hline
+        \rowcolor{lightgray!50}
+        Endpunkt & Methode & Parameter & Beschreibung \\
+        \hline
+        \hline
+        \multicolumn{4}{|c|}{Microservice Kontaktverwaltung} \\
         \hline
         /contacts & GET & - & Gibt alle Kontakte zurück \\
         \hline
@@ -64,18 +67,73 @@ Die REST-Schnittstellen sollten einheitlich über alle Microservices hinweg sein
         \hline
         /contacts/\{ID\} & DELETE & - & Löscht einen Kontakt \\
         \hline
+        \hline
+        \multicolumn{4}{|c|}{Microservice Interaktionsverwaltung} \\
+        \hline
+        /interactions & GET & - & Gibt alle Interaktionen zurück \\
+        \hline
+        /interactions & POST & neue Interaktion & Fügt einen neue Interaktion hinzu \\
+        \hline
+        /interactions/\{ID\} & GET & - & Gibt eine Interaktion zurück \\
+        \hline
+        /interactions/\{ID\} & PUT & veränderte Interaktion & Ändert eine Interaktion \\
+        \hline
+        /interactions/\{ID\} & DELETE & - & Löscht eine Interaktion \\
+        \hline
+        \hline
+        \multicolumn{4}{|c|}{Microservice Chancenverwaltung} \\
+        \hline
+        /opportunity & GET & - & Gibt alle Chancen zurück \\
+        \hline
+        /opportunity & POST & neue Chance & Fügt einen neue Chance hinzu \\
+        \hline
+        /opportunity/\{ID\} & GET & - & Gibt eine Chance zurück \\
+        \hline
+        /opportunity/\{ID\} & PUT & veränderter Chance & Ändert eine Chance \\
+        \hline
+        /opportunity/\{ID\} & DELETE & - & Löscht eine Chance \\
+        \hline
     \end{tabular}
-    \caption{Prozessoren}
-\end{table}
+    \caption{Entwurf der REST-API}
+\end{figure}
 
-Für das Frontend wird React verwendet. [React Erklärung]
-Für alle drei Microservices wird derselbe Technologie-Stack verwendet, um den Entwicklungsaufwand geringer zu halten. Es wird Java mit dem Framework Spring Boot verwendet. Als Datenbank wird MongoDB eingesetzt. [MongoDB Erklärung] Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handelt es sich ein Werkzeug zur sprachunabhängigen Spezifikation von APIs. Swagger kann durch eine Abhängigkeit zu Spring Boot hinzu gefügt werden. Es erstellt automatisch eine Webseite mit der Dokumentation unserer API. Um das Monitoring, Service Discovery, Load Balancing wird mit Kubernetes gelöst. Unser System muss diese Aufgaben also nicht selbst bewältigen und diese Bestandteile werden erst in der Bereitstellung konfiguriert.
+\subsection{Mikro-Architektur}
 
-\subsection{Micro-Architektur}
+Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Dadurch besitzt man bei der Gestaltung der Mikro-Architektur viel Freiheit. Bei der Auswahl der Technologien wird auf bewährte und populäre Lösungen gesetzt.
 
-Die Mikro-Architektur befasst sich mit der Architektur eines einzelnen Microservice. Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Aus diesem Grund besitzt man eine große Freiheit bei der Auswahl. Es sollte die Architektur, welche am Simpelsten alle Anforderungen bietet. Der ausgewählte Technologie-Stack schränkt natürlich die möglichen Architekturen auch weiter ein.
+Die drei Microservices werden mit dem selben Technologie-Stack und einer ähnlichen Architektur entworfen, um den Entwicklungsaufwand zu reduzieren. Es wird Java in Verbindung mit dem Spring Boot Framework verwendet. Spring Boot ist beliebteste Framework in Java und durch die einfache Konfiguration gut geeignet für Microservices. Spring Boot ermöglicht eine schnelle Auswahl und Zusammenstellung von gewünschten Abhängigkeiten. Auch REST-APIs werden von Spring Boot natürlich unterstützt. Für die Datenbanken wird MongoDB verwendet. MongoDB ist eine modernes dokumentorientiertes Datenbankmanagementsystem. Daten werden als Dokumente mit einem \ac{JSON}-ähnlichen Aufbau verwaltet. 
 
-Unser System besteht aus drei Microservices und einem Frontend. Das Frontend dient lediglich zur Visualisierung und Verbindung aller Funktionen der drei Microservices. Die folgenden Domänenmodelle zeigen, welche Daten von den entsprechenden Microservices verwaltet werden müssen.
+Der Entwurf der drei Microservices ist größtenteils analog aufgebaut. Als Erstes werden die Datenmodelle der Microservices modelliert. Zur Modellierung der Datenmodelle werden UML-Klassendiagramme verwendet. UML ist eine grafische Modellierungssprache. Im Laufe der Arbeit werden noch weitere UML-Diagrammarten zum Einsatz kommen. Die Datenmodelle müssen die gewünschten Attribute aus den Anforderungen enthalten.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/DatenmodellKontakt.png}
+    \caption{Datenmodell Microservice Kontaktverwaltung}
+    \label{fig:CRMENTWURF}
+\end{figure} 
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/DatenmodellInteraktion.png}
+    \caption{Datenmodell Microservice Interaktionsverwaltung}
+    \label{fig:CRMENTWURF}
+\end{figure} 
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.71\textwidth]{figures/DatenmodellChance.png}
+    \caption{Datenmodell Microservice Chancenverwaltung}
+    \label{fig:CRMENTWURF}
+\end{figure} 
+
+Dafür wird die JavaScript-Bibliothek React eingesetzt. Es ist derzeit eine der beliebteste Frontendtechnologien. Anwendungen können aus Komponenten zusammengesetzt werden, welche effizient gerendert und aktualisiert werden.
+
+Für das Backend wird Java und das Spring Boot Framework verwendet. Spring Boot ermöglicht eine schnelle und automatische Konfiguration von Abhängigkeiten. Verschiedene Datenbankanbindungen und Unterstützung für REST APIs.
+
+
+ Die folgenden Domänenmodelle zeigen, welche Daten von den entsprechenden Microservices verwaltet werden müssen.
+
+Das Frontend wird dabei eine clientseitige Webanwendung
 
 \begin{figure}[H] 
     \centering
@@ -109,6 +167,11 @@ Für die Architektur der Microservices wird eine hexagonale Architektur (Ports u
 
 \clearpage
 \section{Implementierung}
+
+
+Für das Frontend wird React verwendet. [React Erklärung]
+Für alle drei Microservices wird derselbe Technologie-Stack verwendet, um den Entwicklungsaufwand geringer zu halten. Es wird Java mit dem Framework Spring Boot verwendet. Als Datenbank wird MongoDB eingesetzt. [MongoDB Erklärung] Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handelt es sich ein Werkzeug zur sprachunabhängigen Spezifikation von APIs. Swagger kann durch eine Abhängigkeit zu Spring Boot hinzu gefügt werden. Es erstellt automatisch eine Webseite mit der Dokumentation unserer API. Um das Monitoring, Service Discovery, Load Balancing wird mit Kubernetes gelöst. Unser System muss diese Aufgaben also nicht selbst bewältigen und diese Bestandteile werden erst in der Bereitstellung konfiguriert.
+
 
 An dieser Stelle sei auch erwähnt, dass der gesamte Quellcode im folgenden GitHub Repository einsehbar ist: \href{https://github.com/SimonHirner/bachelor-thesis}{github.com/SimonHirner/bachelor-thesis}.
 
