@@ -15,7 +15,7 @@ cd ./kube || exit
 ./stop-minikube.sh
 
 # Start new container
-minikube start --driver virtualbox --memory 5120 --cpus 3 --disk-size 30000
+minikube start --driver virtualbox --memory 5120 --cpus 6 --disk-size 30000
 
 # Deploy Contact Microservice
 ./deploy-contact-microservice.sh
