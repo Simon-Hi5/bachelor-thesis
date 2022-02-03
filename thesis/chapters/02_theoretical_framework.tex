@@ -154,7 +154,7 @@ Zu den grundlegenden Objekten gehören die Folgenden:
 \item Pods sind die kleinste einsetzbare Einheit. Ein Pod repräsentiert eine einen einzelnen Container oder eine Gruppe von Containern. Alle Container in einem Pod laufen immer auf dem gleichen Node.
 \item Namespaces werden zur logischen Unterteilung des Clusters verwendet. Sie können zur Isolation verschiedener Entwicklerteams oder Anwendungsmodule genutzt werden.
 \item Volumes bieten persistenten Speicher, der auch nach der Lebenszeit eines Pods bestehen bleibt.
-\item ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare. Sie können beispielsweise von Pods als Umgebungsvariablen konsumiert werden.
+\item ConfigMaps ermöglichen das Speichern von Konfigurationsdaten als Key-Value-Paare.
 \item Labels können anderen Objekten zugeordnet werden, um diese zu Gruppieren.
 \item ReplicaSets sorgen dafür, dass eine bestimmte Anzahl von Kopien eines Pods gleichzeitig laufen zu lassen.
 \item Deployments repräsentieren eine zustandslose Anwendung. Deployments verwenden ReplicaSets. Ein Deployment überwacht fortlaufend den Status der Container und kann sie beispielsweise bei Bedarf neu starten.

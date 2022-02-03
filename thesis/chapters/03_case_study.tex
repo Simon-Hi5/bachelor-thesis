@@ -4,7 +4,7 @@ Ziel des Fallbeispieles ist es, ein Verfahren vom Entwurf bis zur Bereitstellung
 \subsection{Anwendungseinsatz}
 Ein \ac{CRM}-System ist eine Software für das Kundenbeziehungsmanagement. \ac{CRM}-Systeme sind komplexe betriebliche Anwendungssysteme. Durch ihre Größe und ihren vielen verwobenen Diensten gestaltet sich der Entwurf und die Weiterentwicklung häufig schwierig. \ac{CRM}-Systeme haben eine große fachliche Breite, was zu einem hohen Koordinationsaufwand bei der Entwicklung und der Bereitstellung führt \parencite[vgl.][S. 62]{trempArchitekturen2021}. Somit eignet sich ein \ac{CRM}-System als gutes Beispiel für die Umsetzung mit einer Microservice-Architektur, welche die Probleme weitgehend lösen soll. 
 
-Das \ac{CRM}-System soll für das \ac{B2C} Umfeld entwickelt werden. Es soll bei der Verwaltung von Kontakten beziehungsweise Kunden helfen. Zu jedem Kontakt sollen Informationen und eine Historie mit allen Interaktionen abgespeichert werden. Darüber hinaus soll es auch möglich sein Verkaufschancen zu verwalten und einem Kontakt zuzuordnen.
+Das \ac{CRM}-System soll für das \ac{B2C} Umfeld entwickelt werden. Es soll bei der Verwaltung von Kontakten beziehungsweise Kunden helfen. Zu jedem Kontakt sollen Informationen und eine Historie mit allen Interaktionen abgespeichert werden. Darüber hinaus soll es auch möglich sein, Verkaufschancen zu verwalten und einem Kontakt zuzuordnen.
 
 \subsection{Anwendungsfunktionen}
 Die Kernfunktionalität des zu erstellenden \ac{CRM}-Systems ist das Anlegen, Anzeigen, Bearbeiten und Löschen von Kontakten, Interaktionen und Verkaufschancen. Konkret sollen die folgenden funktionalen Anforderungen von dem System erfüllt werden:
@@ -35,7 +35,6 @@ Nachdem die fachliche Einteilung erledigt ist, kann jetzt die technischen Archit
     \centering
     \includegraphics[width=0.8\textwidth]{figures/CRMEntwurf.png}
     \caption{Makro-Architektur des \ac{CRM}-Systems}
-    \label{fig:CRMENTWURF}
 \end{figure}
 
 Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \ac{API} wird nach dem \ac{REST}-Architekturstil entworfen. Die Kommunikation erfolgt dabei über \ac{HTTP}. Die \ac{REST}-Ressourcen sollen im \ac{JSON}-Format dargestellt werden. Für jeden Microservice werden die Endpunkte, unter der die API aufrufbar ist und die HTTP-Anfragemethode bestimmt.
@@ -81,14 +80,14 @@ Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \
 Service Discovery und Lastverteilung muss das System nicht selbst erledigen. Diese Funktionen werden von Kubernetes übernommen und erst bei der Bereitstellung konfiguriert.
 
 \subsection{Mikro-Architektur}
-Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Dadurch besitzt man bei der Gestaltung der Mikro-Architektur und vor allem bei der Auswahl des Technologie-Stacks viele Freiheiten. In diesem Fallbeispiel werden ausschließlich bewährte und beliebte Technologien eingesetzt. Die drei Microservices werden mit demselben Technologie-Stack und mit einer gleichartigen Architektur entworfen, um den Entwicklungsaufwand zu reduzieren. Es wäre aber auch möglich, alle Microservices mit verschiedenen Technologien zu implementieren, solange sie die gewünschten Schnittstellen anbieten können. Es wird Java in Verbindung mit dem Spring Boot Framework verwendet. Spring Boot bietet ein einsatzfertiges Baugerüst für Java-Anwendungen und eine einfache Auswahl von benötigten Abhängigkeiten, wie beispielsweise Datenbanktreibern \parencite[vgl.][]{vmwareinc.Spring2022a}. Auch REST-APIs werden von Spring Boot unterstützt. Spring Boot ist der De-Facto-Standard für Microservices in Java \parencite[vgl.][]{vmwareinc.Spring2022}. Für die Datenbanken wird MongoDB verwendet. MongoDB ist ein modernes dokumentorientiertes Datenbankmanagementsystem  \parencite[vgl.][]{mongodbinc.MongoDB2022}. Daten werden in Collections als Dokumente mit einem \ac{JSON}-ähnlichen Aufbau verwaltet. Die Datenstrukturen sind flexibel und können leichter umstrukturiert werden als bei klassischen Datenbanken. MongoDB wird auch als NoSQL-Datenbank bezeichnet.
+Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Dadurch besitzt man bei der Gestaltung der Mikro-Architektur und vor allem bei der Auswahl des Technologie-Stacks viele Freiheiten. In diesem Fallbeispiel werden ausschließlich bewährte und beliebte Technologien eingesetzt. Die drei Microservices werden mit demselben Technologie-Stack und mit einer gleichartigen Architektur entworfen, um den Entwicklungsaufwand zu reduzieren. Es wäre aber auch möglich, alle Microservices mit verschiedenen Technologien zu implementieren, solange sie die gewünschten Schnittstellen anbieten können. Es wird Java in Verbindung mit dem Spring Boot Framework verwendet. Spring Boot bietet ein einsatzfertiges Baugerüst für Java-Anwendungen und eine einfache Auswahl von benötigten Abhängigkeiten, wie beispielsweise Datenbanktreibern. Auch REST-APIs werden von Spring Boot unterstützt. Spring Boot ist der De-Facto-Standard für Microservices in Java \parencite[vgl.][]{vmwareinc.Spring2022}. Für die Datenbanken wird MongoDB verwendet. MongoDB ist ein modernes dokumentorientiertes Datenbankmanagementsystem  \parencite[vgl.][]{mongodbinc.MongoDB2022}. Daten werden in Collections als Dokumente mit einem \ac{JSON}-ähnlichen Aufbau verwaltet. Die Datenstrukturen sind flexibel und können leichter umstrukturiert werden als bei klassischen Datenbanken. MongoDB wird auch als NoSQL-Datenbank bezeichnet.
 
 Für alle drei Microservices erstellt werden Domänenmodelle erstellt. Die Domänenmodelle enthalten alle fachlichen Entitäten, deren Eigenschaften und Beziehungen. Für die Modellierung wird ein Klassendiagramm nach der \ac{UML} verwendet \parencite[vgl.][]{Unified2017}. \ac{UML} ist eine grafische Modellierungssprache, welche im Laufe der Arbeit noch häufiger eingesetzt wird. Die Domänenmodelle enhalten die gewünschten Eigenschaften aus den Anforderungen. Beim Kontakt-Microservice besteht das Datenmodell aus zwei Entitäten. Ein Kontakt besteht aus einer Adresse und mehreren anderen Eigenschaften, wie dem Namen, dem Geburtsdatum und einer Mail-Adresse. Da MongoDB eine NoSQL-Datenbank ist, besitzen die beiden Entitäten keine relationale Beziehung. Die Adresse wird verschachtelt im MongoDB-Dokument vom Kontakt abgespeichert werden. Des Weiteren enthält das Modell zwei Enumerationen für Auswahl des Geschlechts und der Nationalität.
 
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/DomänenmodellKontakt.png}
-    \caption{UML-Klassendiagramm als Domänenmodell für den Kontakt-Microservice}
+    \caption{Domänenmodell für den Kontakt-Microservice}
 \end{figure} 
 
 Das Datenmodell vom Interaktions-Microservice besteht lediglich aus einer einzelnen Entität und einer Enumeration für die Interaktionsart.
@@ -96,7 +95,7 @@ Das Datenmodell vom Interaktions-Microservice besteht lediglich aus einer einzel
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/DomänenmodellInteraktion.png}
-    \caption{UML-Klassendiagramm als Domänenmodell für den Interaktions-Microservice}
+    \caption{Domänenmodell für den Interaktions-Microservice}
 \end{figure}
 
 Der Chancen-Microservice ist ähnlich aufgebaut und besitzt neben einer einzelnen Entität eine Enumeration für den Status einer Verkaufschance.
@@ -104,7 +103,7 @@ Der Chancen-Microservice ist ähnlich aufgebaut und besitzt neben einer einzelne
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/DomänenmodellChance.png}
-    \caption{UML-Klassendiagramm als Domänenmodell für den Chancen-Microservice}
+    \caption{Domänenmodell für den Chancen-Microservice}
 \end{figure}
 
 Die einzelnen Microservices werden nach einer hexagonalen Architektur entworfen. Dabei handelt es sich um ein Architekturmuster bei der die Logik im Mittelpunkt steht. Sie hat verschiedene Schnittstellen (Ports), welche mit verschiedenen Adaptern benutzt werden können. Das Architekturmuster wird deshalb auch als Ports and Adapters bezeichnet. Eine hexagonale Architektur ist eine Weiterentwicklung der klassischen Drei-Schichten-Architektur, bei der eine Anwendung in eine Präsentationsschicht, eine Logikschicht und eine Datenhaltungsschicht aufgeteilt wird.
@@ -112,7 +111,7 @@ Die einzelnen Microservices werden nach einer hexagonalen Architektur entworfen.
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/HexagonalDesignConcept.png}
-    \caption{Überblick Hexagonale Architektur \parencite[vgl.][S. 204]{wolffMicroservices2018}}
+    \caption{Überblick einer hexagonalen Architektur \parencite[vgl.][S. 204]{wolffMicroservices2018}}
 \end{figure}
 
 Jede Facette der Anwendung, wie Benutzer, Daten oder Admin ist ein Port, welcher von den Adaptern auf Technologien wie REST umgesetzt wird \parencite[vgl.][S. 204]{wolffMicroservices2018}. Die Logik der Anwendung wird klar abgetrennt und nur die Adapter ermöglichen die Kommunikation nach Außen. Dadurch bleibt der fachliche Code unabhängig vom technischen Code. Für das Fallbeispiel wird lediglich ein Port für die Daten und ein Port für die Benutzung benötigt. Zusätzlich wird ein Adapter für die \ac{REST}-\ac{API} und ein Adapter für MongoDB benötigt.
@@ -137,15 +136,15 @@ Den Mittelpunkt bildet die Klasse ContactServiceImpl. Sie enthählt den Code, de
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/UMLKlassenDiagrammKontakt.png}
-    \caption{Entwurf des}
+    \caption{\ac{UML}-Klassendiagramm vom Kontakt-Microservice}
 \end{figure}
 
-Der Interaktions-Microservice und der Chancen-Microservices unterscheiden sich bei der Geschäftslogik vom Kontakt-Microservice. Der Interaktions-Microservice muss beim Speichern einer Interaktion überprüfen, ob die Kontaktidentifikationsnummer der Interaktion gültig ist. Dafür ruft der Interaktions-Microservice den Kontakt-Microservice über die REST-API auf und testet, ob zu der angegebenen Kontaktidentifikationsnummer ein Kontakt vorhanden ist. Das folgende Sequenzdiagramm zeigt den zeitlichen Verlauf und die involvierten \ac{API}-Endpunkte. Da bei einer Chance auch eine Kontaktidentifikationsnummer angegeben werden kann, wird hier beim Chancen-Microservice dieselbe Logik implementiert.
+Der Interaktions-Microservice und der Chancen-Microservices unterscheiden sich bei der Geschäftslogik vom Kontakt-Microservice. Der Interaktions-Microservice muss beim Speichern einer Interaktion überprüfen, ob die Kontaktidentifikationsnummer der Interaktion gültig ist. Dafür ruft der Interaktions-Microservice den Kontakt-Microservice über die REST-API auf und testet, ob zu der angegebenen Kontaktidentifikationsnummer ein Kontakt vorhanden ist. Das folgende \ac{UML}-Sequenzdiagramm zeigt den zeitlichen Verlauf und die involvierten \ac{API}-Endpunkte. Da bei einer Chance auch eine Kontaktidentifikationsnummer angegeben werden kann, wird hier beim Chancen-Microservice dieselbe Logik implementiert.
 
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.75\textwidth]{figures/UMLSequenzdiagramm.png}
-    \caption{UML-Sequenzdiagramm}
+    \caption{Kommunikationsablauf zwischen Interaktions-Microservice und Kontakt-Microservice}
 \end{figure}
 
 Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handelt es sich ein Werkzeug zur sprachunabhängigen Spezifikation von APIs \parencite[vgl.][]{smartbearsoftwareSwagger2022}. Swagger kann durch eine Abhängigkeit zu Spring Boot hinzu gefügt werden. Es erstellt automatisch eine Webseite mit der Dokumentation unserer \ac{REST}-\ac{API}. 
@@ -153,7 +152,7 @@ Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handel
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/KontaktAPISwagger.png}
-    \caption{Swagger \ac{API} Dokumentation}
+    \caption{Swagger Dokumentation der \ac{API}}
 \end{figure}
 
 Alle drei Microservices benötigen den \ac{URI} ihrer Datenbank, um mit ihr eine Verbindung aufzubauen. Der Interaktions-Microservice und der Verkaufschancen-Microservice brauchen darüber hinaus die Adresse des Kontakt-Microservices, um mit diesem zu Kommunizieren. Diese Verbindungsinformationen, werden den Anwendungen über Umgebungsvariablen übergeben. Bei der Bereitstellung kann Kubernetes den Containern die passende Umgebungsvariablen übergeben.
@@ -164,25 +163,22 @@ Das Frontend besteht aus insgesamt zehn verschiedenen Webseiten. Für jeden Kont
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/AufbauFrontend.png}
-    \caption{Aufbau des React-Frontends}
+    \includegraphics[width=0.5\textwidth]{figures/AufbauFrontend.png}
+    \caption{Aufbau des Frontends}
 \end{figure}
 
-Zum Styling der Anwendung wird das CSS-Framework Bootstrap verwendet. Im \nameref{anhang} kann  
-
-
-Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Bei React werden Umgebungsvariablen in die Datei .env.production geschrieben, da der Code des Frontends clientseitig ausgeführt wird.
+Zum Styling der Anwendung wird das CSS-Framework Bootstrap verwendet. Bei der Erstellung oder Bearbeitung einer Chance oder Interaktion kann über eine Dropdown-Liste ein zugehöriger Kontakte ausgewählt werden. Bei der Detailansicht eines Kontaktes wird neben den Attributen auch die zugehörigen Interaktionen und Verkaufschancen angezeigt. Im \nameref{anhang} finden sich Bildschirmfotos der beschriebenen Seiten. Auch ist dort die vollständige Service-Klasse zu finden, welche die Anfragen auf den Kontakt-Microservice regelt. Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Bei React werden Umgebungsvariablen in die Datei .env.production geschrieben, da der Code des Frontends clientseitig ausgeführt wird.
 
 \clearpage
 \section{Bereitstellung mit Kubernetes}
 
-Im letzten Teil des Fallbeispiels wird das fertige CRM-System nun mit Kubernetes bereitgestellt. Dafür wird Docker, minikube und kubectl benötigt.
+Im letzten Teil des Fallbeispiels wird das fertige CRM-System mit Kubernetes bereitgestellt. Dafür wird Docker, minikube und kubectl benötigt.
 
 \subsection{Containerisierung}
 
 Um die Microservices und das Frontend in Pods in einem Kubernetes Cluster laufen zu lassen, müssen sie erst mit Docker containerisiert werden. Dazu wird als Erstes ein Dockerfile für jeden Microservice erstellt. Anschließend kann aus dem Dockerfile ein Docker Image gebaut werden, mit dem dann ein entsprechender Container gestartet werden kann.
 
-Dockerfiles besitzen eine eigene Syntax. Ein großgeschriebener Befehl wird gefolgt von einem oder mehreren Parametern. Es ist aufgebaut wie eine Anleitung, welche Schritt für Schritt abgearbeitet wird. Die Dockerfiles der Microservices haben alle den selben Aufbau, da alle drei Projekte auch die selben Aufbau und die selben Technologien verwenden. Der erste Befehl in den Dockerfiles bestimmt, auf welchem Docker Image unser eigenes Image basieren soll. Hier wird ein Image mit einer Java-Plattform verwendet, welches automatisch aus dem öffentlichen DockerHub heruntergeladen wird. Anschließend wird die JAR-Datei der Anwendung in das Image kopiert. Als letzter Befehl wird festgelegt, dass die JAR-Datei beim Start des Containers ausgeführt werden soll.
+Dockerfiles besitzen eine eigene Syntax. Ein großgeschriebener Befehl wird gefolgt von einem oder mehreren Parametern. Es ähnelt einer Anleitung, welche Schritt für Schritt abgearbeitet wird. Die Dockerfiles der Microservices haben einen analogen Aufbau. Der erste Befehl in den Dockerfiles bestimmt, auf welchem Docker Image das neue Image basieren soll. Hier wird ein Image mit einer Java-Plattform verwendet, welches automatisch aus dem öffentlichen DockerHub heruntergeladen wird. Anschließend wird die \acs{JAR}-Datei der Anwendung in das Image kopiert. Als letzter Befehl wird festgelegt, dass die \acs{JAR}-Datei beim Start des Containers ausgeführt werden soll.
 
 \begin{lstlisting}[language=dockerfile, caption=Dockerfile für Kontakt-Microservice]
 FROM openjdk:11-jdk-slim
@@ -209,27 +205,17 @@ COPY --from=build /app/build .
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 \end{lstlisting}
 
-Für die Datenbanken müssen keine eigenen Dockerfiles erstellt werden. Hier reichen unveränderte Images, welche aus dem DockerHub heruntergeladen werden können, aus. Mit dem folgenden Befehl kann aus dem Dockerfile nun ein Docker Image gebaut werden.
+Für die Datenbanken müssen keine eigenen Dockerfiles erstellt werden. Hier reichen unveränderte Images aus, welche vom DockerHub heruntergeladen werden können. Mit dem folgenden Befehl kann aus dem Dockerfile nun ein Docker Image gebaut werden.
 
-\begin{lstlisting}[language=bash, caption=Befehl , captionpos=b]
+\begin{lstlisting}[language=bash, caption=Docker-Befehl für das Bauen eines Images, captionpos=b]
 docker build -t contact-microservice:latest .
 \end{lstlisting}
 
-
 \subsection{Bereitstellung}
 
-Für jede Datenbank wird eine Anwendung 
+Die fertigen Images können nun eingesetzt werden. Dazu wird zuerst das Kubernetes Cluster mit minikube gestartet. Anschließend werden YAML-Dateien erstellt, in denen die gewünschten Kubernetes Objekte beschrieben werden. Für alle drei Microservices, alle drei Datenbanken und das Frontend muss jeweils ein Service und ein Deployment erstellt werden. In den Deployment-Objekten, wird der Name der zuvor gebauten Images angegeben. Mit dem Attribut Replicas kann zudem die Anzahl der Pods, welche von einem Microservice gleichzeitig laufen sollen verändert werden. Bei den Microservices wird zudem die Adresse, unter der die Datenbank erreichbar ist, als Umgebungsvariable übergeben. Als Adresse kann der Name vom Service-Objekt der entsprechenden Datenbank verwendet werden.
 
-\begin{figure}[H] 
-    \centering
-    \includegraphics[width=0.71\textwidth]{figures/DeploymentDiagramm.png}
-    \caption{Entwurf des \acp{Hexagonale Architektur}}
-    \label{fig:CRMENTWURF}
-\end{figure}
-
-Jetzt müssen die fertigen Images in unserem Kubernetes Cluster bereitgestellt werden. Dafür werden YAML-Dateien erstellt, in denen die gewünschten Kubernetes Objekte beschrieben werden. Für jeden der drei Microservices und das Frontend muss ein Service und ein Deployment erstellt werden. Das Deployment repräsentiert die Anwendung. Mit Parametern kann festgelegt werden wie viele Pods mit der Anwendung gestartet werden sollen.
-
-\begin{lstlisting}[language=YAML, caption=Befehl]
+\begin{lstlisting}[language=YAML, caption=Deployment-Objekt vom Kontakt-Microservice]
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -249,24 +235,16 @@ spec:
           - containerPort: 8080
           env:
             - name: MONGODB_HOST
+              value: contact-service
               valueFrom:
                 configMapKeyRef:
                   name: contact-db-config  
                   key: host
 \end{lstlisting}
 
-\begin{lstlisting}[language=YAML, morekeywords=host, caption=Befehl , captionpos=b]
-apiVersion: v1
-kind: ConfigMap
-metadata:
-   name: contact-service-config
-data:
- host: contact-service
-\end{lstlisting}
+Die Service-Objekte der Microservices sind vom Typ NodePort. Somit kann ein fester Port angegeben werden, unter dem der Service auch von außerhalb des Clusters erreichbar ist. Anfragen auf einen Service werden automatisch von Kubernetes auf die Pods, welche dem Service zugeordnet sind, verteilt. 
 
-Nach der Erstellung der Services wird die Service Discovery und Lasterverteilung von Kubernetes übernommen. 
-
-\begin{lstlisting}[language=YAML, caption=Befehl , captionpos=b]
+\begin{lstlisting}[language=YAML, caption=Service-Objekt vom Kontakt-Microservice, captionpos=b]
 kind: Service
 apiVersion: v1
 metadata:
@@ -281,15 +259,15 @@ spec:
   type: NodePort
 \end{lstlisting}
 
-Nun müssen nur noch alle YAML-Dateien über den folgenden kubectl-Befehl angewendet werden. Kubernetes sorg nun dafür, dass die beschriebenen Objekte, erstellt werden.
+Sämtliche erstellte YAML-Dateien müssen über einen kubectl-Befehl auf das Cluster angewendet werden. Kubernetes arbeitet nun die nötigen Schritte automatisch ab, sodass die beschriebenen Objekte erstellt werden.
 
-\begin{lstlisting}[language=bash, caption=Befehl , captionpos=b]
+\begin{lstlisting}[language=bash, caption=kubectl-Befehl für das Anwenden einer YAML-Datei, captionpos=b]
 kubectl apply -f contact-microservice.yaml
 \end{lstlisting}
 
 \subsection{Skalierung}
 
-Um die Vorteile von unseren Microservices auszunutzen, sollen die Microservices nun horizontal skaliert werden. Auch dafür wird eine YAML-Datei erstellt, in der ein HorizontalPodAutoscaler-Objekt für jeden Microservice beschrieben wird. In der Datei wird angegeben, welches Deployment skaliert werden soll. Als Metrik, wann hochskaliert werden soll, kann die CPU-Auslastung des Pods verwendet werden. Darüber hinaus wird angegeben wie viele Pods von dem entsprechenden Microservice minimal und maximal ausgeführt werden sollen.
+Um die Vorteile von unseren Microservices auszunutzen, sollen die Anzahl der gleichzeitig laufenden Pods eines Microservices flexibel gestaltet werden. Abhängig von der Auslastung soll so eine horizontale skalierung vorgenommen werden. Auch dafür wird eine YAML-Datei erstellt, in der ein HorizontalPodAutoscaler-Objekt für jeden Microservice beschrieben wird. In der Datei wird angegeben, welches Deployment skaliert werden soll. Als Metrik, wann hochskaliert werden soll, wird die CPU-Auslastung des Pods verwendet werden. Darüber hinaus wird angegeben wie viele Pods von dem entsprechenden Microservice minimal und maximal ausgeführt werden sollen.
 
 \begin{lstlisting}[language=YAML, caption=Befehl , captionpos=b]
 apiVersion: autoscaling/v1
@@ -305,3 +283,11 @@ spec:
     maxReplicas: 4
     targetCPUUtilizationPercentage: 80
 \end{lstlisting}
+
+Nun ist die Bereitstellung abgeschlossen. minikube bietet ein browserbasiertes Dashboard an, mit dem der Status des Clusters auch grafisch dargestellt werden kann. Ein Bildschirmfoto des Dashboards kann im \nameref{anhang} gefunden werden. Das folgende Verteilungsdiagramm zeigt das Ergebnis der durchgeführten Bereitstellung.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/DeploymentDiagramm.png}
+    \caption{Verteilungsdiagramm}
+\end{figure}
