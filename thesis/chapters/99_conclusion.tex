@@ -1,7 +1,18 @@
 \section{Schlussbetrachtung}
 
-\subsection{Diskussion}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Durch den theoretischen Hintergrund und die praktische Anwendung mithilfe des Fallbeispiels kann nun ein umfassendes Fazit gezogen werden. Im Anschluss an das Fazit wird ein Ausblick in die Zukunft gegeben.
+
+\subsection{Fazit}
+Die Fallstudie bestätigt, dass der Entwurf einer Microservice-Architektur diffizil ist. Microservices bieten viel Flexibilität, es müssen jedoch auch erheblich mehr Entscheidungen getroffen werden. Die Architektur der einzelnen Microservices kann dabei sehr frei gewählt werden und die Auswahl ist mit einem geringen Risiko verbunden. Die fachliche Aufteilung der Microservices hingegen ist besonders herausfordernd. Mit einer schlechten Aufteilung ist das gesamte System zum Scheitern verurteilt. Durch die vielen Freiheiten bei der Umsetzung der einzelnen Microservices kann das System zudem schnell in einem technologischen Pluralismus enden. Vor allem bei großen betrieblichen Anwendungen, an denen viele Entwicklerteams arbeiten und welche eine große fachliche Breite besziten, können Microservices enorme Vorteile bringen. Für kleinere und auf einen Fachbereich spezialisierte Anwendungen ist der erhöhte Aufwand von Microservices beim Entwurf und der Bereitstellung nicht zu rechtfertigen. Das Anwendungsgebiet von Microservices ist somit sehr große, aber doch eingeschränkt.
+
+Container ermöglichen eine einfache Bereitstellung auf verschiedenen Rechnern in einem großem verteilten System und sind für Microservices so eine große Hilfe. Bei der Bereitstellung zeig sich außerdem, wieso Kubernetes so populär ist. Es löst viele Problematiken der Microservice-Architektur mit wenig Aufwand. Service Discovery und Lastverteilung kann leicht über ein entsprechendes Service-Objekt von Kubernetes übernommen werden. Das automatische Skalieren kann auch mit wenig Zeilen konfiguriert werden. Die abstrakten Objekte von Kubernetes sind so eine enorme Erleichterung. Es muss fast nichts mehr manuell eingestellt werden, sondern das Meiste wird über deklarative Dateien erledigt. Doch die Abstrahierung setzt auch ein tiefes Verständnis voraus, welches aufgrund der doch steilen Lernkurve von Kubernetes mühselig erarbeitet werden muss.
+
+Containerisierte Microservices mit Kubernetes sind eine mächtige Kombination für moderne verteilte Anwendungen. Sie sind aber auch keine perfekt Lösung für jeden Zweck. Gerade deshalb ist das tiefe Verständnis vom Entwurf bis hin zur Bereitstellung erforderlich, um sie richtig einzusetzen.
 
 \subsection{Ausblick}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+Microservices sind noch jung und ihr Potential mit Sicherheit noch nicht voll ausgeschöpft. In Zukunft sie vor allem im geschäftlichen Umfeld eine immer wichtigere Rolle einnehmen. Microservices sind aber auch nicht für jedes Anwendungsgebiet vorteilhaft und werden Monolithen so nicht verdrängen, sondern nur in bestimmten Bereichen ablösen. Microservices passen perfekt in das moderne DevOps-Umfeld. Für verteilte Cloud-Infrastrukturen sind Microservices unumgänglich. Agile Softwareentwicklung und crossfunktionale Teams ergänzen sich bestens mit ihnen. Bei Microservices handelt es sich nicht nur um einen kurzzeitigen Trend, sondern um die logische Reaktion auf ein dynamisches IT-Umfeld.
+
+Kubernetes hat sich etabliert und wird so schnell nicht mehr verschwinden. Dafür bietet es zu viele Vorzüge, gerade in der Verwendung mit Microservices. Es ist bereits ein fester Bestandteil vieler großer Cloud-Anbieter. Mit der Zeit wird Kubernetes somit immer weiter aus dem Fokus geraten und zu einem normalen Teil der Infrastruktur werden.
+
+Ein logischer nächster Schritt wäre es, das Fallbeispiel auf einer Cloud-Plattform durchzuführen. Durch den Einsatz von CI/CD-Pipelines könnte zudem, die Bereitstellung weiter automatisiert werden.

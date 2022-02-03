@@ -1,0 +1,18 @@
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.1}DevOps}{\reset@font\stcSSfont 3}{subsection.2.1}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2}Microservices}{\reset@font\stcSSfont 4}{subsection.2.2}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.1}Merkmale}{\reset@font\stcSSSfont 4}{subsubsection.2.2.1}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.2}Vorteile}{\reset@font\stcSSSfont 7}{subsubsection.2.2.2}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.3}Herausforderungen}{\reset@font\stcSSSfont 8}{subsubsection.2.2.3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.4}Architektur}{\reset@font\stcSSSfont 9}{subsubsection.2.2.4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.5}Integration}{\reset@font\stcSSSfont 9}{subsubsection.2.2.5}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.3}Docker}{\reset@font\stcSSfont 11}{subsection.2.3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.3.1}Docker Image}{\reset@font\stcSSSfont 12}{subsubsection.2.3.1}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.3.2}Dockerfile}{\reset@font\stcSSSfont 12}{subsubsection.2.3.2}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.3.3}Container}{\reset@font\stcSSSfont 12}{subsubsection.2.3.3}}
+{\reset@font\stcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.4}Kubernetes}{\reset@font\stcSSfont 13}{subsection.2.4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.1}Aufbau}{\reset@font\stcSSSfont 13}{subsubsection.2.4.1}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.2}Objekte}{\reset@font\stcSSSfont 14}{subsubsection.2.4.2}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.3}Service Discovery}{\reset@font\stcSSSfont 15}{subsubsection.2.4.3}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.4}Skalierung}{\reset@font\stcSSSfont 16}{subsubsection.2.4.4}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.5}Kubectl}{\reset@font\stcSSSfont 16}{subsubsection.2.4.5}}
+{\reset@font\stcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.4.6}Minikube}{\reset@font\stcSSSfont 16}{subsubsection.2.4.6}}

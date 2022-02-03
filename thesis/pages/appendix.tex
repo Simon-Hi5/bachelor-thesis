@@ -1,1 +1,164 @@
+\section*{Anhang}
+\addcontentsline{toc}{section}{Anhang}
+
 \appendix
+
+\subsection*{ContactController.java}
+\addcontentsline{toc}{subsection}{ContactController.java}
+
+\begin{lstlisting}[language=java]
+@RestController
+@RequestMapping("/contacts")
+@CrossOrigin(origins = "*")
+@Api(tags = {SwaggerConfig.CONTACT_TAG})
+public class ContactController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContactApplication.class);
+
+    private final ContactService contactService;
+
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get all Contacts.")
+    List<Contact> getAllContacts() {
+        logger.debug("GET /contacts");
+        return contactService.getAllContacts();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Save new Contact.")
+    Contact saveContact(@RequestBody Contact newContact) {
+        logger.debug("POST /contacts");
+        try {
+            return contactService.saveContact(newContact);
+        } catch (ConstraintViolationException exception) {
+            throw new BadRequestException(exception.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Get Contact by ID.")
+    Contact getContact(@PathVariable String id) {
+        logger.debug("GET /contacts/{}", id);
+        return contactService.getContact(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Replace Contact by ID with new Contact.")
+    Contact replaceContact(@PathVariable String id, @RequestBody Contact newContact) {
+        logger.debug("PUT /contacts/{}", id);
+        return contactService.replaceContact(id, newContact);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete Contact by ID.")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteContact(@PathVariable String id) {
+        logger.debug("DELETE /contacts/{}", id);
+        contactService.deleteContact(id);
+    }
+
+}
+\end{lstlisting}
+
+\subsection*{ContactServiceImpl.java}
+\addcontentsline{toc}{subsection}{ContactServiceImpl.java}
+
+\begin{lstlisting}[language=java]
+@Service
+public class ContactServiceImpl implements ContactService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContactApplication.class);
+
+    private final ContactRepository contactRepository;
+
+    public ContactServiceImpl(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
+
+    @Override
+    public List<Contact> getAllContacts() {
+        logger.debug("Find all contacts");
+        return contactRepository.findAllByOrderByLastNameAscIdAsc();
+    }
+
+    @Override
+    public Optional<Contact> getContact(String id) {
+        logger.debug("Find contact {}", id);
+        return contactRepository.findById(id);
+    }
+
+    @Override
+    public Contact saveContact(Contact newContact) {
+        logger.debug("Save new contact");
+        return contactRepository.save(newContact);
+    }
+
+    @Override
+    public Contact replaceContact(String id, Contact newContact) {
+        logger.debug("Replace contact {}", id);
+        return getContact(id)
+                .map(contact -> {
+                    contact.setFirstName(newContact.getFirstName());
+                    contact.setLastName(newContact.getLastName());
+                    contact.setGender(newContact.getGender());
+                    contact.setEmail(newContact.getEmail());
+                    contact.setDateOfBirth(newContact.getDateOfBirth());
+                    contact.setPhoneNumber(newContact.getPhoneNumber());
+                    contact.setAddress(newContact.getAddress());
+                    return saveContact(contact);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
+    @Override
+    public void deleteContact(String id) {
+        logger.debug("Delete contact {}", id);
+        contactRepository.deleteById(getContact(id).orElseThrow(() -> new ResourceNotFoundException(id)).getId());
+    }
+
+    @Override
+    public void deleteAllContacts() {
+        logger.debug("Delete all contacts");
+        contactRepository.deleteAll();
+    }
+
+}
+\end{lstlisting}
+
+\subsection*{Frontend Interaktionen}
+\addcontentsline{toc}{subsection}{Frontend Interaktionen}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.87\textwidth]{figures/FrontendInteraktionen.png}
+\end{figure}
+
+\subsection*{Frontend Interaktion}
+\addcontentsline{toc}{subsection}{Frontend Interaktion}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.87\textwidth]{figures/FrontendInteraktion.png}
+\end{figure}
+
+\subsection*{Frontend Kontakt}
+\addcontentsline{toc}{subsection}{Frontend Kontakt}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.87\textwidth]{figures/FrontendKontakt.png}
+\end{figure}
+
+\subsection*{Frontend Kontakt}
+\addcontentsline{toc}{subsection}{Frontend Kontakt}
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.87\textwidth]{figures/FrontendKontakt.png}
+\end{figure}

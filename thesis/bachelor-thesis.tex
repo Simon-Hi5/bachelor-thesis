@@ -54,29 +54,30 @@
 
 \input{pages/title}
 
+\clearpage
+\pagestyle{empty}
+\input{pages/declaration}
+
 \input{pages/abstract}
 
 \addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
-\thispagestyle{empty}
 
 \clearpage
 \pagenumbering{Roman}
+\pagestyle{plain}
 \setcounter{page}{1}
-\thispagestyle{plain}
 \listoffigures
 
 \clearpage
-\thispagestyle{plain}
 \lstlistoflistings
-\listoftables
 
 \clearpage
-\thispagestyle{plain}
 \input{pages/acronyms}	
 
 \clearpage
-\pagenumbering{arabic} 
+\pagenumbering{arabic}
+\pagestyle{fancy}
 \input{chapters/01_introduction}
 
 \clearpage
@@ -91,21 +92,14 @@
 \clearpage
 \pagenumbering{Roman}
 \setcounter{page}{4}
-\thispagestyle{plain}
+\pagestyle{plain}
 \printbibheading
 \printbibliography[type=book, heading=subbibliography, title={Bücher}]
-\printbibliography[type=article, heading=subbibliography,title={Artikel}]
-\printbibliography[type=report, heading=subbibliography,title={Berichte}]
-\printbibliography[type=inproceedings, heading=subbibliography,title={Konferenzpapier}]
+\printbibliography[nottype=online, nottype=book, heading=subbibliography,title={Artikel}]
 \printbibliography[type=online, heading=subbibliography,title={Online}]
-\printbibliography[nottype=online, nottype=article, nottype=book, nottype=report, nottype=inproceedings, heading=subbibliography, title={Sonstige}]
+\thispagestyle{plain}
 
 \clearpage
-\thispagestyle{plain}
-\input{pages/declaration}
-
-\clearpage
-\thispagestyle{plain}
 \input{pages/appendix}
 
 \end{document}
