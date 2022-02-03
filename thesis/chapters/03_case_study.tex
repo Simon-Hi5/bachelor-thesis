@@ -160,14 +160,18 @@ Alle drei Microservices benötigen den \ac{URI} ihrer Datenbank, um mit ihr eine
 
 \subsection{Frontend}
 
-Das Frontend besteht aus insgesamt zehn verschiedenen Webseiten. Für jeden Kontakt, jede Interaktion und jede Verkaufschance gibt es jeweils eine Seite zum Einsehen aller Objekte, eine Seite zum Einsehen sowie Bearbeiten eines Objektes und eine Seite zum Anlegen eines neuen Objektes. Dazu hat das Frontend noch eine Startseite. 
+Das Frontend besteht aus insgesamt zehn verschiedenen Webseiten. Für jeden Kontakt, jede Interaktion und jede Verkaufschance gibt es jeweils eine Seite zum Einsehen aller Objekte, eine Seite zum Einsehen sowie Bearbeiten eines Objektes und eine Seite zum Anlegen eines neuen Objektes. Dazu hat das Frontend noch eine Startseite. Die Seiten setzen sich auch verschiedenen wiederverwendbaren Komponenten, wie beispielsweise der Navigationsleiste, Formularen und Tabellen zusammen. Die \ac{API}-Aufrufe werden über Funktionen in Service-Klassen implementiert, die von den Komponenten aufgerufen werden. Daraus ergibt sich der folgenden Aufbau für das Frontend.
 
-Die Seiten setzen sich auch verschiedenen Komponenten, wie beispielsweise der Navigationsleiste, Formularen und Tabellen zusammen. 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/AufbauFrontend.png}
+    \caption{Aufbau des React-Frontends}
+\end{figure}
 
-Im Anhang 1 können die 
+Zum Styling der Anwendung wird das CSS-Framework Bootstrap verwendet. Im \nameref{anhang} kann  
 
 
-Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Da die Anwendung clientseitig Ausgeführt wird, werden Umgebungsvariablen in die Datei .env.production geschrieben und beim Bauen in den statischen Code für das Frontend eingebettet.
+Das Frontend benötigt die \ac{URI} aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Bei React werden Umgebungsvariablen in die Datei .env.production geschrieben, da der Code des Frontends clientseitig ausgeführt wird.
 
 \clearpage
 \section{Bereitstellung mit Kubernetes}
