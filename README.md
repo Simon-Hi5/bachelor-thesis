@@ -1,7 +1,8 @@
-## <center>Bachelorarbeit zum Thema: </center>
-# <center>Entwurf und Bereitstellung von Microservices mit Kubernetes am Beispiel eines CRM-Systems</center>
-**<center>Simon Hirner</center>**
-**<center>04.02.2022</center>**
+<h2 align="center">Bachelorarbeit zum Thema:</h2>
+<h1 align="center">Entwurf und Bereitstellung von Microservices mit Kubernetes am Beispiel eines CRM-Systems</h1>
+
+<p align="center"><b>Simon Hirner</b></p>
+<p align="center"><b>04.02.2022</b></p>
 
 ---
 
