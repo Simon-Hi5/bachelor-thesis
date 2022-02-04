@@ -37,7 +37,7 @@ Nachdem die fachliche Einteilung erledigt ist, kann jetzt die technischen Archit
     \caption{Makro-Architektur des CRM-Systems}
 \end{figure}
 
-Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \ac{API} wird nach dem \ac{REST}-Architekturstil entworfen. Die Kommunikation erfolgt dabei über \ac{HTTP}. Die \ac{REST}-Ressourcen sollen im \ac{JSON}-Format dargestellt werden. Für jeden Microservice werden die Endpunkte, unter der die \ac{API} aufrufbar ist und die HTTP-Anfragemethode bestimmt.
+Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \ac{API} wird nach dem \ac{REST}-Architekturstil entworfen. Die Kommunikation erfolgt dabei über das \ac{HTTP}. Die \ac{REST}-Ressourcen sollen im \acs{JSON}-Format dargestellt werden. Für jeden Microservice werden die Endpunkte, unter der die \ac{API} aufrufbar ist und die HTTP-Anfragemethode bestimmt.
 
 \begin{figure}[H] 
 \centering
@@ -80,9 +80,9 @@ Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \
 Service Discovery und Lastverteilung muss das System nicht selbst erledigen. Diese Funktionen werden von Kubernetes übernommen und erst bei der Bereitstellung konfiguriert.
 
 \subsection{Mikro-Architektur}
-Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Dadurch besitzt man bei der Gestaltung der Mikro-Architektur und vor allem bei der Auswahl des Technologie-Stacks viele Freiheiten. In diesem Fallbeispiel werden ausschließlich bewährte und beliebte Technologien eingesetzt. Die drei Microservices werden mit demselben Technologie-Stack und mit einer gleichartigen Architektur entworfen, um den Entwicklungsaufwand zu reduzieren. Es wäre aber auch möglich, alle Microservices mit verschiedenen Technologien zu implementieren, solange sie die gewünschten Schnittstellen anbieten können. Es wird Java in Verbindung mit dem Spring Boot Framework verwendet. Spring Boot bietet ein einsatzfertiges Baugerüst für Java-Anwendungen und eine einfache Auswahl von benötigten Abhängigkeiten, wie beispielsweise Datenbanktreibern. Auch \ac{REST}-\acp{API} werden von Spring Boot unterstützt. Spring Boot ist der De-Facto-Standard für Microservices in Java \parencite[vgl.][]{vmwareinc.Spring2022}. Für die Datenbanken wird MongoDB verwendet. MongoDB ist ein modernes dokumentorientiertes Datenbankmanagementsystem  \parencite[vgl.][]{mongodbinc.MongoDB2022}. Daten werden in Collections als Dokumente mit einem \ac{JSON}-ähnlichen Aufbau verwaltet. Die Datenstrukturen sind flexibel und können leichter umstrukturiert werden als bei klassischen Datenbanken. MongoDB wird auch als NoSQL-Datenbank bezeichnet.
+Für das Gesamtsystem ist die Architektur eines einzelnen Microservice nicht von Bedeutung. Dadurch besitzt man bei der Gestaltung der Mikro-Architektur und vor allem bei der Auswahl des Technologie-Stacks viele Freiheiten. In diesem Fallbeispiel werden ausschließlich bewährte und beliebte Technologien eingesetzt. Die drei Microservices werden mit demselben Technologie-Stack und mit einer gleichartigen Architektur entworfen, um den Entwicklungsaufwand zu reduzieren. Es wäre aber auch möglich, alle Microservices mit verschiedenen Technologien zu implementieren, solange sie die gewünschten Schnittstellen anbieten können. Es wird Java in Verbindung mit dem Spring Boot Framework verwendet. Spring Boot bietet ein einsatzfertiges Baugerüst für Java-Anwendungen und eine einfache Auswahl von benötigten Abhängigkeiten, wie beispielsweise Datenbanktreibern. Auch \ac{REST}-\acp{API} werden von Spring Boot unterstützt. Spring Boot ist der De-Facto-Standard für Microservices in Java \parencite[vgl.][]{vmwareinc.Spring2022}. Für die Datenbanken wird MongoDB verwendet. MongoDB ist ein modernes dokumentorientiertes Datenbankmanagementsystem  \parencite[vgl.][]{mongodbinc.MongoDB2022}. Daten werden in Collections als Dokumente mit einem \acs{JSON}-ähnlichen Aufbau verwaltet. Die Datenstrukturen sind flexibel und können leichter umstrukturiert werden als bei klassischen Datenbanken. MongoDB wird auch als NoSQL-Datenbank bezeichnet.
 
-Für alle drei Microservices werden Domänenmodelle erstellt. Die Domänenmodelle enthalten alle fachlichen Entitäten sowie deren Eigenschaften und Beziehungen. Für die Modellierung wird ein Klassendiagramm nach der \ac{UML} verwendet \parencite[vgl.][]{Unified2017}. \ac{UML} ist eine grafische Modellierungssprache, welche im Laufe der Arbeit noch häufiger eingesetzt wird. Die Domänenmodelle enhalten die gewünschten Eigenschaften aus den Anforderungen. Beim Kontakt-Microservice besteht das Datenmodell aus zwei Entitäten. Ein Kontakt besteht aus einer Adresse und mehreren anderen Eigenschaften, wie dem Namen, dem Geburtsdatum und einer Mail-Adresse. Da MongoDB eine NoSQL-Datenbank ist, besitzen die beiden Entitäten keine relationale Beziehung. Die Adresse wird verschachtelt im MongoDB-Dokument vom Kontakt abgespeichert werden. Des Weiteren enthält das Modell zwei Enumerationen für Auswahl des Geschlechts und der Nationalität.
+Für alle drei Microservices werden Domänenmodelle erstellt. Die Domänenmodelle enthalten alle fachlichen Entitäten sowie deren Eigenschaften und Beziehungen. Für die Modellierung wird ein Klassendiagramm nach der \ac{UML} verwendet \parencite[vgl.][]{objectmanagementgroupUnified2017}. \ac{UML} ist eine grafische Modellierungssprache, welche im Laufe der Arbeit noch häufiger eingesetzt wird. Die Domänenmodelle enhalten die gewünschten Eigenschaften aus den Anforderungen. Beim Kontakt-Microservice besteht das Datenmodell aus zwei Entitäten. Ein Kontakt besteht aus einer Adresse und mehreren anderen Eigenschaften, wie dem Namen, dem Geburtsdatum und einer Mail-Adresse. Da MongoDB eine NoSQL-Datenbank ist, besitzen die beiden Entitäten keine relationale Beziehung. Die Adresse wird verschachtelt im MongoDB-Dokument vom Kontakt abgespeichert werden. Des Weiteren enthält das Modell zwei Enumerationen für Auswahl des Geschlechts und der Nationalität.
 
 \begin{figure}[H] 
     \centering
@@ -106,12 +106,12 @@ Der Chancen-Microservice ist ähnlich aufgebaut und besitzt neben einer einzelne
     \caption{Domänenmodell für den Chancen-Microservice}
 \end{figure}
 
-Die einzelnen Microservices werden nach einer hexagonalen Architektur entworfen. Dabei handelt es sich um ein Architekturmuster bei der die Logik im Mittelpunkt steht. Sie hat verschiedene Schnittstellen (Ports), welche mit diversen Adaptern benutzt werden können. Das Architekturmuster wird deshalb auch als Ports and Adapters bezeichnet. Eine hexagonale Architektur ist eine Weiterentwicklung der klassischen Drei-Schichten-Architektur, bei der die Anwendung in eine Präsentationsschicht, eine Logikschicht und eine Datenhaltungsschicht aufgeteilt wird.
+Die einzelnen Microservices werden nach einer hexagonalen Architektur entworfen. Dabei handelt es sich um ein Architekturmuster bei der die Logik im Mittelpunkt steht. Die Architektur besteht aus verschiedenen Schnittstellen (Ports), welche mit diversen Adaptern benutzt werden können. Das Architekturmuster wird deshalb auch als Ports and Adapters bezeichnet. Eine hexagonale Architektur ist eine Weiterentwicklung der klassischen Drei-Schichten-Architektur, bei der die Anwendung in eine Präsentationsschicht, eine Logikschicht und eine Datenhaltungsschicht aufgeteilt wird.
 
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/HexagonalDesignConcept.png}
-    \caption{Überblick einer hexagonalen Architektur \parencite[vgl.][S. 204]{wolffMicroservices2018}}
+    \caption{Übersicht einer hexagonalen Architektur \parencite[vgl.][S. 204]{wolffMicroservices2018}}
 \end{figure}
 
 Jede Facette der Anwendung, wie Benutzer, Daten oder Admin ist ein Port, welcher von den Adaptern auf Technologien wie \ac{REST} umgesetzt wird \parencite[vgl.][S. 204]{wolffMicroservices2018}. Die Logik der Anwendung wird klar abgetrennt und nur die Adapter ermöglichen eine Kommunikation nach Außen. Dadurch bleibt der fachliche Code unabhängig vom technischen Code. Für das Fallbeispiel wird lediglich ein Port für die Daten und ein Port für die Benutzung benötigt. Zusätzlich wird ein Adapter für die \ac{REST}-\ac{API} und ein Adapter für MongoDB benötigt.
@@ -135,7 +135,7 @@ Den Mittelpunkt des Microservices bildet die Klasse ContactServiceImpl. Sie enth
 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/UMLKlassenDiagrammKontakt.png}
+    \includegraphics[width=0.85\textwidth]{figures/UMLKlassenDiagrammKontakt.png}
     \caption{Struktur vom Kontakt-Microservice}
 \end{figure}
 
@@ -167,7 +167,7 @@ Das Frontend besteht aus insgesamt zehn verschiedenen Webseiten. Für jeden Kont
     \caption{Aufbau des Frontends}
 \end{figure}
 
-Zum Styling der Anwendung wird das CSS-Framework Bootstrap verwendet. Bei der Erstellung oder Bearbeitung einer Chance oder Interaktion kann über eine Dropdown-Liste ein zugehöriger Kontakte ausgewählt werden. Bei der Detailansicht eines Kontaktes wird neben den Attributen auch die zugehörigen Interaktionen und Verkaufschancen angezeigt. Im \nameref{anhang} finden sich Bildschirmfotos der beschriebenen Seiten. Auch ist dort eine der Service-Klassen zu finden, welche die Anfragen auf den Kontakt-Microservice regelt. Das Frontend benötigt die Adresse aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Bei React werden Umgebungsvariablen in die Datei .env.production geschrieben, da der Code des Frontends clientseitig ausgeführt wird.
+Zum Styling der Anwendung wird das CSS-Framework Bootstrap verwendet. Bei der Erstellung oder Bearbeitung einer Chance oder Interaktion kann über eine Dropdown-Liste ein zugehöriger Kontakt ausgewählt werden. Bei der Detailansicht eines Kontaktes wird neben den Attributen auch die zugehörigen Interaktionen und Verkaufschancen angezeigt. Im \nameref{anhang} finden sich Bildschirmfotos der beschriebenen Seiten. Auch ist dort eine der Service-Klassen zu finden, welche die Anfragen auf den Kontakt-Microservice regelt. Das Frontend benötigt die Adresse aller Services. Auch hier werden die Verbindungsinformationen über eine Umgebungsvariable übergeben. Bei React werden Umgebungsvariablen in die Datei .env.production geschrieben, da der Code des Frontends clientseitig ausgeführt wird.
 
 \clearpage
 \section{Bereitstellung mit Kubernetes}
@@ -180,6 +180,7 @@ Um die Microservices und das Frontend in Pods in einem Kubernetes Cluster laufen
 
 Dockerfiles besitzen eine eigene Syntax. Ein großgeschriebener Befehl wird gefolgt von einem oder mehreren Parametern. Es ähnelt einer Anleitung, welche Schritt für Schritt abgearbeitet wird. Die Dockerfiles der Microservices haben alle einen analogen Aufbau. Der erste Befehl in den Dockerfiles bestimmt, auf welchem Docker Image das neue Image basieren soll. Für die Microservices wird ein Image mit einer Java-Plattform verwendet, welches automatisch aus dem öffentlichen DockerHub heruntergeladen wird. Anschließend wird die \acs{JAR}-Datei der Anwendung in das Image kopiert. Als letzter Befehl wird festgelegt, dass die \acs{JAR}-Datei beim Start des Containers ausgeführt werden soll.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=dockerfile, caption=Dockerfile für den Kontakt-Microservice]
 FROM openjdk:11-jdk-slim
 ARG JAR_FILE=target/*.jar
@@ -187,9 +188,11 @@ COPY ${JAR_FILE} app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
 \end{lstlisting}
+\end{minipage}
 
 Das Frontend benötigt ein eigenes Dockerfile. Dieses hat einen mehrstufigen Aufbau. In der ersten Stufe, der Build-Stage, wird die React-Anwendung gebaut. Um die fertig gebaute Webanwendung an einen Browser auszuliefern wird ein Webserver benötigt. Die zweite Stufe des Dockerfiles basiert auf einem Image mit dem Webserver Nginx. Die React-Anwendung aus der Build-Stage wird nun in das finale Image kopiert.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=dockerfile, caption=Dockerfile für das Frontend]
 FROM node:alpine as build
 WORKDIR /app
@@ -204,17 +207,21 @@ RUN rm -rf ./*
 COPY --from=build /app/build .
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 \end{lstlisting}
+\end{minipage}
 
 Für die Datenbanken müssen keine eigenen Dockerfiles erstellt werden. Hier reichen unveränderte Images aus, welche vom DockerHub heruntergeladen werden können. Mit dem folgenden Befehl kann aus den erstellten Dockerfiles nun ein Docker Image gebaut werden.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=bash, caption=Docker-Befehl für das Bauen eines Images, captionpos=b]
 docker build -t contact-microservice:latest .
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Bereitstellung}
 
 Die fertigen Images können jetzt eingesetzt werden. Dazu wird zuerst das Kubernetes Cluster mit Minikube gestartet. Anschließend werden YAML-Dateien erstellt, in denen die gewünschten Kubernetes Objekte beschrieben werden. Für alle drei Microservices, alle drei Datenbanken und das Frontend muss jeweils ein Service und ein Deployment erstellt werden. In den Deployment-Objekten wird der Name der zuvor gebauten Images angegeben. Mit dem Attribut Replicas kann zudem die Anzahl der Pods, welche gleichzeitig laufen sollen, verändert werden. Bei den Microservices wird zudem die Adresse, unter der die Datenbank erreichbar ist, als Umgebungsvariable übergeben. Als Adresse wird der Name vom Service-Objekt der entsprechenden Datenbank verwendet.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=YAML, caption=Deployment-Objekt vom Kontakt-Microservice]
 apiVersion: apps/v1
 kind: Deployment
@@ -241,10 +248,12 @@ spec:
                   name: contact-db-config  
                   key: host
 \end{lstlisting}
+\end{minipage}
 
 Die Service-Objekte der Datenbanken sind vom Typ ClusterIP, da sie nur innerhalb des Clusters aufgerufen werden.
 Die Service-Objekte der Microservices sind dagegen vom Typ NodePort. Somit kann ein fester Port angegeben werden, unter dem der Service auch von außerhalb des Clusters erreichbar ist. Anfragen auf einen Service werden automatisch von Kubernetes auf die Pods, welche dem Service zugeordnet sind, verteilt. 
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=YAML, caption=Service-Objekt vom Kontakt-Microservice, captionpos=b]
 kind: Service
 apiVersion: v1
@@ -259,16 +268,20 @@ spec:
     nodePort: 30010
   type: NodePort
 \end{lstlisting}
+\end{minipage}
 
 Sämtliche erstellte YAML-Dateien müssen über einen Kubectl-Befehl auf das Cluster angewendet werden. Kubernetes arbeitet dann automatisch die nötigen Schritte, um die beschriebenen Objekte zu erstellen.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=bash, caption=Kubectl-Befehl für das Anwenden einer YAML-Datei, captionpos=b]
 kubectl apply -f contact-microservice.yaml
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Skalierung}
-Um die Vorteile von der Microservices auszunutzen, soll die Anzahl der gleichzeitig laufenden Pods eines Microservices flexibel verwaltet werden. Abhängig von der Auslastung soll so eine horizontale Skalierung vorgenommen werden. Auch dafür wird eine YAML-Datei erstellt, in der ein \ac{HPA}-Objekt für jeden Microservice beschrieben wird. In der Datei wird angegeben, welches Deployment skaliert werden soll. Als Metrik für die Skalierung, wird die CPU-Auslastung des Pods verwendet. Darüber hinaus wird angegeben wie viele Pods vom entsprechenden Microservice minimal und maximal ausgeführt werden sollen.
+Um die Vorteile der Microservices auszunutzen, soll die Anzahl der gleichzeitig laufenden Pods eines Microservices flexibel verwaltet werden. Abhängig von der Auslastung soll so eine horizontale Skalierung vorgenommen werden. Auch dafür wird eine YAML-Datei erstellt, in der ein \ac{HPA}-Objekt für jeden Microservice beschrieben wird. In der Datei wird angegeben, welches Deployment skaliert werden soll. Als Metrik für die Skalierung, wird die CPU-Auslastung des Pods verwendet. Darüber hinaus wird angegeben wie viele Pods vom entsprechenden Microservice minimal und maximal ausgeführt werden sollen.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=YAML, caption=HPA-Objekt vom Kontakt-Microservice, captionpos=b]
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
@@ -283,6 +296,7 @@ spec:
     maxReplicas: 4
     targetCPUUtilizationPercentage: 80
 \end{lstlisting}
+\end{minipage}
 
 Nun ist die Bereitstellung abgeschlossen. Minikube bietet ein browserbasiertes Dashboard an, mit dem der Status des Clusters auch grafisch überprüft werden kann. Ein Bildschirmfoto des Dashboards kann im \nameref{anhang} gefunden werden. Das folgende Verteilungsdiagramm zeigt das Ergebnis der durchgeführten Bereitstellung.
 
