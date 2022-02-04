@@ -2,7 +2,7 @@
 Ziel des Fallbeispieles ist es, ein Verfahren vom Entwurf bis zur Bereitstellung von containerisierten Microservices mit Kubernetes zu implementieren. Auf Basis dieses Verfahrens sollen Aussagen zur Umsetzung und dem Anwendungsgebiet getroffen werden können. Als Beispiel wird ein vereinfachtes \ac{CRM}-System verwendet. In diesem Kapitel werden die Vorgaben an das Fallbeispiel beschrieben.
 
 \subsection{Anwendungseinsatz}
-Ein \ac{CRM}-System ist eine Software für das Kundenbeziehungsmanagement. \ac{CRM}-Systeme sind komplexe betriebliche Anwendungssysteme. Durch ihre Größe und ihren vielen verwobenen Diensten gestaltet sich der Entwurf und die Weiterentwicklung häufig schwierig. \ac{CRM}-Systeme haben eine große fachliche Breite, was zu einem hohen Koordinationsaufwand bei der Entwicklung und der Bereitstellung führt \parencite[vgl.][S. 62]{trempArchitekturen2021}. Somit eignet sich ein \ac{CRM}-System als gutes Beispiel für die Umsetzung mit einer Microservice-Architektur, welche die Probleme weitgehend lösen soll. 
+Ein \ac{CRM}-System ist eine Software für das Kundenbeziehungsmanagement. \ac{CRM}-Systeme sind komplexe betriebliche Anwendungssysteme. Durch ihre Größe und ihre vielen verwobenen Dienste gestaltet sich der Entwurf und die Weiterentwicklung häufig schwierig. \ac{CRM}-Systeme haben eine große fachliche Breite, was zu einem hohen Koordinationsaufwand bei der Entwicklung und der Bereitstellung führt \parencite[vgl.][S. 62]{trempArchitekturen2021}. Somit eignet sich ein \ac{CRM}-System als gutes Beispiel für die Umsetzung mit einer Microservice-Architektur, welche die Probleme weitgehend lösen soll. 
 
 Das \ac{CRM}-System soll für das \ac{B2C} Umfeld entwickelt werden. Es soll bei der Verwaltung von Kontakten beziehungsweise Kunden helfen. Zu jedem Kontakt sollen Informationen und eine Historie mit allen Interaktionen abgespeichert werden. Darüber hinaus soll es auch möglich sein, Verkaufschancen zu verwalten und einem Kontakt zuzuordnen.
 
@@ -34,7 +34,7 @@ Nachdem die fachliche Einteilung erledigt ist, kann jetzt die technischen Archit
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.8\textwidth]{figures/CRMEntwurf.png}
-    \caption{Makro-Architektur des \ac{CRM}-Systems}
+    \caption{Makro-Architektur des CRM-Systems}
 \end{figure}
 
 Als Nächstes müssen die \acp{API} der Microservices spezifiziert werden. Die \ac{API} wird nach dem \ac{REST}-Architekturstil entworfen. Die Kommunikation erfolgt dabei über \ac{HTTP}. Die \ac{REST}-Ressourcen sollen im \ac{JSON}-Format dargestellt werden. Für jeden Microservice werden die Endpunkte, unter der die API aufrufbar ist und die HTTP-Anfragemethode bestimmt.
@@ -152,7 +152,7 @@ Darüber hinaus wird Swagger in die Microservices integriert. Bei Swagger handel
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\textwidth]{figures/KontaktAPISwagger.png}
-    \caption{Swagger Dokumentation der \ac{API}}
+    \caption{Swagger Dokumentation der API}
 \end{figure}
 
 Alle drei Microservices benötigen den \ac{URI} ihrer Datenbank, um mit ihr eine Verbindung aufzubauen. Der Interaktions-Microservice und der Verkaufschancen-Microservice brauchen darüber hinaus die Adresse des Kontakt-Microservices, um mit diesem zu Kommunizieren. Diese Verbindungsinformationen, werden den Anwendungen über Umgebungsvariablen übergeben. Bei der Bereitstellung kann Kubernetes den Containern die passende Umgebungsvariablen übergeben.
