@@ -29,4 +29,4 @@ bachelor-thesis
 
 ### Verteilungsdiagramm des CRM-Systems
 
-![Test](thesis/figures/Verteilungsdiagramm.png)
+![Verteilungsdiagramm](Verteilungsdiagramm.png)
